@@ -35,13 +35,11 @@
       "tags": "compiler, gcc"
     }, 
     "lib-blas": {
-      "local": "yes", 
       "name": "BLAS Library", 
       "sort": 5, 
       "tags": "lib,blas,no-openblas,cblas"
     }, 
     "lib-lapack": {
-      "local": "yes", 
       "name": "LaPalk Library", 
       "sort": 5, 
       "tags": "lib,lapack"

@@ -12,7 +12,7 @@
       "linux": "qiskit-sdk-py/build/qiskiy/__init__.py"
     }
   }, 
-  "soft_name": "qiskit-sdk-py", 
+  "soft_name": "Qiskit", 
   "tags": [
     "lib", 
     "qiskit"

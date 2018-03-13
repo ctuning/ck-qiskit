@@ -153,8 +153,8 @@ def period(a,N):
 	Shor1.h(Q_reg[4])
 	Shor1.measure(Q_reg[4],C_reg[0])
 # Reinitialize to |0>
-	Shor1.reset(Q_reg[4])
-
+	if _backend != "local_projectq_simulator":
+		Shor1.reset(Q_reg[4])
 # Step two : apply a**2 mod 15
 	Shor1.h(Q_reg[4])
 # Controlled unitary. Apply a mod 15 twice.
@@ -165,7 +165,8 @@ def period(a,N):
 	Shor1.h(Q_reg[4])
 	Shor1.measure(Q_reg[4],C_reg[1])	
 # Reinitialize to |0>
-	Shor1.reset(Q_reg[4])
+	if _backend != "local_projectq_simulator":
+		Shor1.reset(Q_reg[4])
 
 # Step three : apply 11 mod 15
 	Shor1.h(Q_reg[4])
@@ -183,11 +184,11 @@ def period(a,N):
 	begin_time = time.time() 
 	simulate = qp.execute(["Period_Finding"], backend=_backend, shots=_shots,timeout=_tout)
 	shor_run_time = time.time() - begin_time
-	print("Run Period_Finding in: %f sec" % shor_run_time)
+	#print("Run Period_Finding in: %f sec" % shor_run_time)
 	simulate.get_counts("Period_Finding")
-	print(simulate)
+	#print(simulate)
 	data = simulate.get_counts("Period_Finding") 
-	print(data)
+	#print(data)
 	data = list(data.keys())
 	#print(data)
 	r = int(data[0])
