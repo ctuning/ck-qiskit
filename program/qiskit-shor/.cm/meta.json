@@ -1,0 +1,95 @@
+{
+  "backup_data_uid": "425ebb1d00d74d82", 
+  "data_name": "qiskit-shor", 
+  "no_compile": "yes", 
+  "no_target_file": "yes", 
+  "print_files_after_run": [
+    "tmp-stdout.tmp", 
+    "tmp-stderr.tmp"
+  ], 
+  "process_in_tmp": "yes", 
+  "program": "yes", 
+  "run_cmds": {
+    "dvdt_monitor": {
+      "ignore_return_code": "no", 
+      "run_time": {
+        "output_invariant_of_repeat": "yes", 
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../monitor.py", 
+        "run_cmd_out1": "tmp-stdout.tmp", 
+        "run_cmd_out2": "tmp-stderr.tmp", 
+        "run_output_files": [
+          "tmp-ck-timer.json", 
+          "tmp-ck-output.bin", 
+          "tmp-ck-output.json"
+        ]
+      }
+    }, 
+    "dvdt_test_qasm": {
+      "ignore_return_code": "no", 
+      "run_time": {
+        "output_invariant_of_repeat": "yes", 
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../dvdt_test_qasm.py", 
+        "run_cmd_out1": "tmp-stdout.tmp", 
+        "run_cmd_out2": "tmp-stderr.tmp", 
+        "run_output_files": [
+          "tmp-ck-timer.json", 
+          "tmp-ck-output.bin", 
+          "tmp-ck-output.json"
+        ]
+      }
+    }, 
+    "shor": {
+      "ignore_return_code": "no", 
+      "run_time": {
+        "output_invariant_of_repeat": "yes", 
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../shor.py --number=$<<CK_SHOR_INPUT>>$", 
+        "run_cmd_out1": "tmp-stdout.tmp", 
+        "run_cmd_out2": "tmp-stderr.tmp", 
+        "run_output_files": [
+          "tmp-ck-timer.json", 
+          "tmp-ck-output.bin", 
+          "tmp-ck-output.json"
+        ]
+      }
+    }
+  }, 
+  "run_deps": {
+    "lib-projectq": {
+      "local": "yes", 
+      "name": "ProjectQ library", 
+      "skip_pruning_by_other_deps": "yes", 
+      "sort": 10, 
+      "tags": "lib,projectq,vcpu"
+    }, 
+    "lib-qiskit": {
+      "local": "yes", 
+      "name": "IBM QuantumExperience PythonSDK ", 
+      "skip_pruning_by_other_deps": "yes", 
+      "sort": 10, 
+      "tags": "lib,qiskit,quantum,vcpu"
+    }, 
+    "python": {
+      "local": "yes", 
+      "name": "python", 
+      "sort": 8, 
+      "tags": "compiler,lang-python,python,v3"
+    }
+  }, 
+  "run_vars": {
+    "CK_IBM_BACKEND": "ibmqx_qasm_simulator", 
+    "CK_IBM_REPETITION": 1, 
+    "CK_IBM_TIMEOUT": 1200, 
+    "CK_IBM_VERBOSE": 1, 
+    "CK_REPETITIONS": 3, 
+    "CK_SHOR_INPUT": 5
+  }, 
+  "tags": [
+    "qiskit", 
+    "qiskit,qiskit-sdk-py", 
+    "demo", 
+    "examples", 
+    "ibm", 
+    "quantum_random_numbers", 
+    "teleport"
+  ]
+}

@@ -1,0 +1,14 @@
+WARNING: There's no connection with IBMQuantumExperience servers.
+             cannot test I/O intesive tasks, will only test CPU intensive tasks
+             running the jobs in the local simulator
+The backends available for use are:
+['local_qiskit_simulator', 'local_clifford_simulator', 'local_projectq_simulator', 'local_unitary_simulator', 'local_qasm_simulator']
+
+
+local_qiskit_simulator
+local_clifford_simulator
+local_projectq_simulator
+local_unitary_simulator
+local_qasm_simulator
+3
+Run Period_Finding in: 0.222243 sec
