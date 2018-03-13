@@ -98,3 +98,23 @@ $ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN>
 ```
 $ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN> --env.CK_IBM_BACKEND=ibmqx5
 ```
+
+
+## FAQ
+
+### Where does CK store my program and its output?
+
+A program can be located on disk by its name as follows:
+```
+$ ck find program:projectq-shor
+/home/flavio/CK-REPOS/ck-qiskit/program/qiskit-shor
+$ ls `ck find program:qiskit-shor`
+quantum_random_numbers.py  shor.py
+```
+
+Temporary files (including the executable, `stderr` and `stdout`) are in the `tmp` directory:
+```
+$ cd `ck find program:qiskit-shor`/tmp
+```
+
+## Troubleshooting
