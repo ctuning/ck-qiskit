@@ -1,22 +1,20 @@
-# ck-qiskit
-CK repository for Quantum Information Software Kit (QISKit)
-
+# CK repository for Quantum Information Software Kit (QISKit)
 
 ## Installation 
 
-### Install global prerequisites (Ubuntu)
+### Install global prerequisites (Ubuntu, Debian)
 
 ```
-$ sudo apt-get install build-essential
+$ sudo apt install build-essential
 $ sudo apt install libblas-dev liblapack-dev
 ```
 
 ### Install Python 3
-(Python 2 is **not** supported)
+
+**NB:** Python 2 is **not** supported.
 
 ```
-$ sudo apt-get install python3 python3-pip
-$ sudo pip3 install scipy
+$ sudo apt install python3 python3-pip
 ```
 
 ### Install Collective Knowledge
@@ -25,90 +23,80 @@ $ sudo pip3 install scipy
 $ sudo pip3 install ck
 ```
 
+### Detect Blas and LaPack
+
+```$ ck detect soft:lib.blas ```
+
+```$ ck detect soft:lib.lapack```
+
 ### Install this CK repository with all its dependencies (other CK repos to reuse artifacts)
+
 ```
-$ ck pull repo --url=git@github.com:dividiti/ck-qiskit
+$ ck pull repo:ck-qiskit
 ```
 
-
-## Packages installation
-
-List all the packages available 
+## Install Quantum Information Software Kit (QISKit)
 
 ```
 $ ck list ck-qiskit:package:*
-```
-
-## IBM QuantumExperience
-
-**Documentation**
-
-[Main Repo](https://github.com/QISKit) and [IBMQX USER GUIDES](https://github.com/QISKit/ibmqx-user-guides)
-
-[QISKit SDK](https://github.com/QISKit/qiskit-sdk-py/blob/master/README.md) and [Getting Started Guide](https://www.qiskit.org/documentation/quickstart.html)
-
-[QISKit Tutorial](https://github.com/QISKit/qiskit-tutorial)
-
-
-At a lower level, you can use the native Python API to call OpenQASM 
-
-[QISKit API](https://github.com/QISKit/qiskit-api-py)
-
-[OpenQASM](https://github.com/QISKit/openqasm/blob/master/README.md)
-
-
-
-**Real Backends**
-
-[IBMQX2](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx2/README.md) 
-
-[IBMQX3](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx3/README.md)
-
-[IBMQX4](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx4/README.md)
-
-[IBMQX5](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx5/README.md)
-
-**Local Simulators**
-
-```local_clifford_simulator```
-
-```local_qasm_simulator```
-
-```local_unitary_simulator```
-
-```local_projectq_simulator```
-
-```local_qiskit_simulator```
-
-
-
-### Quantum Information Software Kit (QISKit) package
-
-```
 $ ck install package:lib-qiskit
 ```
 
-### Run Programs
+## IBM Quantum Experience
 
-Get a valid [IBM_API_TOKEN](https://quantumexperience.ng.bluemix.net/qx/login) -> myaccount -> advanced
+### Documentation
+- [Main Repo](https://github.com/QISKit)
+- [IBM Quantum Experience user guides](https://github.com/QISKit/ibmqx-user-guides)
 
-1) Run an example using the local simulator. An exception might be  raised due to login failure (missing or invalid token)
+- QISKit [SDK](https://github.com/QISKit/qiskit-sdk-py/blob/master/README.md)
+- QISKit [Getting Started Guide](https://www.qiskit.org/documentation/quickstart.html)
+- QISKit [Tutorial](https://github.com/QISKit/qiskit-tutorial)
+
+
+At a lower level, you can use the native [QISKit Python API](https://github.com/QISKit/qiskit-api-py) to call [OpenQASM](https://github.com/QISKit/openqasm/blob/master/README.md).
+
+### Real Backends
+
+- [IBMQX2](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx2/README.md) 
+- [IBMQX3](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx3/README.md)
+- [IBMQX4](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx4/README.md)
+- [IBMQX5](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx5/README.md)
+
+### Local Simulators
+
+- `local_clifford_simulator`
+- `local_qasm_simulator`
+- `local_unitary_simulator`
+- `local_projectq_simulator`
+- `local_qiskit_simulator`
+
+
+## Run Programs
+
+Get a valid [IBM_API_TOKEN](https://quantumexperience.ng.bluemix.net/qx/login) `->` myaccount `->` advanced
+
+**NB:** An exception might be raised due to login failure (missing or invalid token).
+
+#### Run an example using a local simulator
 
 ```
-$ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_BACKEND=local_qasm_simulator
+$ ck run program:qiskit-demo --cmd_key=hello \
+  --env.CK_IBM_BACKEND=local_qasm_simulator
 ```
 
 
-2) Run an example using the remote simulator
+#### Run an example using a remote simulator
 
 ```
-$ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN> --env.CK_IBM_BACKEND=ibmqx_qasm_simulator
+$ ck run program:qiskit-demo --cmd_key=hello \
+  --env.CK_IBM_BACKEND=ibmqx_qasm_simulator --env.CK_IBM_API_TOKEN=<YOUR_TOKEN>
 ```
 
-3) Run an example using IBMQX5 
+#### Run an example using IBMQX5 
 
 ```
-$ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN> --env.CK_IBM_BACKEND=ibmqx5
+$ ck run program:qiskit-demo --cmd_key=hello \
+  --env.CK_IBM_BACKEND=ibmqx5 --env.CK_IBM_API_TOKEN=<YOUR_TOKEN>
 ```
 
 
@@ -130,3 +118,5 @@ $ cd `ck find program:qiskit-shor`/tmp
 ```
 
 ## Troubleshooting
+
+**TODO**
