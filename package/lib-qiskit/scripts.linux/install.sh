@@ -49,6 +49,10 @@ echo "Compiling QISKIT SIMULATOR"
 cd ${INSTALL_DIR}/src/src/qiskit-simulator/
 make;
 
+if [ "${?}" != "0" ] ; then
+  echo "Error: installation failed!"
+  exit 1
+fi
 
 cd ${INSTALL_DIR}/src
 
