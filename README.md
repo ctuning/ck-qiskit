@@ -68,6 +68,18 @@ At a lower level, you can use the native Python API to call OpenQASM
 
 [IBMQX5](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx5/README.md)
 
+**Local Simulators**
+
+```local_clifford_simulator```
+
+```local_qasm_simulator```
+
+```local_unitary_simulator```
+
+```local_projectq_simulator```
+
+```local_qiskit_simulator```
+
 
 
 ### Quantum Information Software Kit (QISKit) package
