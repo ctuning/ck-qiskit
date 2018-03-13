@@ -23,11 +23,6 @@ $ sudo apt install python3 python3-pip
 $ sudo pip3 install ck
 ```
 
-### Detect Blas and LaPack
-
-```$ ck detect soft:lib.blas ```
-
-```$ ck detect soft:lib.lapack```
 
 ### Install this CK repository with all its dependencies (other CK repos to reuse artifacts)
 
@@ -101,6 +96,17 @@ $ ck run program:qiskit-demo --cmd_key=hello \
 
 
 ## FAQ
+
+### How to register my libraries and tools with CK?
+
+CK will try to detect compilers and libraries automatically, but you can also
+register them as follows:
+
+```
+$ ck detect soft:compiler.gcc
+$ ck detect soft:lib.blas
+$ ck detect soft:lib.lapack
+```
 
 ### Where does CK store my program and its output?
 
