@@ -36,8 +36,8 @@ $ ck pull repo --url=git@github.com:dividiti/ck-quantum-private
 List all the packages available 
 
 ```
-$ ck list ck-quantum-private:package:*
-
+$ ck list ck-qiskit:package:*
+```
 
 ## IBM QuantumExperience
 
@@ -90,11 +90,11 @@ $ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_BACKEND=local_qasm_sim
 2) Run an example using the remote simulator
 
 ```
-$ ck run program:demo-qiskit --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN> --env.CK_IBM_BACKEND=ibmqx_qasm_simulator
+$ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN> --env.CK_IBM_BACKEND=ibmqx_qasm_simulator
 ```
 
 3) Run an example using IBMQX5 
 
 ```
-$ ck run program:demo-qiskit --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN> --env.CK_IBM_BACKEND=ibmqx5
+$ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_API_TOKEN=<YOUR_TOKEN> --env.CK_IBM_BACKEND=ibmqx5
 ```
