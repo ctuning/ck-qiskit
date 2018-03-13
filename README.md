@@ -15,7 +15,6 @@ $ sudo apt install libblas-dev liblapack-dev
 
 ```
 $ sudo apt install python3 python3-pip
-$ sudo pip3 install scipy
 ```
 
 ### Install Collective Knowledge
@@ -24,7 +23,14 @@ $ sudo pip3 install scipy
 $ sudo pip3 install ck
 ```
 
+### Detect Blas and LaPack
+
+```$ ck detect soft:lib.blas ```
+
+```$ ck detect soft:lib.lapack```
+
 ### Install this CK repository with all its dependencies (other CK repos to reuse artifacts)
+
 ```
 $ ck pull repo:ck-qiskit
 ```
