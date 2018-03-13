@@ -16,8 +16,6 @@
 echo "**************************************************************"
 echo "Installing Quantum Software Development Kit ..."
 
-
-
 # Check extra stuff
 export PACKAGE_LIB_DIR=${INSTALL_DIR}/build
 
@@ -45,23 +43,22 @@ fi
 rm -f tmp-pip-help.tmp
 
 ######################################################################################
-echo "Compiling QISKIT SIMULATOR"
+echo "Compiling QISKit Simulator ..."
 cd ${INSTALL_DIR}/src/src/qiskit-simulator/
-make;
+make CC=${CK_CC_PATH_FOR_CMAKE} CXX=${CK_CXX_PATH_FOR_CMAKE}
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"
   exit 1
 fi
 
-cd ${INSTALL_DIR}/src
+######################################################################################
+echo "Installing QISKit to '${PACKAGE_LIB_DIR}' ..."
 
-echo "Installing in" ${PACKAGE_LIB_DIR}
+cd ${INSTALL_DIR}/src
 #sudo -H env CC=${CK_CXX} ${CK_PYTHON_BIN} -m pip install -r requirements.txt --prefix=${PROJECTQ_LIB_DIR}  -U --no-cache-dir
-#-r requirements.txt
 ${CK_PYTHON_PIP_BIN_FULL} install --upgrade -r requirements.txt qiskit -t ${PACKAGE_LIB_DIR}
 #${CK_PYTHON_PIP_BIN_FULL} install qiskit -t ${PACKAGE_LIB_DIR} 
-
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"

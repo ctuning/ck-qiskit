@@ -1,6 +1,6 @@
 {
   "check_exit_status": "yes", 
-  "comment": "install QIS KIT", 
+  "comment": "install QISKit",
   "customize": {
     "extra_dir": "", 
     "git_src_dir": "src", 
@@ -30,18 +30,18 @@
   "deps": {
     "compiler": {
       "local": "yes", 
-      "name": "GCC compiler", 
+      "name": "C++ compiler",
       "sort": 10, 
-      "tags": "compiler, gcc"
+      "tags": "compiler,lang-cpp"
     }, 
     "lib-blas": {
-      "name": "BLAS Library", 
-      "sort": 5, 
+      "name": "BLAS library",
+      "sort": 15, 
       "tags": "lib,blas,no-openblas,cblas"
     }, 
     "lib-lapack": {
-      "name": "LaPalk Library", 
-      "sort": 5, 
+      "name": "LAPACK library",
+      "sort": 25, 
       "tags": "lib,lapack"
     }, 
     "python": {
