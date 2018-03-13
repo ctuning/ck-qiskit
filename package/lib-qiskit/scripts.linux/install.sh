@@ -45,7 +45,7 @@ rm -f tmp-pip-help.tmp
 ######################################################################################
 echo "Compiling QISKit Simulator ..."
 cd ${INSTALL_DIR}/src/src/qiskit-simulator/
-make CC=${CK_CC_PATH_FOR_CMAKE} CXX=${CK_CXX_PATH_FOR_CMAKE}
+make # CC=${CK_CC_PATH_FOR_CMAKE} CXX=${CK_CXX_PATH_FOR_CMAKE}
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"

@@ -46,7 +46,7 @@
     }, 
     "python": {
       "local": "yes", 
-      "name": "Python", 
+      "name": "Python 3",
       "sort": 5, 
       "tags": "compiler,python,v3"
     }
@@ -62,7 +62,7 @@
   "package_extra_name": " (built, cpu)", 
   "process_script": "install", 
   "soft_uoa": "126e8e93a4041e7a", 
-  "suggested_path": "qiskit", 
+  "suggested_path": "lib-qiskit",
   "tags": [
     "lib", 
     "qiskit", 
