@@ -96,13 +96,6 @@
     }
   }, 
   "run_deps": {
-    "lib-projectq": {
-      "local": "yes", 
-      "name": "ProjectQ library", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 10, 
-      "tags": "lib,projectq,vcpu"
-    }, 
     "lib-qiskit": {
       "local": "yes", 
       "name": "IBM QuantumExperience Python SDK", 
