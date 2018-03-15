@@ -5,8 +5,13 @@
 ### Install global prerequisites (Ubuntu, Debian)
 
 ```
-$ sudo apt install build-essential
-$ sudo apt install libblas-dev liblapack-dev
+$ sudo apt install \
+  build-essential  \
+  liblapack-dev    \
+  libblas-dev      \
+  libssl-dev       \
+  libpng-dev       \
+  libfreetype6-dev
 ```
 
 ### Install Python 3
@@ -14,7 +19,11 @@ $ sudo apt install libblas-dev liblapack-dev
 **NB:** Python 2 is **not** supported.
 
 ```
-$ sudo apt install python3 python3-pip
+$ sudo apt install \
+  python3          \
+  python3-pip      \
+  python3-wheel
+$ sudo pip3 install setuptools
 ```
 
 ### Install Collective Knowledge
