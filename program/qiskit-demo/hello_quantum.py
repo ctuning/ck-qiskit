@@ -27,6 +27,7 @@ except:
 print("The backends available for use are:")
 pprint(Q_program.available_backends())
 print("\n")
+backend = 'local_qasm_simulator'
 if 'CK_IBM_BACKEND' in os.environ:
     backend = os.environ['CK_IBM_BACKEND']
 try:
@@ -34,20 +35,20 @@ try:
     qr = Q_program.create_quantum_register("qr", 2)
     # Create a Classical Register called "cr" with 2 bits.
     cr = Q_program.create_classical_register("cr", 2)
-    # Create a Quantum Circuit called "qc". involving the Quantum Register "qr"
+    # Create a Quantum Circuit called "qc" with the Quantum Register "qr"
     # and the Classical Register "cr".
     qc = Q_program.create_circuit("bell", [qr], [cr])
 
-    # Add the H gate in the Qubit 0, putting this qubit in superposition.
+    # Add an H gate to qubit 0, putting this qubit in superposition.
     qc.h(qr[0])
-    # Add the CX gate on control qubit 0 and target qubit 1, putting 
-    # the qubits in a Bell state
+    # Add a CX gate to control qubit 0 and target qubit 1, putting
+    # the qubits in a Bell state.
     qc.cx(qr[0], qr[1])
 
-    # Add a Measure gate to see the state.
+    # Add a Measure gate to observe the state.
     qc.measure(qr, cr)
 
-    # Compile and execute the Quantum Program in the local_qasm_simulator.
+    # Compile and execute the Quantum Program using the given backend.
     result = Q_program.execute(["bell"], backend=backend, shots=1024, seed=1)
 
     # Show the results.
@@ -55,6 +56,6 @@ try:
     print(result.get_data("bell"))
 
 except QISKitError as ex:
-    print('There was an error in the circuit!. Error = {}'.format(ex))
+    print('Error in the circuit! {}'.format(ex))
 except RegisterSizeError as ex:
-    print('Error in the number of registers!. Error = {}'.format(ex))
+    print('Error in the number of registers! {}'.format(ex))
