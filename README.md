@@ -104,8 +104,14 @@ register them as follows:
 
 ```
 $ ck detect soft:compiler.gcc
+$ ck detect soft:compiler.python
 $ ck detect soft:lib.blas
 $ ck detect soft:lib.lapack
+```
+
+You can also register tools by providing a full path e.g.
+```
+$ ck detect soft:compiler.python --full_path=`which python3`
 ```
 
 ### Where does CK store my program and its output?
