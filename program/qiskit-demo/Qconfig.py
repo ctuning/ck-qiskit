@@ -10,7 +10,7 @@ if 'CK_IBM_API_TOKEN' in os.environ:
     API_TOKEN = os.environ['CK_IBM_API_TOKEN']
 else:
 #    API_TOKEN = '227cf74859f37ff7b4612bdbd02fab3c287f23e40dda92e61a3f674f9d0c2c2d939955096fdf8a920dca4dcf8cf92c5b570cab5fb84d15d08301b921b26ca8f6'
-    API_TOKEN='YOUR TOKE HERE'
+    API_TOKEN='YOUR TOKEN HERE'
 
 config = {
     'url': 'https://quantumexperience.ng.bluemix.net/api',
