@@ -48,7 +48,12 @@
       "local": "yes", 
       "name": "Python 3",
       "sort": 5, 
-      "tags": "compiler,python,v3"
+      "tags": "compiler,python",
+      "version_from": [
+            3,
+            2,
+            0
+      ]
     }
   }, 
   "end_full_path_universal": "build$#sep#$qiskit$#sep#$__init__.py", 
