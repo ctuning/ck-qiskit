@@ -2,6 +2,12 @@
   "data_uid": "4f49a0bdde6167b4", 
   "data_name": "ck-qiskit", 
   "dict": {
+    "repo_deps": [
+      {
+        "repo_uoa": "ck-autotuning",
+        "repo_url": "https://github.com/ctuning/ck-autotuning"
+      }
+    ],
     "url": "https://github.com/ctuning/ck-qiskit", 
     "shared": "git"
   }, 
