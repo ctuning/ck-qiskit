@@ -1,14 +1,13 @@
 diff --git a/qiskit/backends/_qiskit_cpp_simulator.py b/qiskit/backends/_qiskit_cpp_simulator.py
-index 4bcf8d1..dadfadd 100644
+index 4bcf8d1..ebe5426 100644
 --- a/qiskit/backends/_qiskit_cpp_simulator.py
 +++ b/qiskit/backends/_qiskit_cpp_simulator.py
-@@ -43,6 +43,9 @@ DEFAULT_SIMULATOR_PATHS = [
+@@ -43,6 +43,8 @@ DEFAULT_SIMULATOR_PATHS = [
                      '../../../out/src/qiskit-simulator/qiskit_simulator' + EXTENSION),
      # This is the path where PIP installs the simulator
      os.path.abspath(os.path.dirname(__file__) + '/qiskit_simulator' + EXTENSION),
 +    # This is the path where CK installs the simulator
 +    os.environ['CK_ENV_LIB_QISKIT_SIM']
-+
  ]
  
  
