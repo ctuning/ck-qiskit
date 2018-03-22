@@ -4,7 +4,10 @@
 # See CK LICENSE.txt for licensing details
 # See CK COPYRIGHT.txt for copyright details
 #
-# Author: Grigori Fursin, cTuning foundation/dividiti
+# Author(s):
+# - Grigori Fursin, cTuning foundation/dividiti
+# - Flavio Vella, dividiti
+# - Anton Lokhmotov, dividiti
 #
 
 import os
@@ -74,16 +77,16 @@ def setup(i):
     pl=os.path.dirname(p1)
     pi=os.path.dirname(pl)
     env[ep]=pi
-    env[ep+'_LIB']=pi+'/'+ienv['PACKAGE_SUB_DIR1']
-    ppath = pi+'/'+ienv['PACKAGE_SUB_DIR1']+"/"
+    ppath=os.path.join(pi, ienv['PACKAGE_SUB_DIR1'])
+    env[ep+'_LIB']=ppath
 
-   # spath = env['CK_ENV_LIB_QISKIT'] + '/src/src/qiskit-simulator/'
-    spath = ppath+'out/'
-    ## TO FIX for WIN 
+    # FIXME: Fix for Windows.
+    # FIXME: Should have no explicit exports.
     if winh=='yes':
         s+='\nset PYTHONPATH='+pl+';%PYTHONPATH%\n'
     else:
         s+='\nexport PYTHONPATH='+ppath+':${PYTHONPATH}\n'
+        spath=os.path.join(ppath, 'out', 'qiskit_simulator')
         s+='\nexport CK_ENV_LIB_QISKIT_SIM='+spath+'\n'
     for k in ienv:
         if k.startswith('QISKIT_') or k=='CK_PYTHON_IPYTHON_BIN_FULL' or k=='CK_ENV_COMPILER_PYTHON_FILE':
