@@ -32,7 +32,12 @@
       "local": "yes", 
       "name": "C++ compiler",
       "sort": 10, 
-      "tags": "compiler,lang-cpp"
+      "tags": "compiler,lang-cpp",
+      "version_from": [
+            4,
+            0,
+            0
+      ]
     }, 
     "lib-blas": {
       "name": "BLAS library",
