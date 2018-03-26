@@ -1,0 +1,32 @@
+# After changing this file, check it on:
+#   http://lint.travis-ci.org/
+
+os: linux
+
+language: python
+
+python: 
+    - 3.6
+
+env:
+    matrix:
+        - TRAVIS_CK_CXX_COMPILER=gcc    TRAVIS_CK_USE_BACKEND=local_qasm_simulator
+        - TRAVIS_CK_CXX_COMPILER=llvm   TRAVIS_CK_USE_BACKEND=local_clifford_simulator
+
+addons:
+    apt:
+        packages:
+            - python-pip
+
+install:
+    - pip install -r requirements.txt                                       # ck kernel itself
+    - ck pull repo:ck-qiskit                                                # trigger pulling dependent repositories
+    - echo 1 | ck detect platform.os --update_platform_init                 # set the platform to generic-linux
+    -          ck detect soft:compiler.python --full_path=`which python`    # pick the one Travis has set for us in the PATH
+    -          ck detect soft:compiler.${TRAVIS_CK_CXX_COMPILER}            # force detection of a specific one
+    -          ck detect soft:lib.blas
+    -          ck detect soft:lib.lapack
+    -          ck install package:lib-qiskit                                # have to install this again into CK's registered space
+
+script:
+    - ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_BACKEND=${TRAVIS_CK_USE_BACKEND}
