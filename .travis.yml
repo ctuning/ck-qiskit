@@ -17,7 +17,7 @@ addons:
         sources:
             - ubuntu-toolchain-r-test
         packages:
-            - g++5
+            - g++6
             - python-pip
             - libblas-dev
             - liblapack-dev
