@@ -42,7 +42,7 @@ echo "to avoid well-known issues with user/system space installation:"
 echo "Compiling QISKit Simulator ..."
 
 cd ${INSTALL_DIR}/src/src/qiskit-simulator/
-make CC=${CK_CXX} # CC=${CK_CXX_PATH_FOR_CMAKE}
+make CC="${CK_CXX}" LIBS="${CK_COMPILER_OWN_LIB_LOC} -lpthread -llapack -lblas"
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"
@@ -54,8 +54,7 @@ echo "Installing QISKit to '${PACKAGE_LIB_DIR}' ..."
 
 cd ${INSTALL_DIR}/src
 
-#${CK_PYTHON_PIP_BIN_FULL} install --upgrade -r requirements.txt qiskit --prefix=${PY_DEPS_TREE}
-${CK_PYTHON_BIN} -m pip install -r requirements.txt qiskit --prefix=${PY_DEPS_TREE} --no-cache-dir --ignore-installed
+${CK_PYTHON_BIN} -m pip install -r requirements.txt qiskit --prefix=${PY_DEPS_TREE} --no-cache-dir # --ignore-installed
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"
