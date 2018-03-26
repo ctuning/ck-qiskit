@@ -3,8 +3,10 @@
 
 os:         linux
 dist:       trusty
-language:   cpp
-compiler:   gcc
+language:   python
+
+python:
+    - 3.6
 
 env:
     matrix:
@@ -13,7 +15,7 @@ env:
 addons:
     apt:
         packages:
-            - python3-pip
+            - python-pip
             - libblas-dev
             - liblapack-dev
 
@@ -26,7 +28,7 @@ install:
     # C++14
     - sudo apt-get install -qq g++-6
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-    - python3 -m pip install -r requirements.txt                            # ck kernel itself
+    - pip install -r requirements.txt                                       # ck kernel itself
     - ck pull repo:ck-qiskit                                                # trigger pulling dependent repositories
     - echo 1 | ck detect platform.os --update_platform_init                 # set the platform to generic-linux
     -          ck detect soft:compiler.python --full_path=`which python3`   # pick the one Travis has set for us in the PATH
