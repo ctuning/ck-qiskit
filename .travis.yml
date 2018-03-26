@@ -13,7 +13,7 @@ env:
 addons:
     apt:
         packages:
-            - python-pip
+            - python3-pip
             - libblas-dev
             - liblapack-dev
 
