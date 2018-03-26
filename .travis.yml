@@ -6,9 +6,6 @@ dist:       trusty
 language:   cpp
 compiler:   gcc
 
-python:
-    - 3.6
-
 env:
     matrix:
         - TRAVIS_CK_CXX_COMPILER=gcc    TRAVIS_CK_USE_BACKEND=local_qasm_simulator
@@ -29,10 +26,10 @@ install:
     # C++14
     - sudo apt-get install -qq g++-6
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-    - pip install -r requirements.txt                                       # ck kernel itself
+    - python3 -m pip install -r requirements.txt                            # ck kernel itself
     - ck pull repo:ck-qiskit                                                # trigger pulling dependent repositories
     - echo 1 | ck detect platform.os --update_platform_init                 # set the platform to generic-linux
-    -          ck detect soft:compiler.python --full_path=`which python`    # pick the one Travis has set for us in the PATH
+    -          ck detect soft:compiler.python --full_path=`which python3`   # pick the one Travis has set for us in the PATH
     -          ck detect soft:compiler.${TRAVIS_CK_CXX_COMPILER}            # force detection of a specific one
     - echo   | ck detect soft:lib.blas
     - echo   | ck detect soft:lib.lapack
