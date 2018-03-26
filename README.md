@@ -1,5 +1,7 @@
 # CK repository for Quantum Information Software Kit (QISKit)
 
+[![Travis Build Status](https://travis-ci.org/ctuning/ck-qiskit.svg?branch=master)](https://travis-ci.org/ctuning/ck-qiskit)
+
 ## Installation 
 
 ### Install global prerequisites (Ubuntu, Debian)
