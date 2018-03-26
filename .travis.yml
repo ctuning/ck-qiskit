@@ -32,7 +32,7 @@ install:
     - ck pull repo:ck-qiskit                                                # trigger pulling dependent repositories
     - echo 1 | ck detect platform.os --update_platform_init                 # set the platform to generic-linux
     -          ck detect soft:compiler.python --full_path=`which python3`   # pick the one Travis has set for us in the PATH
-    -          ck detect soft:compiler.${TRAVIS_CK_CXX_COMPILER}            # force detection of a specific one
+    - echo 0 | ck detect soft:compiler.${TRAVIS_CK_CXX_COMPILER}            # force detection of a specific one
     - echo   | ck detect soft:lib.blas
     - echo   | ck detect soft:lib.lapack
     -          ck install package:lib-qiskit                                # have to install this again into CK's registered space
