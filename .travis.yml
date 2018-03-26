@@ -17,6 +17,8 @@ addons:
     apt:
         packages:
             - python-pip
+            - libblas-dev
+            - liblapack-dev
 
 install:
     - pip install -r requirements.txt                                       # ck kernel itself
