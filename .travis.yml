@@ -6,14 +6,15 @@ dist:       trusty
 language:   cpp
 compiler:   gcc
 
+python:
+    - 3.6
+
 env:
     matrix:
         - TRAVIS_CK_CXX_COMPILER=gcc    TRAVIS_CK_USE_BACKEND=local_qasm_simulator
 
 addons:
     apt:
-        sources:
-            - ubuntu-toolchain-r-test
         packages:
             - python-pip
             - libblas-dev
