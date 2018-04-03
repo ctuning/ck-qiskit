@@ -96,6 +96,11 @@ def setup(i):
     if r['return']>0: return r
     shell_setup_script_contents = r['script']
 
+    # Adding some extra output to debug the situation on Travis:
+    #
+    shell_setup_script_contents += "\n\necho DEBUG: CK_ENV_COMPILER_GCC_LIB = $CK_ENV_COMPILER_GCC_LIB\n\n"
+    shell_setup_script_contents += "\nls -l $CK_ENV_COMPILER_GCC_LIB\n\n"
+
     # FIXME: Fix for Windows.
     # FIXME: Should have no explicit exports.
     if winh=='yes':
