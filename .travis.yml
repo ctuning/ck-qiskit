@@ -21,6 +21,30 @@ env:
         - TRAVIS_CK_CXX_COMPILER=llvm   TRAVIS_CK_USE_BACKEND=local_unitary_simulator
         - TRAVIS_CK_CXX_COMPILER=llvm   TRAVIS_CK_USE_BACKEND=local_qiskit_simulator
 
+matrix:
+    include:
+        - os: osx
+          language: generic
+          python:   3.6
+          env:
+                - TRAVIS_CK_CXX_COMPILER=llvm   TRAVIS_CK_USE_BACKEND=local_unitary_simulator
+          before_install:
+                - brew update                                                   # this swaps python versions and makes 3 the default one
+                - brew reinstall python                                         # install and link python3 and pip3 to /usr/local/bin
+                - export PATH=/usr/local/opt/python/libexec/bin:$PATH
+                - brew install llvm\@5
+        - os: osx
+          language: generic
+          python:   3.6
+          env:
+                - TRAVIS_CK_CXX_COMPILER=gcc    TRAVIS_CK_USE_BACKEND=local_unitary_simulator
+          before_install:
+                - brew update                                                   # this swaps python versions and makes 3 the default one
+                - brew reinstall python                                         # install and link python3 and pip3 to /usr/local/bin
+                - export PATH=/usr/local/opt/python/libexec/bin:$PATH
+                - brew install gcc\@6 || brew link --overwrite gcc\@6           # to avoid symlink conflict with oclint
+
+
 before_install:
     # C++14
     - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
