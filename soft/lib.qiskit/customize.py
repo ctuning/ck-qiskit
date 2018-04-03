@@ -56,7 +56,6 @@ def setup(i):
 
     # Get variables
     ck=i['ck_kernel']
-    s=''
 
     iv=i.get('interactive','')
 
@@ -80,16 +79,34 @@ def setup(i):
     ppath=os.path.join(pi, ienv['PACKAGE_SUB_DIR1'])
     env[ep+'_LIB']=ppath
 
+    # Using a generic script to prepend the library search path
+    # with the value expected to be set in $CK_ENV_COMPILER_GCC_LIB .
+    #
+    # GCC's dynamic library is an implicit dependency of Python's scipy package.
+    # If this library is not found, dlopen() call buried deep in scipy library
+    # fails to import ___addtf3 symbol.
+    #
+    # See this discussion:
+    #   https://github.com/citwild/laugh-finder/issues/11#issuecomment-377997186
+    #
+    r = ck.access({'action': 'lib_path_export_script',
+                   'module_uoa': 'os',
+                   'host_os_dict': hosd,
+                   'lib_path': '$CK_ENV_COMPILER_GCC_LIB' })
+    if r['return']>0: return r
+    shell_setup_script_contents = r['script']
+
     # FIXME: Fix for Windows.
     # FIXME: Should have no explicit exports.
     if winh=='yes':
-        s+='\nset PYTHONPATH='+pl+';%PYTHONPATH%\n'
+        shell_setup_script_contents += '\nset PYTHONPATH='+pl+';%PYTHONPATH%\n'
     else:
-        s+='\nexport PYTHONPATH='+ppath+':${PYTHONPATH}\n'
+        shell_setup_script_contents += '\nexport PYTHONPATH='+ppath+':${PYTHONPATH}\n'
         spath=os.path.join(ppath, 'out', 'qiskit_simulator')
-        s+='\nexport CK_ENV_LIB_QISKIT_SIM='+spath+'\n'
+        shell_setup_script_contents += '\nexport CK_ENV_LIB_QISKIT_SIM='+spath+'\n'
+
     for k in ienv:
         if k.startswith('QISKIT_') or k=='CK_PYTHON_IPYTHON_BIN_FULL' or k=='CK_ENV_COMPILER_PYTHON_FILE':
            env[k]=ienv[k]
    
-    return {'return':0, 'bat':s}
+    return {'return':0, 'bat':shell_setup_script_contents}
