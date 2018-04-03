@@ -23,12 +23,19 @@ matrix:
         - os: osx
           language: generic
           python:   3.6
-          env:
-                matrix:
-                    - TRAVIS_CK_USE_BACKEND=local_clifford_simulator
-                    - TRAVIS_CK_USE_BACKEND=local_qasm_simulator
-                    - TRAVIS_CK_USE_BACKEND=local_unitary_simulator
-                    - TRAVIS_CK_USE_BACKEND=local_qiskit_simulator
+          env:      TRAVIS_CK_USE_BACKEND=local_clifford_simulator
+        - os: osx
+          language: generic
+          python:   3.6
+          env:      TRAVIS_CK_USE_BACKEND=local_qasm_simulator
+        - os: osx
+          language: generic
+          python:   3.6
+          env:      TRAVIS_CK_USE_BACKEND=local_unitary_simulator
+        - os: osx
+          language: generic
+          python:   3.6
+          env:      TRAVIS_CK_USE_BACKEND=local_qiskit_simulator
 
 before_install:
     # For C++14 we need at least gcc-6:
