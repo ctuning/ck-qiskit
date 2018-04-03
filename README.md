@@ -2,38 +2,40 @@
 
 [![Travis Build Status](https://travis-ci.org/ctuning/ck-qiskit.svg?branch=master)](https://travis-ci.org/ctuning/ck-qiskit)
 
-## Installation 
 
-### Install global prerequisites (Ubuntu, Debian)
+## Installation (on Ubuntu or Debian)
 
+### Install global prerequisites, Python3 and its Pip3 (Python 2 is **not** supported)
 ```
-$ sudo apt install \
-  build-essential  \
-  liblapack-dev    \
-  libblas-dev      \
-  libssl-dev       \
-  libpng-dev       \
-  libfreetype6-dev
-```
-
-### Install Python 3
-
-**NB:** Python 2 is **not** supported.
-
-```
-$ sudo apt install \
-  python3          \
-  python3-pip      \
-  python3-wheel
+$ sudo apt install build-essential liblapack-dev libblas-dev libssl-dev libpng-dev libfreetype6-dev
+$ sudo apt install python3 python3-pip python3-wheel
 $ sudo pip3 install setuptools
 ```
 
 ### Install Collective Knowledge
-
 ```
 $ sudo pip3 install ck
 ```
 
+
+## Installation (on MacOSX)
+
+### Install global prerequisites, GCC compiler v.6+, Python3 and its Pip3 (Python 2 is **not** supported)
+```
+$ brew update
+$ brew reinstall python                                                 # brew now installs python3 and pip3 by default
+$ export PATH=/usr/local/opt/python/libexec/bin:$PATH
+$ brew install gcc\@6 || brew link --overwrite gcc\@6                   # to avoid symlink conflict with oclint
+$ python -m pip install --ignore-installed --verbose pip setuptools     # let python3 find its own pip and install its own setuptools
+```
+
+### Install Collective Knowledge
+```
+$ python -m pip install ck                                              # let python3 find its own pip and install CK
+```
+
+
+## Common part of the installation (Linux or MacOSX)
 
 ### Install this CK repository with all its dependencies (other CK repos to reuse artifacts)
 
