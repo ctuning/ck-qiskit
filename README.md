@@ -5,10 +5,10 @@
 
 ## Installation (on Ubuntu or Debian)
 
-### Install global prerequisites, Python3 and its Pip3 (Python 2 is **not** supported)
+### Install global prerequisites, Python 3 and Pip 3 (Python 2 is **not** supported)
 ```
 $ sudo apt install build-essential liblapack-dev libblas-dev libssl-dev libpng-dev libfreetype6-dev
-$ sudo apt install python3 python3-pip python3-wheel
+$ sudo apt install python3 python3-pip python3-wheel pkg-config
 $ sudo pip3 install setuptools
 ```
 
