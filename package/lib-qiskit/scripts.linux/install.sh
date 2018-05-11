@@ -16,21 +16,21 @@
 echo "**************************************************************"
 echo "Installing Quantum Software Development Kit ..."
 
-    # This is where pip2/pip3 will install the modules.
+    # This is where pip will install the modules.
     # It has its own funny structure we don't control :
     #
-PY_DEPS_TREE=${INSTALL_DIR}/py_deps
+EXTRA_PYTHON_SITE=${INSTALL_DIR}/python_deps_site
 
     # This is the link that *will* be pointing at the directory with modules.
     # However, because we want to use asterisk expansion, we will create
-    # the link itself *after* PY_DEPS_TREE has been already populated.
+    # the link itself *after* EXTRA_PYTHON_SITE has been already populated.
     #
 export PACKAGE_LIB_DIR=${INSTALL_DIR}/build
 
 ######################################################################################
 echo ""
-echo "Removing '${PY_DEPS_TREE}' ..."
-rm -rf ${PY_DEPS_TREE} ${PACKAGE_LIB_DIR}
+echo "Removing '${EXTRA_PYTHON_SITE}' ..."
+rm -rf ${EXTRA_PYTHON_SITE} ${PACKAGE_LIB_DIR}
 
 ######################################################################################
 # Print info about possible issues
@@ -54,7 +54,7 @@ echo "Installing QISKit to '${PACKAGE_LIB_DIR}' ..."
 
 cd ${INSTALL_DIR}/src
 
-${CK_PYTHON_BIN} -m pip install -r requirements.txt qiskit --prefix=${PY_DEPS_TREE} --no-cache-dir # --ignore-installed
+${CK_ENV_COMPILER_PYTHON_FILE} -m pip install -r requirements.txt qiskit --prefix=${EXTRA_PYTHON_SITE} --no-cache-dir # --ignore-installed
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"
@@ -64,4 +64,4 @@ fi
     # In order for the asterisk to expand properly,
     # we have to do it AFTER the directory tree has been populated:
     #
-ln -s $PY_DEPS_TREE/lib/python*/site-packages ${PACKAGE_LIB_DIR}
+ln -s $EXTRA_PYTHON_SITE/lib/python*/site-packages ${PACKAGE_LIB_DIR}
