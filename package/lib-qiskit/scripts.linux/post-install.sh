@@ -16,5 +16,5 @@ echo "Post install script"
 
 #DEST_SRC=`ck find program:demo-projectq`
 cp -r ${INSTALL_DIR}/src/out ${INSTALL_DIR}/build/
-cp ${INSTALL_DIR}/src/qiskit/backends/_qiskit_cpp_simulator.py ${INSTALL_DIR}/build/qiskit/backends/_qiskit_cpp_simulator.py
+cp ${INSTALL_DIR}/src/qiskit/backends/local/qasm_simulator_cpp.py ${INSTALL_DIR}/build/qiskit/backends/_qiskit_cpp_simulator.py
 return $?

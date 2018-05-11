@@ -34,7 +34,7 @@ rm -rf ${EXTRA_PYTHON_SITE} ${INSTALL_DIR}/build
 ######################################################################################
 echo "Compiling QISKit Simulator ..."
 
-cd ${INSTALL_DIR}/src/src/qiskit-simulator/
+cd ${INSTALL_DIR}/src/src/qasm-simulator-cpp
 make CC="${CK_CXX}" LIBS="${CK_COMPILER_OWN_LIB_LOC} -lpthread -llapack -lblas"
 
 if [ "${?}" != "0" ] ; then
