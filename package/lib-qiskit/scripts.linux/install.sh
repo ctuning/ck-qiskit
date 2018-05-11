@@ -15,28 +15,21 @@
 
 echo "**************************************************************"
 echo "Installing Quantum Software Development Kit ..."
+echo ""
 
     # This is where pip will install the modules.
     # It has its own funny structure we don't control :
     #
 EXTRA_PYTHON_SITE=${INSTALL_DIR}/python_deps_site
 
-    # This is the link that *will* be pointing at the directory with modules.
-    # However, because we want to use asterisk expansion, we will create
-    # the link itself *after* EXTRA_PYTHON_SITE has been already populated.
-    #
-export PACKAGE_LIB_DIR=${INSTALL_DIR}/build
+SHORT_PYTHON_VERSION=`${CK_ENV_COMPILER_PYTHON_FILE} -c 'import sys;print(sys.version[:3])'`
+export PACKAGE_LIB_DIR="${EXTRA_PYTHON_SITE}/lib/python${SHORT_PYTHON_VERSION}/site-packages"
+export PYTHONPATH=$PACKAGE_LIB_DIR:$PYTHONPATH
 
 ######################################################################################
-echo ""
-echo "Removing '${EXTRA_PYTHON_SITE}' ..."
-rm -rf ${EXTRA_PYTHON_SITE} ${PACKAGE_LIB_DIR}
+echo "Removing '${EXTRA_PYTHON_SITE}' and the symbolic link ..."
 
-######################################################################################
-# Print info about possible issues
-echo ""
-echo "Note that you sometimes need to upgrade your pip to the latest version"
-echo "to avoid well-known issues with user/system space installation:"
+rm -rf ${EXTRA_PYTHON_SITE} ${INSTALL_DIR}/build
 
 ######################################################################################
 echo "Compiling QISKit Simulator ..."
@@ -50,7 +43,7 @@ if [ "${?}" != "0" ] ; then
 fi
 
 ######################################################################################
-echo "Installing QISKit to '${PACKAGE_LIB_DIR}' ..."
+echo "Installing QISKit to '${EXTRA_PYTHON_SITE}' ..."
 
 cd ${INSTALL_DIR}/src
 
@@ -61,7 +54,8 @@ if [ "${?}" != "0" ] ; then
   exit 1
 fi
 
-    # In order for the asterisk to expand properly,
-    # we have to do it AFTER the directory tree has been populated:
+    # Because we have to provide a fixed name via meta.json ,
+    # and $PACKAGE_LIB_DIR depends on the Python version,
+    # we solve it by creating a symbolic link with a fixed name.
     #
-ln -s $EXTRA_PYTHON_SITE/lib/python*/site-packages ${PACKAGE_LIB_DIR}
+ln -s $PACKAGE_LIB_DIR ${INSTALL_DIR}/build
