@@ -14,7 +14,8 @@
   }, 
   "soft_name": "Qiskit", 
   "tags": [
-    "lib", 
+    "lib",
+    "python-package",
     "qiskit"
   ]
 }

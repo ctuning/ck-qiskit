@@ -101,7 +101,7 @@
       "name": "IBM QuantumExperience Python SDK", 
       "skip_pruning_by_other_deps": "yes", 
       "sort": 10, 
-      "tags": "lib,qiskit,quantum,vcpu"
+      "tags": "lib,python-package,qiskit"
     }, 
     "python": {
       "local": "yes", 

@@ -31,14 +31,14 @@
       "name": "IBM QuantumExperience Python SDK", 
       "skip_pruning_by_other_deps": "yes", 
       "sort": 10, 
-      "tags": "lib,qiskit,quantum,vcpu"
+      "tags": "lib,python-package,qiskit"
     }, 
     "lib-projectq": { 
       "local": "yes",  
       "name": "ProjectQ library",  
       "skip_pruning_by_other_deps": "yes",  
       "sort": 10,  
-      "tags": "lib,projectq,vcpu" 
+      "tags": "lib,python-package,projectq"
     }, 
     "python": {
       "local": "yes", 
