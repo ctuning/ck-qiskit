@@ -39,7 +39,7 @@
       "name": "ck-quantum", 
       "skip_pruning_by_other_deps": "yes", 
       "sort": 10, 
-      "tags": "tool,python-package,ck-quantum,hackathon"
+      "tags": "tool,ck-quantum,hackathon"
     }, 
     "python": {
       "local": "yes", 

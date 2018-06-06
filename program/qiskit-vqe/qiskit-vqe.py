@@ -67,7 +67,6 @@ def benchmark_code(vqe_entry, N = 100, solution = 0., delta = 1e-1, p=0.95):
 
 if __name__ == '__main__':
     #print(hackathon.hello())
-    print(hackathon.get_min_func_src_code())
     Tave, Terr, t_ave, t_err, s, s_err, out_list, n_samples_list = benchmark_code(vqe_entry)
     #print('Time to solution: {:.0f} +/- {:.0f}'.format(Tave, Terr))
 
