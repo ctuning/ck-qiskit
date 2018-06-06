@@ -13,7 +13,6 @@ sys.path.append('../IBMQuantumExperience')
 from IBMQuantumExperience import IBMQuantumExperience  # noqa
 from IBMQuantumExperience import ApiError  # noqa
 from IBMQuantumExperience import BadBackendError  # noqa
-from IBMQuantumExperience import RegisterSizeError  # noqa
 
 
 class TestQX(unittest.TestCase):
@@ -174,25 +173,6 @@ measure q[2] -> f[0];
         '''
         backends = self.api.available_backend_simulators()
         self.assertGreaterEqual(len(backends), 1)
-
-    def test_register_size_limit_exception(self):
-        '''
-        Check that exceeding register size limit generates exception
-        '''
-        backend = 'simulator'
-        shots = 1
-        qasm = """OPENQASM 2.0;
-include "qelib1.inc";
-qreg q[25];
-creg c[25];
-h q[0];
-h q[24];
-measure q[0] -> c[0];
-measure q[24] -> c[24];
-        """
-        self.assertRaises(RegisterSizeError, self.api.run_job,
-                          [{'qasm': qasm}],
-                          backend, shots)
 
     def test_qx_api_version(self):
         '''

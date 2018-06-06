@@ -2,7 +2,7 @@
 # Import necessary modules 
 #--------------------------------------------------------------------------------------------------------------
 import sys, os, argparse, time
-from qiskit import QuantumProgram, QISKitError, RegisterSizeError
+from qiskit import QuantumProgram, QISKitError
 import Basic_gates
 import math
 from random import randint
@@ -342,6 +342,4 @@ try:
 		wb.close()
 except QISKitError as ex:
     print('There was an error in the circuit!. Error = {}'.format(ex))
-except RegisterSizeError as ex:
-    print('Error in the number of registers!. Error = {}'.format(ex))
 

@@ -8,7 +8,7 @@ from pprint import pprint
 # TODO: Relative imports for intra-package imports are highly discouraged.
 # http://stackoverflow.com/a/7506006
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from qiskit import QuantumProgram, QISKitError, RegisterSizeError
+from qiskit import QuantumProgram, QISKitError
 
 # Create a QuantumProgram object instance.
 Q_program = QuantumProgram()
@@ -59,5 +59,3 @@ try:
 
 except QISKitError as ex:
     print('There was an error in the circuit!. Error = {}'.format(ex))
-except RegisterSizeError as ex:
-    print('Error in the number of registers!. Error = {}'.format(ex))

@@ -57,5 +57,3 @@ try:
 
 except QISKitError as ex:
     print('Error in the circuit! {}'.format(ex))
-#except RegisterSizeError as ex:
-#    print('Error in the number of registers! {}'.format(ex))
