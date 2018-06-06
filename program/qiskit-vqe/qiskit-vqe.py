@@ -42,7 +42,7 @@ def vqe_entry():
 
     samples = 10000 # The participant decides to use this many samples for all iterations of the minimiser
     # I've used numpy 'minimize' here but this can be completely custom! TODO: add simulated annealing example
-    res = minimize(quantum_expectation, x0=np.array([1.3,2.7]), args=(samples), method='Nelder-Mead', options={'maxfev':200, 'xatol': 0.001, 'fatol': 0.001})
+    res =  hackathon.my_nelder_mead(quantum_expectation, x0=np.array([1.3,2.7]), my_args=(samples), my_options={'maxfev':200, 'xatol': 0.001, 'fatol': 0.001})
     out = res.fun
     n_samples = res.nfev * samples # We may need a more systematic method of calculating this
 
