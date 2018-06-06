@@ -14,6 +14,7 @@
       "ignore_return_code": "no", 
       "run_time": {
         "output_invariant_of_repeat": "yes", 
+        "fine_grain_timer_file": "tmp-ck-output.json",
         "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../qiskit-vqe.py", 
         "run_cmd_out1": "tmp-stdout.tmp", 
         "run_cmd_out2": "tmp-stderr.tmp", 

@@ -1,7 +1,15 @@
 import numpy as np
 from scipy.optimize import minimize
 
+
 import hackathon
+
+import json
+import os
+import re
+
+
+
 # Total time to solution, with each run taking time t, with success probability s and desired success probability p
 def ttot(t,s,p):
     R = np.ceil(np.log(1-p)/np.log(1-s))
@@ -58,11 +66,16 @@ def benchmark_code(vqe_entry, N = 100, solution = 0., delta = 1e-1, p=0.95):
     return Tave, Terr, t_ave, t_err, s, s_err, out_list, n_samples_list
 
 if __name__ == '__main__':
-    print(hackathon.hello())
+    #print(hackathon.hello())
     print(hackathon.get_min_func_src_code())
     Tave, Terr, t_ave, t_err, s, s_err, out_list, n_samples_list = benchmark_code(vqe_entry)
-    print('Time to solution: {:.0f} +/- {:.0f}'.format(Tave, Terr))
+    #print('Time to solution: {:.0f} +/- {:.0f}'.format(Tave, Terr))
 
+
+    # Wrting output ... Move on hackahton.write_output? 
+    output = {"program": hackathon.get_min_func_src_code(), "Tave":Tave, "Terr":Terr}
+    with open('tmp-ck-output.json', 'w') as f:
+             json.dump(output, f, ensure_ascii=False)
     # Uncomment this line to see what fraction were succesful
     # print('{:.3f} +/- {:.3f} \% of runs successful'.format(s*100,s_err*100))
 
