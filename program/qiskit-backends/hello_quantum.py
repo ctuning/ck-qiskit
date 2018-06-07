@@ -30,7 +30,7 @@ pprint(backends)
 print("\n")
 if 'CK_IBM_BACKEND' in os.environ:
    backend = os.environ['CK_IBM_BACKEND']
-if backend is not backends:
+if backend not in backends:
    backend = backends[0]
 try:
     # Create a Quantum Register called "qr" with 2 qubits.
