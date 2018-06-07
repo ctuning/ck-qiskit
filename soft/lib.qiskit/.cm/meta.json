@@ -8,9 +8,7 @@
       "linux": 5, 
       "win": 5
     }, 
-    "soft_file": {
-      "linux": "qiskit-sdk-py/build/qiskit/__init__.py"
-    }
+    "soft_file_universal": "qiskit-sdk-py$#sep#$build$#sep#$qiskit$#sep#$__init__.py"
   }, 
   "soft_name": "Qiskit", 
   "tags": [
