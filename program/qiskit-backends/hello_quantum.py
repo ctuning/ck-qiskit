@@ -8,13 +8,13 @@ from pprint import pprint
 # TODO: Relative imports for intra-package imports are highly discouraged.
 # http://stackoverflow.com/a/7506006
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from qiskit import QuantumProgram, QISKitError
+from qiskit import QuantumProgram, QISKitError, available_backends, register
 
 # Create a QuantumProgram object instance.
 Q_program = QuantumProgram()
 try:
     import Qconfig
-    Q_program.set_api(Qconfig.APItoken, Qconfig.config["url"], verify=False,
+    register(Qconfig.APItoken, Qconfig.config["url"], verify=False,
                       hub=Qconfig.config["hub"],
                       group=Qconfig.config["group"],
                       project=Qconfig.config["project"])
@@ -25,7 +25,7 @@ except:
              running the jobs in the local simulator""")
 
 print("The backends available for use are:")
-backends = Q_program.available_backends()
+backends = available_backends()
 pprint(backends)
 print("\n")
 if 'CK_IBM_BACKEND' in os.environ:
