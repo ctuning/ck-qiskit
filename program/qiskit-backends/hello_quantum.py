@@ -31,7 +31,9 @@ print("\n")
 if 'CK_IBM_BACKEND' in os.environ:
    backend = os.environ['CK_IBM_BACKEND']
 if backend not in backends:
+   print("Your choice '%s' was not available, so picking a random one for you..." % backend)
    backend = backends[0]
+   print("Picked '%s' backend!" % backend)
 try:
     # Create a Quantum Register called "qr" with 2 qubits.
     qr = Q_program.create_quantum_register("qr", 2)
