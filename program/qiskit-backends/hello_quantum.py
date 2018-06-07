@@ -10,8 +10,6 @@ from pprint import pprint
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 from qiskit import QuantumProgram, QISKitError, available_backends, register
 
-# Create a QuantumProgram object instance.
-Q_program = QuantumProgram()
 try:
     import Qconfig
     register(Qconfig.APItoken, Qconfig.config["url"], verify=False,
@@ -24,10 +22,13 @@ except:
              cannot test I/O intesive tasks, will only test CPU intensive tasks
              running the jobs in the local simulator""")
 
+# Running this block before registering quietly returns a list of local-only simulators
+#
 print("The backends available for use are:")
 backends = available_backends()
 pprint(backends)
 print("\n")
+
 if 'CK_IBM_BACKEND' in os.environ:
    backend = os.environ['CK_IBM_BACKEND']
 if backend not in backends:
@@ -35,6 +36,9 @@ if backend not in backends:
    backend = backends[0]
    print("Picked '%s' backend!" % backend)
 try:
+    # Create a QuantumProgram object instance.
+    Q_program = QuantumProgram()
+
     # Create a Quantum Register called "qr" with 2 qubits.
     qr = Q_program.create_quantum_register("qr", 2)
     # Create a Classical Register called "cr" with 2 bits.
