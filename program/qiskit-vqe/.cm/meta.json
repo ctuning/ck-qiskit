@@ -15,7 +15,7 @@
       "run_time": {
         "output_invariant_of_repeat": "yes", 
         "fine_grain_timer_file": "tmp-ck-output.json",
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../qiskit-vqe.py", 
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../qiskit-vqe-copy.py", 
         "run_cmd_out1": "tmp-stdout.tmp", 
         "run_cmd_out2": "tmp-stderr.tmp", 
         "run_output_files": [
@@ -34,6 +34,13 @@
       "sort": 10, 
       "tags": "lib,python-package,qiskit"
     }, 
+    "lib-projectq": {
+      "local": "yes", 
+      "name": "PQ ", 
+      "skip_pruning_by_other_deps": "yes", 
+      "sort": 10, 
+      "tags": "lib,python-package,projectq"
+    }, 
     "ck-quantum": {
       "local": "yes", 
       "name": "ck-quantum", 
@@ -49,12 +56,11 @@
     }
   }, 
   "run_vars": {
-    "CK_IBM_BACKEND": "ibmqx_qasm_simulator", 
-    "CK_IBM_REPETITION": 1, 
+    "CK_IBM_BACKEND": "local_qasm_simulator", 
+    "CK_IBM_SHOTS": 10, 
     "CK_IBM_TIMEOUT": 1200, 
     "CK_IBM_VERBOSE": 1, 
-    "CK_REPETITIONS": 3, 
-    "CK_SHOR_INPUT": 5
+    "CK_SAMPLES": 10 
   }, 
   "tags": [
     "qiskit", 
