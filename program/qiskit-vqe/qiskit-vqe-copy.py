@@ -118,10 +118,17 @@ if __name__ == '__main__':
     delta = 1e-1
     if 'CK_DELTA' in os.environ:
          delta = int(os.environ['CK_DELTA'])
-    p = 10 # Prob
+    p = 0.95 # Prob
     if 'CK_PROBABILITY' in os.environ:
          p = int(os.environ['CK_PROBABILITY'])
-    vqe_opt = {'shot': shots, 'x0':initial_theta, 'method':'Neder-Mead', 'options':{'maxfev':2, 'xatol': 0.001, 'fatol': 0.001} }
+    method = 'Neder-Mead'
+    if 'CK_OPTIMIZER_METHOD' in os.environ:
+         method = int(os.environ['CK_OPTIMIZER_METHOD'])
+    maxfev = 2
+    if 'CK_OPTIMIZER_MAXFEV' in os.environ:
+       maxfev = int(os.environ['CK_OPTIMIZER_MAXFEV'])
+
+    vqe_opt = {'shot': shots, 'x0':initial_theta, 'method':method, 'options':{'maxfev': maxfev, 'xatol': 0.001, 'fatol': 0.001} }
     Tave, Terr, t_ave, t_err, s, s_err, out_list, n_samples_list = utils.benchmark_code(vqe_entry, N, solution, delta, p, vqe_opt)
     #print('Time to solution: {:.0f} +/- {:.0f}'.format(Tave, Terr))
 
