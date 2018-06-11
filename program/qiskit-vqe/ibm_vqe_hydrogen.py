@@ -4,7 +4,7 @@
 This script runs Variational-Quantum-Eigensolver on H2 (Hydrogen molecule)
 
 Example running it partially using CK infrastructure:
-    time CK_IBM_BACKEND=ibmq_qasm_simulator ck virtual `ck search env:* --tags=lib,qiskit` `ck search env:* --tags=ibmqx,login` `ck search env:* --tags=hackathon` --shell_cmd='python3 ibm_vqe.py'
+    time ck virtual `ck search env:* --tags=lib,qiskit` `ck search env:* --tags=ibmqx,login` `ck search env:* --tags=hackathon` --shell_cmd='ibm_vqe_hydrogen.py'
 """
 
 import os
