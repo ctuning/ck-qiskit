@@ -116,7 +116,8 @@ if __name__ == '__main__':
     #warnings.filterwarnings('ignore')
 
     # Import hamiltonian for H2 from file
-    ham_name = 'H2Equilibrium.txt'
+    #ham_name = 'H2Equilibrium.txt'
+    ham_name = '../H2Equilibrium.txt'
     pauli_list = Hamiltonian_from_file(ham_name)
     pauli_list_grouped = group_paulis(pauli_list) # Groups a list of (coeff,Pauli) tuples into tensor product basis (tpb) sets
 
