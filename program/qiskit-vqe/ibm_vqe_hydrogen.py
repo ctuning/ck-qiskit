@@ -17,6 +17,7 @@ from scipy import linalg as la
 
 from qiskit import QuantumProgram, register
 from qiskit.tools.apps.optimization import trial_circuit_ryrz, Hamiltonian_from_file, make_Hamiltonian, eval_hamiltonian, group_paulis
+from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 
 from hackathon.utils import cmdline_parse_and_report
 
@@ -30,6 +31,14 @@ class NumpyEncoder(json.JSONEncoder):
         elif isinstance(obj, np.bool_):
             return bool(obj)
         return json.JSONEncoder.default(self, obj)
+
+
+def Hamiltonian_from_list(list_of_pairs):
+    pauli_list = []
+    for pair in list_of_pairs:
+        label, weight = pair
+        pauli_list.append([weight, label_to_pauli(label)])
+    return pauli_list
 
 
 def vqe_for_qiskit(sample_number):
@@ -119,10 +128,17 @@ if __name__ == '__main__':
     #import warnings
     #warnings.filterwarnings('ignore')
 
-    # Import hamiltonian for H2 from file
-    ham_name = 'H2Equilibrium.txt'
+    # Build hamiltonian for H2 from the list below:
     #ham_name = '../H2Equilibrium.txt'
-    pauli_list = Hamiltonian_from_file(ham_name)
+    #pauli_list = Hamiltonian_from_file(ham_name)
+    pauli_list = Hamiltonian_from_list([
+        ('ZZ',  0.011279956224107712),
+        ('II', -1.0523760606256514),
+        ('ZI',  0.39793570529466216),
+        ('IZ',  0.39793570529466227),
+        ('XX',  0.18093133934472627)
+        ])
+
     pauli_list_grouped = group_paulis(pauli_list) # Groups a list of (coeff,Pauli) tuples into tensor product basis (tpb) sets
 
     # Calculate Exact Energy classically, to compare with quantum solution
