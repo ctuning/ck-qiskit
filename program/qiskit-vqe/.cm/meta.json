@@ -11,7 +11,7 @@
   "program": "yes", 
   "run_cmds": {
     "shor": {
-      "ignore_return_code": "no", 
+      "ignore_return_code": "no",
       "run_time": {
         "output_invariant_of_repeat": "yes", 
         "fine_grain_timer_file": "tmp-ck-output.json",
@@ -24,6 +24,19 @@
           "tmp-ck-output.json"
         ]
       }
+    },
+    "ibm-vqe-hydrogen": {
+      "ignore_return_code": "no",
+      "run_time": {
+        "fine_grain_timer_file" "ibm_vqe_report.json",
+        "output_invariant_of_repeat": "no",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../ibm_vqe_hydrogen.py --start-params $<<VQE_START_PARAMS>>$ --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<CK_IBM_BACKEND>>$ --minimizer_method $<<VQE_MINIMIZER_METHOD>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$",
+        "run_cmd_out1": "tmp-stdout.tmp",
+        "run_cmd_out2": "tmp-stderr.tmp",
+        "run_output_files": [
+          "ibm_vqe_report.json"
+        ]
+      }
     }
   }, 
   "run_deps": {
@@ -31,32 +44,36 @@
       "local": "yes", 
       "name": "IBM QuantumExperience PythonSDK ", 
       "skip_pruning_by_other_deps": "yes", 
-      "sort": 10, 
+      "sort": 10,
       "tags": "lib,python-package,qiskit"
     }, 
     "lib-projectq": {
       "local": "yes", 
       "name": "PQ ", 
       "skip_pruning_by_other_deps": "yes", 
-      "sort": 10, 
+      "sort": 20,
       "tags": "lib,python-package,projectq"
     }, 
-    "ck-quantum": {
+    "hackathon-plugin": {
       "local": "yes", 
       "name": "ck-quantum", 
       "skip_pruning_by_other_deps": "yes", 
-      "sort": 10, 
+      "sort": 8,
       "tags": "tool,ck-quantum,hackathon"
-    }, 
-    "python": {
-      "local": "yes", 
-      "name": "python", 
-      "sort": 8, 
-      "tags": "compiler,lang-python,python,v3"
+    },
+    "IBM QX login": {
+      "local": "yes",
+      "name": "IBM QX credentials",
+      "sort": 5,
+      "tags": "ibmqx,login"
     }
   }, 
   "run_vars": {
-    "CK_IBM_BACKEND": "local_qasm_simulator", 
+    "VQE_START_PARAMS"          : "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+    "VQE_SAMPLE_SIZE"           : 100,
+    "VQE_MINIMIZER_METHOD"      : "my_cobyla",
+    "VQE_MAX_ITERATIONS"        : 80,
+    "CK_IBM_BACKEND"            : "local_qasm_simulator",
     "CK_IBM_SHOTS": 10, 
     "CK_IBM_TIMEOUT": 1200, 
     "CK_IBM_VERBOSE": 1, 
