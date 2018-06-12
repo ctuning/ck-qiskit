@@ -143,8 +143,8 @@ if __name__ == '__main__':
 
     # Calculate Exact Energy classically, to compare with quantum solution
     H = make_Hamiltonian(pauli_list)
-    exact = np.amin(la.eigh(H)[0])
-    print('The exact ground state energy is: {:.4f}'.format(exact))
+    classical_energy = np.amin(la.eigh(H)[0])
+    print('The exact ground state energy is: {:.4f}'.format(classical_energy))
 
     entangler_map = {1: [0]}    # Which qubits to use (0 to 1 best to avoid qiskit bugs)
 
@@ -161,7 +161,8 @@ if __name__ == '__main__':
         "minimizer_method"  : minimizer_method,
         "minimizer_options" : minimizer_options,
         "sample_number"     : sample_number,
-        "minimizer_src"     : minimizer_src
+        "minimizer_src"     : minimizer_src,
+        "classical_energy"  : classical_energy
         }
 
     output_dict     = { "vqe_input" : vqe_input, "vqe_output" : vqe_output, "report" : report }
