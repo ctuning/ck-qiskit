@@ -4,7 +4,7 @@
 This script runs Variational-Quantum-Eigensolver on H2 (Hydrogen molecule)
 
 Example running it partially using CK infrastructure:
-    time ck virtual `ck search env:* --tags=lib,qiskit` `ck search env:* --tags=ibmqx,login` `ck search env:* --tags=hackathon` --shell_cmd='ibm_vqe_hydrogen.py'
+    time ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=hackathon`  --shell_cmd="$HOME/CK/ck-qiskit/program/qiskit-vqe/ibm_vqe_hydrogen.py --minimizer_method=my_minimizer"
 """
 
 import os
@@ -51,9 +51,10 @@ def vqe_for_qiskit(sample_number):
             'energy' : energy
             }
 
-        report['iterations'].append( report_this_iteration )
-        report['total_q_seconds'] += report_this_iteration['total_q_seconds_per_c_iteration']  # total_q_time += total
-        report['total_q_shots'] += report_this_iteration['total_q_shots_per_c_iteration']
+        if report != 'TestMode':
+            report['iterations'].append( report_this_iteration )
+            report['total_q_seconds'] += report_this_iteration['total_q_seconds_per_c_iteration']  # total_q_time += total
+            report['total_q_shots'] += report_this_iteration['total_q_shots_per_c_iteration']
 
         report_this_iteration['total_seconds_per_c_iteration'] = time.time() - timestamp_before_ee
 
@@ -72,6 +73,9 @@ def vqe_for_qiskit(sample_number):
 
     timestamp_before_optimizer = time.time()
     optimizer_output = minimizer_function(expectation_estimation, start_params, my_args=(report), my_options = minimizer_options)
+
+    # override the returned function value by one computed by us
+    optimizer_output['fun_validated'] = expectation_estimation(optimizer_output['x'], 'TestMode')
 
     report['total_seconds'] = time.time() - timestamp_before_optimizer
 
@@ -116,8 +120,8 @@ if __name__ == '__main__':
     #warnings.filterwarnings('ignore')
 
     # Import hamiltonian for H2 from file
-    #ham_name = 'H2Equilibrium.txt'
-    ham_name = '../H2Equilibrium.txt'
+    ham_name = 'H2Equilibrium.txt'
+    #ham_name = '../H2Equilibrium.txt'
     pauli_list = Hamiltonian_from_file(ham_name)
     pauli_list_grouped = group_paulis(pauli_list) # Groups a list of (coeff,Pauli) tuples into tensor product basis (tpb) sets
 
