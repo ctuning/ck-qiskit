@@ -64,8 +64,6 @@ def vqe_for_qiskit(sample_number, pauli_list):
         return energy
 
 
-    report = { 'total_q_seconds': 0, 'total_q_shots':0, 'iterations' : [] }
-
     # Initialise quantum program
     Q_program = QuantumProgram()
 
@@ -75,16 +73,22 @@ def vqe_for_qiskit(sample_number, pauli_list):
     # Which qubits to use (0 to 1 best to avoid qiskit bugs)
     entangler_map = {1: [0]}
 
-    initial_out = expectation_estimation(start_params, { 'total_q_seconds': 0, 'total_q_shots':0, 'iterations' : [] })   # Initial objective function value
-    print('Initial guess at solution is: {:.4f}'.format(initial_out))
+
+    report = { 'total_q_seconds': 0, 'total_q_shots':0, 'iterations' : [] }
+
+    # Initial objective function value
+    fun_initial = expectation_estimation(start_params, 'TestMode')
+    print('Initial guess at start_params is: {:.4f}'.format(fun_initial))
 
     timestamp_before_optimizer = time.time()
     optimizer_output = minimizer_function(expectation_estimation, start_params, my_args=(report), my_options = minimizer_options)
-
-    # override the returned function value by one computed by us
-    optimizer_output['fun_validated'] = expectation_estimation(optimizer_output['x'], 'TestMode')
-
     report['total_seconds'] = time.time() - timestamp_before_optimizer
+
+    # Also generate and provide a validated function value at the optimal point
+    fun_validated = expectation_estimation(optimizer_output['x'], 'TestMode')
+    print('Validated value at solution is: {:.4f}'.format(fun_validated))
+
+    optimizer_output['fun_validated'] = fun_validated
 
     print('Total Q seconds = %f' % report['total_q_seconds'])
     print('Total Q shots = %d' % report['total_q_shots'])
