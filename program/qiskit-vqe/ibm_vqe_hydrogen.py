@@ -16,7 +16,7 @@ import numpy as np
 from scipy import linalg as la
 
 from qiskit import QuantumProgram, register
-from qiskit.tools.apps.optimization import trial_circuit_ryrz, Hamiltonian_from_file, make_Hamiltonian, eval_hamiltonian, group_paulis
+from qiskit.tools.apps.optimization import trial_circuit_ryrz, make_Hamiltonian, eval_hamiltonian, group_paulis
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 
 from hackathon.utils import cmdline_parse_and_report
@@ -33,15 +33,7 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def Hamiltonian_from_list(list_of_pairs):
-    pauli_list = []
-    for pair in list_of_pairs:
-        label, weight = pair
-        pauli_list.append([weight, label_to_pauli(label)])
-    return pauli_list
-
-
-def vqe_for_qiskit(sample_number):
+def vqe_for_qiskit(sample_number, pauli_list):
 
     def expectation_estimation(current_params, report):
 
@@ -77,6 +69,12 @@ def vqe_for_qiskit(sample_number):
     # Initialise quantum program
     Q_program = QuantumProgram()
 
+    # Groups a list of (coeff,Pauli) tuples into tensor product basis (tpb) sets
+    pauli_list_grouped = group_paulis(pauli_list)
+
+    # Which qubits to use (0 to 1 best to avoid qiskit bugs)
+    entangler_map = {1: [0]}
+
     initial_out = expectation_estimation(start_params, { 'total_q_seconds': 0, 'total_q_shots':0, 'iterations' : [] })   # Initial objective function value
     print('Initial guess at solution is: {:.4f}'.format(initial_out))
 
@@ -93,9 +91,6 @@ def vqe_for_qiskit(sample_number):
     print('Total seconds = %f' % report['total_seconds'])
 
     return (optimizer_output, report)
-
-#    out = optimizer_output.fun   # Final optimised value
-#   print('Final optimised solution is: {:.4f}'.format(out))
 
 
 if __name__ == '__main__':
@@ -131,26 +126,22 @@ if __name__ == '__main__':
     # Build hamiltonian for H2 from the list below:
     #ham_name = '../H2Equilibrium.txt'
     #pauli_list = Hamiltonian_from_file(ham_name)
-    pauli_list = Hamiltonian_from_list([
-        ('ZZ',  0.011279956224107712),
-        ('II', -1.0523760606256514),
-        ('ZI',  0.39793570529466216),
-        ('IZ',  0.39793570529466227),
-        ('XX',  0.18093133934472627)
-        ])
-
-    pauli_list_grouped = group_paulis(pauli_list) # Groups a list of (coeff,Pauli) tuples into tensor product basis (tpb) sets
+    pauli_list = [
+        [  0.011279956224107712,   label_to_pauli('ZZ') ],
+        [ -1.0523760606256514,     label_to_pauli('II') ],
+        [  0.39793570529466216,    label_to_pauli('ZI') ],
+        [  0.39793570529466227,    label_to_pauli('IZ') ],
+        [  0.18093133934472627,    label_to_pauli('XX') ]
+        ]
 
     # Calculate Exact Energy classically, to compare with quantum solution
     H = make_Hamiltonian(pauli_list)
     classical_energy = np.amin(la.eigh(H)[0])
     print('The exact ground state energy is: {:.4f}'.format(classical_energy))
 
-    entangler_map = {1: [0]}    # Which qubits to use (0 to 1 best to avoid qiskit bugs)
-
     # ---------------------------------------- run VQE: ----------------------------------------
 
-    (vqe_output, report) = vqe_for_qiskit(sample_number)
+    (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list)
 
     # ---------------------------------------- store the results: ----------------------------------------
 
