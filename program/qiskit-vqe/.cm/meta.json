@@ -45,13 +45,6 @@
       "sort": 10,
       "tags": "lib,python-package,qiskit"
     }, 
-    "lib-projectq": {
-      "local": "yes", 
-      "name": "PQ ", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 20,
-      "tags": "lib,python-package,projectq"
-    }, 
     "hackathon-plugin": {
       "local": "yes", 
       "name": "ck-quantum", 
