@@ -19,7 +19,7 @@ from qiskit import QuantumProgram, register
 from qiskit.tools.apps.optimization import trial_circuit_ryrz, make_Hamiltonian, eval_hamiltonian, group_paulis
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 
-from hackathon.utils import cmdline_parse_and_report
+from hackathon_utils import cmdline_parse_and_report
 
 
 # See https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable
