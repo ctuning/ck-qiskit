@@ -38,25 +38,31 @@
     }
   }, 
   "run_deps": {
-    "lib-qiskit": {
-      "local": "yes", 
-      "name": "IBM QuantumExperience PythonSDK ", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 10,
-      "tags": "lib,python-package,qiskit"
-    }, 
-    "hackathon-plugin": {
-      "local": "yes", 
-      "name": "ck-quantum", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 8,
-      "tags": "tool,ck-quantum,hackathon"
-    },
     "IBM QX login": {
       "local": "yes",
       "name": "IBM QX credentials",
       "sort": 5,
       "tags": "ibmqx,login"
+    },
+    "hackathon-plugin": {
+      "local": "yes",
+      "name": "ck-quantum",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 10,
+      "tags": "tool,ck-quantum,hackathon"
+    },
+    "python": {
+      "local": "yes",
+      "name": "Python interpreter",
+      "sort": 15,
+      "tags": "compiler,python"
+    },
+    "lib-qiskit": {
+      "local": "yes",
+      "name": "IBM QuantumExperience PythonSDK",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 20,
+      "tags": "lib,python-package,qiskit"
     }
   }, 
   "run_vars": {
