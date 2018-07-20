@@ -4,6 +4,10 @@
   "dict": {
     "repo_deps": [
       {
+        "repo_uoa": "ck-quantum",
+        "repo_url": "https://github.com/ctuning/ck-quantum"
+      },
+      {
         "repo_uoa": "ck-autotuning",
         "repo_url": "https://github.com/ctuning/ck-autotuning"
       }
