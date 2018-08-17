@@ -62,12 +62,16 @@
     "CK_SAMPLES": 10 
   }, 
   "tags": [
+    "ibm",
+    "ibmq",
+    "ibmqx",
     "qiskit", 
-    "qiskit,qiskit-sdk-py", 
-    "demo", 
-    "examples", 
-    "ibm", 
-    "vqe", 
+    "qiskit-sdk-py",
+    "demo",
+    "examples",
+    "vqe",
+    "vqe-implementation",
+    "hydrogen",
     "hackathon"
   ]
 }

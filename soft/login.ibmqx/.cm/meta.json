@@ -13,12 +13,14 @@
   }, 
   "soft_name": "IBM QuantumExperience Login", 
   "tags": [
-    "login", 
-    "quantum", 
-    "ibmqx", 
-    "qiskit", 
-    "api_key", 
-    "credentials", 
+    "ibm",
+    "ibmq",
+    "ibmqx",
+    "login",
+    "quantum",
+    "qiskit",
+    "api_key",
+    "credentials",
     "password"
   ]
 }
