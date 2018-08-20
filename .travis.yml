@@ -62,6 +62,9 @@ before_install:
     - |
         if [ $TRAVIS_OS_NAME == "osx" ]; then
             brew update                                                         # this swaps python versions and makes 3 the default one
+
+            brew install freetype                                               # somehow needed for matplotlib which is not needed!
+
             brew reinstall python                                               # install and link python3 and pip3 to /usr/local/bin
             export PATH=/usr/local/opt/python/bin:$PATH
             export PYTHON_EXE=python3
