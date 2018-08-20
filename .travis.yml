@@ -2,7 +2,6 @@
 #   http://lint.travis-ci.org/
 
 os:         linux
-dist:       trusty
 language:   python
 
 python:
