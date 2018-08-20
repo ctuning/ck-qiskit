@@ -2,6 +2,8 @@
 #   http://lint.travis-ci.org/
 
 os:         linux
+sudo:       false
+
 language:   python
 
 python:
@@ -46,6 +48,15 @@ matrix:
           python:   3.7
           env:      TRAVIS_CK_WHICH_TEST=vqe_hydrogen TRAVIS_CK_USE_BACKEND=local_qasm_simulator WANTED_PYTHON_VERSION=3.7
 
+addons:
+    apt:
+        packages:
+            - g++-6
+            - python-pip
+            - libblas-dev
+            - liblapack-dev
+        sources:
+            - ubuntu-toolchain-r-test
 
 before_install:
     # For C++14 we need at least gcc-6:
@@ -66,11 +77,11 @@ before_install:
 
             export CK_PLATFORM_NAME="generic-macos "                            # used later by CK
         else
-            sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-            sudo apt-get update -qq
-            sudo apt-get install -qq g++-6
-            sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-            sudo apt-get install python-pip libblas-dev liblapack-dev
+            # sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+            # sudo apt-get update -qq
+            # sudo apt-get install -qq g++-6
+            # sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+            # sudo apt-get install python-pip libblas-dev liblapack-dev
             export CK_PLATFORM_NAME="generic-linux "                            # used later by CK (note the trailing space to make the choice unique)
             export PYTHON_EXE=python
         fi
