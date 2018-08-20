@@ -99,7 +99,7 @@ install:
     - echo "$TRAVIS_CK_COMPILER_CHOICE" | ck detect soft:compiler.${TRAVIS_CK_CXX_COMPILER}     # force detection of a specific C/C++ compiler
     - echo   | ck detect soft:lib.blas
     - echo   | ck detect soft:lib.lapack
-    -          ck install package:lib-qiskit                                    # have to install this again into CK's registered space
+    -          ck install package:lib-qiskit-0.5.4                              # Fix the version
 
 
 script:
