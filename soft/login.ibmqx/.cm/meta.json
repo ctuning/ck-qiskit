@@ -7,9 +7,8 @@
       "linux": 1, 
       "win": 1
     }, 
-    "soft_can_be_dir"       : "yes",
-    "skip_file_check"       : "yes",
-    "soft_file_universal"   : "CK-TOOLS"
+    "detect_in_soft_dir": "yes",
+    "soft_file_universal": "customize.py"
   }, 
   "soft_name": "IBM QuantumExperience Login", 
   "tags": [
