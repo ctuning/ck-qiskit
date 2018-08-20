@@ -15,42 +15,21 @@ def version_cmd(i):
 
     return {'return':0, 'cmd':'', 'version':'N/A'}
 
-##############################################################################
-
-def dirs(i):
-    dirs    = i.get('dirs', [])
-
-    # The concept of directories is not applicable to credentials
-
-    return {'return':0, 'dirs':[]}
 
 ##############################################################################
 
 def setup(i):
     """
     Input:  {
-              cfg              - meta of this soft entry
-              self_cfg         - meta of module soft
-              ck_kernel        - import CK kernel module (to reuse functions)
+              ck_kernel             - import CK kernel module (to reuse functions)
 
-              host_os_uoa      - host OS UOA
-              host_os_uid      - host OS UID
-              host_os_dict     - host OS meta
+              customize             - updated customize vars from meta
 
-              target_os_uoa    - target OS UOA
-              target_os_uid    - target OS UID
-              target_os_dict   - target OS meta
+              customize.env_mapping - the structure of the dialogue
 
-              target_device_id - target device ID (if via ADB)
+              env                   - updated environment vars from meta
 
-              tags             - list of tags used to search this entry
-
-              env              - updated environment vars from meta
-              customize        - updated customize vars from meta
-
-              deps             - resolved dependencies for this soft
-
-              interactive      - if 'yes', can ask questions, otherwise quiet
+              interactive           - if 'yes', can ask questions, otherwise quiet and assume defaults
             }
 
     Output: {
@@ -63,25 +42,42 @@ def setup(i):
 
     """
 
-    ck              = i['ck_kernel']
+    ck                  = i['ck_kernel']
+    interactive_bool    = i.get('interactive', '') == 'yes'
+    env_mapping         = i.get('customize', {}).get('env_mapping', [])
+    env                 = i['env']                      # target structure to deposit the future environment variables
 
-    ibmqx_api_key   = os.environ.get('IBMQX_API_KEY','')
+    for one_var_mapping in env_mapping:
+        var_name = one_var_mapping['variable']
 
-    interactive     = i.get('interactive','')
+        # 1) Command line parameters have the highest precedence,
+        # 2) followed by the variables of the current environment
+        # 3) interactive ? interaction : default ? default : error
+        var_value = env.get(var_name) or os.environ.get(var_name)
 
-    env             = i['env']                      # target structure to deposit the future environment variables
+        if not var_value:
+            default_value   = one_var_mapping.get('default_value')
 
-    if interactive and not ibmqx_api_key:
-        kernel_ret = ck.inp({'text': 'Please enter your IBM QuantumExperience API key: '})
-        if kernel_ret['return']:
-            return kernel_ret
-        else:
-            ibmqx_api_key = kernel_ret['string']
+            if interactive_bool:    # ask the question and collect the response:
 
-    if ibmqx_api_key:
-        env['CK_IBM_API_TOKEN'] = ibmqx_api_key
-    else:
-        return {'return':1, 'error':'Environment variable IBMQX_API_KEY should be set!'}
+                display_name = one_var_mapping['display_name']
+                question = 'Please enter {}{}: '.format(display_name, " [hit return to accept the default '{}']".format(default_value) if default_value else '')
+                kernel_ret = ck.inp({'text': question})
+                if kernel_ret['return']:
+                    return kernel_ret
+                else:
+                    var_value = kernel_ret['string']
+
+                    if var_value=='' and default_value!=None:
+                        var_value = default_value
+
+            elif default_value!=None:   # assume the default
+                var_value = default_value
+
+            else:
+                return {'return':1, 'error':'Non-interactive mode and no default for {} - bailing out'.format(var_name)}
+        env[var_name] = var_value
+
+        # Can add some general type checks and constraints if necessary (in response to "nonempty", "is_a_number", etc)
 
     return {'return':0, 'bat':''}
-

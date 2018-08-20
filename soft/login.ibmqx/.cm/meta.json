@@ -8,7 +8,13 @@
       "win": 1
     }, 
     "detect_in_soft_dir": "yes",
-    "soft_file_universal": "customize.py"
+    "soft_file_universal": "customize.py",
+    "env_mapping": [
+        {
+            "variable"      : "CK_IBM_API_TOKEN",
+            "display_name"  : "your IBM QuantumExperience API key"
+        }
+    ]
   }, 
   "soft_name": "IBM QuantumExperience Login", 
   "tags": [
