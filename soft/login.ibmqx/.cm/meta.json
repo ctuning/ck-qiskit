@@ -2,13 +2,13 @@
   "auto_detect": "yes", 
   "customize": {
     "check_that_exists": "yes", 
-    "env_prefix": "CK_ENV_IBMQX_LOGIN", 
+    "env_prefix": "CK_ENV_LOGIN_IBMQX",
     "limit_recursion_dir_search": {
-      "linux": 1, 
-      "win": 1
+      "linux": 0,
+      "win": 0
     }, 
     "detect_in_soft_dir": "yes",
-    "soft_file_universal": "customize.py",
+    "soft_file_universal": ".cm/meta.json",
     "env_mapping": [
         {
             "variable"      : "CK_IBM_API_TOKEN",
@@ -18,6 +18,7 @@
   }, 
   "soft_name": "IBM QuantumExperience Login", 
   "tags": [
+    "dialogue",
     "ibm",
     "ibmq",
     "ibmqx",
@@ -27,5 +28,9 @@
     "api_key",
     "credentials",
     "password"
-  ]
+  ],
+  "use_customize_script_from_another_entry": {
+    "data_uoa": "f14e1ed51a944f13",
+    "module_uoa": "soft"
+  }
 }
