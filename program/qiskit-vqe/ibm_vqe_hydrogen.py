@@ -108,7 +108,7 @@ if __name__ == '__main__':
         q_device_name_help          = "Real devices: 'ibmqx4' or 'ibmqx5'. Use 'ibmq_qasm_simulator' for remote simulator or 'local_qasm_simulator' for local",
         minimizer_options_default   = '{"maxfev":200, "xatol": 0.001, "fatol": 0.001}'
         )
-    # q_device_name = os.environ.get('CK_IBM_BACKEND', 'local_qasm_simulator') # try 'local_qasm_simulator', 'ibmq_qasm_simulator', 'ibmqx4', 'ibmqx5'
+    # q_device_name = os.environ.get('VQE_QUANTUM_BACKEND', 'local_qasm_simulator') # try 'local_qasm_simulator', 'ibmq_qasm_simulator', 'ibmqx4', 'ibmqx5'
 
     try:
         import Qconfig
