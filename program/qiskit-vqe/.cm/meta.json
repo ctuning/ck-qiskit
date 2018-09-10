@@ -3,6 +3,7 @@
   "data_name": "qiskit-vqe", 
   "no_compile": "yes", 
   "no_target_file": "yes", 
+  "pass_env_to_resolve": "yes",
   "print_files_after_run": [
     "tmp-stdout.tmp", 
     "tmp-stderr.tmp"
@@ -27,6 +28,9 @@
       "local": "yes",
       "name": "IBM QX credentials",
       "sort": 5,
+      "disable_if_env": {
+            "VQE_QUANTUM_BACKEND" : "local_qasm_simulator"
+      },
       "tags": "ibmqx,login"
     },
     "hackathon-plugin": {
