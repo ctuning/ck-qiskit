@@ -65,7 +65,8 @@ def setup(i):
     hosd=i['host_os_dict']
     tosd=i['target_os_dict']
 
-    winh=hosd.get('windows_base','')
+    winh    = hosd.get('windows_base','')
+    macos   = hosd.get('macos','')
 
     ienv=cus.get('install_env',{})
 
@@ -79,6 +80,8 @@ def setup(i):
     ppath=os.path.join(pi, ienv['PACKAGE_SUB_DIR1'])
     env[ep+'_LIB']=ppath
 
+    pil_dlibs_path = os.path.join(ppath, 'PIL', '.dylibs')
+
     # Using a generic script to prepend the library search path
     # with the value expected to be set in $CK_ENV_COMPILER_GCC_LIB .
     #
@@ -89,10 +92,17 @@ def setup(i):
     # See this discussion:
     #   https://github.com/citwild/laugh-finder/issues/11#issuecomment-377997186
     #
-    r = ck.access({'action': 'lib_path_export_script',
-                   'module_uoa': 'os',
-                   'host_os_dict': hosd,
-                   'lib_path': '$CK_ENV_COMPILER_GCC_LIB' })
+    lib_path_adict = { 'action': 'lib_path_export_script',
+                       'module_uoa': 'os',
+                       'host_os_dict': hosd,
+                       'lib_path': [ '$CK_ENV_COMPILER_GCC_LIB' ],
+    }
+
+    if not winh:
+        pil_extra_dynamic_path = os.path.join(ppath, 'PIL', '.dylibs' if macos else '.libs')
+        lib_path_adict['lib_path'].insert(0, pil_extra_dynamic_path)
+
+    r = ck.access( lib_path_adict )
     if r['return']>0: return r
     shell_setup_script_contents = r['script']
 
