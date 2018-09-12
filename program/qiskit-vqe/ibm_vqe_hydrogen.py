@@ -17,10 +17,12 @@ from scipy import linalg as la
 
 from qiskit import QuantumProgram, register
 from qiskit.tools.apps.optimization import trial_circuit_ryrz, make_Hamiltonian, eval_hamiltonian, group_paulis
+from qiskit.tools.visualization._circuit_visualization import matplotlib_circuit_drawer
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 
 from hackathon_utils import cmdline_parse_and_report
 
+plot_counter = 0
 
 # See https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable
 #
@@ -32,7 +34,6 @@ class NumpyEncoder(json.JSONEncoder):
             return bool(obj)
         return json.JSONEncoder.default(self, obj)
 
-
 def vqe_for_qiskit(sample_number, pauli_list):
 
     def expectation_estimation(current_params, report):
@@ -40,7 +41,13 @@ def vqe_for_qiskit(sample_number, pauli_list):
         timestamp_before_ee = time.time()
 
         timestamp_before_q_run = timestamp_before_ee    # no point in taking consecutive timestamps
-        energy = eval_hamiltonian(Q_program, pauli_list_grouped, trial_circuit_ryrz(n, m, current_params, entangler_map, None, False), sample_number, q_device_name).real
+        ansatz_circuit = trial_circuit_ryrz(n, m, current_params, entangler_map, None, False)
+
+        global plot_counter
+        matplotlib_circuit_drawer(ansatz_circuit, filename='universal_ansatz_{:03d}.png'.format(plot_counter))
+        plot_counter += 1
+
+        energy = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name).real
         q_run_seconds   = time.time() - timestamp_before_q_run
         q_run_shots     = sample_number
 
