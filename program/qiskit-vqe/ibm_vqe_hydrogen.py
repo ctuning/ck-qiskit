@@ -92,7 +92,7 @@ def tiny_ansatz_2(current_params):
     return qc
 
 
-def vqe_for_qiskit(sample_number, pauli_list):
+def vqe_for_qiskit(sample_number, pauli_list, visualize_ansatz):
 
     def expectation_estimation(current_params, report):
 
@@ -104,7 +104,8 @@ def vqe_for_qiskit(sample_number, pauli_list):
         #ansatz_circuit = tiny_ansatz_2(current_params)
 
         global fun_evaluation_counter
-        matplotlib_circuit_drawer(ansatz_circuit, filename='ansatz_{:03d}.png'.format(fun_evaluation_counter))
+        if visualize_ansatz:
+            matplotlib_circuit_drawer(ansatz_circuit, filename='ansatz_{:03d}.png'.format(fun_evaluation_counter))
         fun_evaluation_counter += 1
 
         energy = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name).real
@@ -161,7 +162,7 @@ def vqe_for_qiskit(sample_number, pauli_list):
 
 if __name__ == '__main__':
 
-    start_params, sample_number, q_device_name, minimizer_method, minimizer_options, minimizer_function = cmdline_parse_and_report(
+    start_params, sample_number, q_device_name, minimizer_method, minimizer_options, minimizer_function, visualize_ansatz = cmdline_parse_and_report(
         num_params                  = num_params,
         q_device_name_default       = 'local_qasm_simulator',
         q_device_name_help          = "Real devices: 'ibmqx4' or 'ibmqx5'. Use 'ibmq_qasm_simulator' for remote simulator or 'local_qasm_simulator' for local",
@@ -205,7 +206,7 @@ if __name__ == '__main__':
 
     # ---------------------------------------- run VQE: ----------------------------------------
 
-    (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list)
+    (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list, visualize_ansatz)
 
     # ---------------------------------------- store the results: ----------------------------------------
 
