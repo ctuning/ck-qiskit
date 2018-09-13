@@ -42,9 +42,14 @@
     },
     "python": {
       "local": "yes",
-      "name": "Python interpreter",
+      "name": "Python 3",
       "sort": 15,
-      "tags": "compiler,python"
+      "tags": "compiler,python",
+      "version_from": [
+            3,
+            2,
+            0
+      ]
     },
     "lib-qiskit": {
       "local": "yes",
