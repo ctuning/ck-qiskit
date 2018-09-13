@@ -16,7 +16,7 @@
       "run_time": {
         "fine_grain_timer_file":"ibm_vqe_report.json",
         "output_invariant_of_repeat": "no",
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../ibm_vqe_hydrogen.py --start-params $<<VQE_START_PARAMS>>$ --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --minimizer_method $<<VQE_MINIMIZER_METHOD>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../ibm_vqe_hydrogen.py --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --minimizer_method $<<VQE_MINIMIZER_METHOD>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$",
         "run_output_files": [
           "ibm_vqe_report.json"
         ]
@@ -60,7 +60,6 @@
     }
   }, 
   "run_vars": {
-    "VQE_START_PARAMS"          : "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
     "VQE_SAMPLE_SIZE"           : 100,
     "VQE_MINIMIZER_METHOD"      : "my_cobyla",
     "VQE_MAX_ITERATIONS"        : 80,

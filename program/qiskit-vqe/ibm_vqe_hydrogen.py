@@ -104,7 +104,7 @@ def vqe_for_qiskit(sample_number, pauli_list):
         #ansatz_circuit = tiny_ansatz_2(current_params)
 
         global fun_evaluation_counter
-        matplotlib_circuit_drawer(ansatz_circuit, filename='universal_ansatz_{:03d}.png'.format(fun_evaluation_counter))
+        matplotlib_circuit_drawer(ansatz_circuit, filename='ansatz_{:03d}.png'.format(fun_evaluation_counter))
         fun_evaluation_counter += 1
 
         energy = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name).real
@@ -165,7 +165,8 @@ if __name__ == '__main__':
         num_params                  = num_params,
         q_device_name_default       = 'local_qasm_simulator',
         q_device_name_help          = "Real devices: 'ibmqx4' or 'ibmqx5'. Use 'ibmq_qasm_simulator' for remote simulator or 'local_qasm_simulator' for local",
-        minimizer_options_default   = '{"maxfev":200, "xatol": 0.001, "fatol": 0.001}'
+        minimizer_options_default   = '{"maxfev":200, "xatol": 0.001, "fatol": 0.001}',
+        start_params_zeros_default  = True
         )
     # q_device_name = os.environ.get('VQE_QUANTUM_BACKEND', 'local_qasm_simulator') # try 'local_qasm_simulator', 'ibmq_qasm_simulator', 'ibmqx4', 'ibmqx5'
 
