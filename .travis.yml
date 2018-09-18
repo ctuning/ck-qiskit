@@ -108,8 +108,8 @@ install:
 script:
     - |
         if [ $TRAVIS_CK_WHICH_TEST == "vqe_hydrogen" ]; then
-            ck deploy vqe --optimizer=optimizer.cobyla
-            echo tiny1 | ck detect soft:template.qiskit.ansatz
+            ck deploy_optimizer vqe --value=optimizer.cobyla
+            ck deploy_ansatz vqe --value=ansatz.tiny2
             ck run program:qiskit-vqe --env.VQE_MAX_ITERATIONS=10 --env.VQE_QUANTUM_BACKEND=${TRAVIS_CK_USE_BACKEND}
         else
             ck run program:qiskit-demo --cmd_key=${TRAVIS_CK_WHICH_TEST} --env.CK_IBM_BACKEND=${TRAVIS_CK_USE_BACKEND}

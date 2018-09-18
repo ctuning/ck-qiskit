@@ -70,7 +70,7 @@
       "name": "Qiskit ansatz function",
       "skip_pruning_by_other_deps": "yes",
       "sort": 50,
-      "tags": "quantum,ansatz"
+      "tags": "quantum,ansatz,deployed"
     }
   }, 
   "run_vars": {
