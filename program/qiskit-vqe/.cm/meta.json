@@ -64,6 +64,13 @@
       "skip_pruning_by_other_deps": "yes",
       "sort": 40,
       "tags": "quantum,vqe,utils,lib"
+    },
+    "ansatz-plugin": {
+      "local": "yes",
+      "name": "Qiskit ansatz function",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 50,
+      "tags": "quantum,ansatz"
     }
   }, 
   "run_vars": {

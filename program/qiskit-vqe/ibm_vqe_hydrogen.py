@@ -15,18 +15,14 @@ import inspect
 import numpy as np
 from scipy import linalg as la
 
-from qiskit import QuantumRegister, ClassicalRegister, QuantumCircuit, QuantumProgram, register
-from qiskit.tools.apps.optimization import trial_circuit_ryrz, make_Hamiltonian, eval_hamiltonian, group_paulis
+from qiskit import QuantumProgram, register
+from qiskit.tools.apps.optimization import make_Hamiltonian, eval_hamiltonian, group_paulis
 from qiskit.tools.visualization._circuit_visualization import matplotlib_circuit_drawer
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 
-from vqe_utils import cmdline_parse_and_report
+from vqe_utils import cmdline_parse_and_report, get_first_callable
 
-n = 2   # Number of qubits
-m = 6   # Depth of circuit
-num_params  = 2 * n * m     # used with universal_ansatz
-#num_params  = 1             # used with tiny_ansatz_1
-#num_params  = 2             # used with tiny_ansatz_2
+import custom_ansatz    # the file will be different depending on the plugin choice
 
 
 fun_evaluation_counter = 0    # global
@@ -41,56 +37,6 @@ class NumpyEncoder(json.JSONEncoder):
             return bool(obj)
         return json.JSONEncoder.default(self, obj)
 
-def universal_ansatz(current_params, depth=m, qbitness=n, entangler_map=None):
-    if entangler_map==None:
-        # Which qubits to use (0 to 1 best to avoid qiskit bugs)
-        entangler_map = {1: [0]}
-
-    return trial_circuit_ryrz(qbitness, depth, current_params, entangler_map, None, False)
-
-## Previously used for Hydrogen VQE in Rigetti implementation
-#
-def tiny_ansatz_1(current_params):
-    q = QuantumRegister(2, "q")
-    qc = QuantumCircuit(q, ClassicalRegister(2, "c"))
-
-    qc.x(q[0])
-    qc.x(q[1])
-    qc.rx(-np.pi/2, q[0])
-    qc.ry( np.pi/2, q[1])
-    qc.cx(q[0], q[1])
-    qc.rz(current_params[0], q[1])
-    qc.cx(q[0], q[1])
-    qc.rx( np.pi/2, q[0])
-    qc.ry(-np.pi/2, q[1])
-
-    return qc
-
-## Previously used for Helium VQE in Rigetti implementation
-#
-def tiny_ansatz_2(current_params):
-    q = QuantumRegister(2, "q")
-    qc = QuantumCircuit(q, ClassicalRegister(2, "c"))
-
-    qc.x(q[0])
-    qc.x(q[1])
-    qc.rx( np.pi/2, q[0])
-    qc.h(q[1])
-    qc.cx(q[0], q[1])
-    qc.rz(current_params[0], q[1])
-    qc.cx(q[0], q[1])
-    qc.rx(-np.pi/2, q[0])
-    qc.h(q[1])
-    qc.h(q[0])
-    qc.rx( np.pi/2, q[1])
-    qc.cx(q[0], q[1])
-    qc.rz(current_params[1], q[1])
-    qc.cx(q[0], q[1])
-    qc.h(q[0])
-    qc.rx(-np.pi/2, q[1])
-
-    return qc
-
 
 def vqe_for_qiskit(sample_number, pauli_list, visualize_ansatz):
 
@@ -99,14 +45,10 @@ def vqe_for_qiskit(sample_number, pauli_list, visualize_ansatz):
         timestamp_before_ee = time.time()
 
         timestamp_before_q_run = timestamp_before_ee    # no point in taking consecutive timestamps
-        ansatz_circuit = universal_ansatz(current_params)
-        #ansatz_circuit = tiny_ansatz_1(current_params)
-        #ansatz_circuit = tiny_ansatz_2(current_params)
+
+        ansatz_circuit  = ansatz_function(current_params)
 
         global fun_evaluation_counter
-        if visualize_ansatz:
-            matplotlib_circuit_drawer(ansatz_circuit, filename='ansatz_{:03d}.png'.format(fun_evaluation_counter))
-        fun_evaluation_counter += 1
 
         energy = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name).real
         q_run_seconds   = time.time() - timestamp_before_q_run
@@ -125,6 +67,10 @@ def vqe_for_qiskit(sample_number, pauli_list, visualize_ansatz):
             report['total_q_seconds'] += report_this_iteration['total_q_seconds_per_c_iteration']  # total_q_time += total
             report['total_q_shots'] += report_this_iteration['total_q_shots_per_c_iteration']
 
+            if visualize_ansatz:
+                matplotlib_circuit_drawer(ansatz_circuit, filename='ansatz_{:03d}.png'.format(fun_evaluation_counter))
+            fun_evaluation_counter += 1
+
         report_this_iteration['total_seconds_per_c_iteration'] = time.time() - timestamp_before_ee
 
         print(report_this_iteration, "\n")
@@ -136,6 +82,10 @@ def vqe_for_qiskit(sample_number, pauli_list, visualize_ansatz):
 
     # Groups a list of (coeff,Pauli) tuples into tensor product basis (tpb) sets
     pauli_list_grouped = group_paulis(pauli_list)
+
+    # Load the ansatz function from the plug-in
+    ansatz_method   = get_first_callable( custom_ansatz )
+    ansatz_function = getattr(custom_ansatz, ansatz_method)     # ansatz_method is a string/name, ansatz_function is an imported callable
 
     report = { 'total_q_seconds': 0, 'total_q_shots':0, 'iterations' : [] }
 
@@ -163,7 +113,7 @@ def vqe_for_qiskit(sample_number, pauli_list, visualize_ansatz):
 if __name__ == '__main__':
 
     start_params, sample_number, q_device_name, minimizer_method, minimizer_options, minimizer_function, visualize_ansatz = cmdline_parse_and_report(
-        num_params                  = num_params,
+        num_params                  = custom_ansatz.num_params,
         q_device_name_default       = 'local_qasm_simulator',
         q_device_name_help          = "Real devices: 'ibmqx4' or 'ibmqx5'. Use 'ibmq_qasm_simulator' for remote simulator or 'local_qasm_simulator' for local",
         minimizer_options_default   = '{"maxfev":200, "xatol": 0.001, "fatol": 0.001}',
