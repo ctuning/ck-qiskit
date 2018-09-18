@@ -20,7 +20,7 @@ from qiskit.tools.apps.optimization import trial_circuit_ryrz, make_Hamiltonian,
 from qiskit.tools.visualization._circuit_visualization import matplotlib_circuit_drawer
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 
-from hackathon_utils import cmdline_parse_and_report
+from vqe_utils import cmdline_parse_and_report
 
 n = 2   # Number of qubits
 m = 6   # Depth of circuit

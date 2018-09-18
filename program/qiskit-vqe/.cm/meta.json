@@ -16,7 +16,7 @@
       "run_time": {
         "fine_grain_timer_file":"ibm_vqe_report.json",
         "output_invariant_of_repeat": "no",
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../ibm_vqe_hydrogen.py --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --minimizer_method $<<VQE_MINIMIZER_METHOD>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$ $<<VQE_VISUALIZE_ANSATZ>>$",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../ibm_vqe_hydrogen.py --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$ $<<VQE_VISUALIZE_ANSATZ>>$",
         "run_output_files": [
           "ibm_vqe_report.json"
         ]
@@ -33,17 +33,10 @@
       },
       "tags": "ibmqx,login"
     },
-    "hackathon-plugin": {
-      "local": "yes",
-      "name": "ck-quantum",
-      "skip_pruning_by_other_deps": "yes",
-      "sort": 10,
-      "tags": "tool,ck-quantum,hackathon"
-    },
     "python": {
       "local": "yes",
       "name": "Python 3",
-      "sort": 15,
+      "sort": 10,
       "tags": "compiler,python",
       "version_from": [
             3,
@@ -57,11 +50,24 @@
       "skip_pruning_by_other_deps": "yes",
       "sort": 20,
       "tags": "lib,python-package,qiskit"
+    },
+    "optimizer-plugin": {
+      "local": "yes",
+      "name": "Deployed python optimizer function",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 30,
+      "tags": "quantum,optimizer,deployed"
+    },
+    "vqe-utils-plugin": {
+      "local": "yes",
+      "name": "VQE Python utility functions",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 40,
+      "tags": "quantum,vqe,utils,lib"
     }
   }, 
   "run_vars": {
     "VQE_SAMPLE_SIZE"           : 100,
-    "VQE_MINIMIZER_METHOD"      : "my_cobyla",
     "VQE_MAX_ITERATIONS"        : 80,
     "VQE_QUANTUM_BACKEND"       : "local_qasm_simulator",
     "VQE_VISUALIZE_ANSATZ"      : ""
