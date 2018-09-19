@@ -8,28 +8,32 @@ from pprint import pprint
 # TODO: Relative imports for intra-package imports are highly discouraged.
 # http://stackoverflow.com/a/7506006
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from qiskit import QuantumProgram, QISKitError
+from qiskit import QuantumProgram, QISKitError, available_backends
 
-# Create a QuantumProgram object instance.
-Q_program = QuantumProgram()
+
 try:
     import Qconfig
-    Q_program.set_api(Qconfig.APItoken, Qconfig.config["url"], verify=False,
+    register(Qconfig.APItoken, Qconfig.config["url"], verify=False,
                       hub=Qconfig.config["hub"],
                       group=Qconfig.config["group"],
                       project=Qconfig.config["project"])
 except:
-    offline = True
-    print("""WARNING: There's no connection with IBMQuantumExperience servers.
-             cannot test I/O intesive tasks, will only test CPU intensive tasks
-             running the jobs in the local simulator""")
+    print("""
+            WARNING: There's no connection with IBMQuantumExperience servers.
+            cannot test I/O intesive tasks, will only test CPU intensive tasks
+            running the jobs in the local simulator
+            """)
+
+# Create a QuantumProgram object instance.
+Q_program = QuantumProgram()
 
 print("The backends available for use are:")
-pprint(Q_program.available_backends())
+pprint(available_backends())
 print("\n")
-backend = 'local_qasm_simulator'
-if 'CK_IBM_BACKEND' in os.environ:
-    backend = os.environ['CK_IBM_BACKEND']
+
+#backend = os.environ.get('CK_IBM_BACKEND', 'ibmq_qasm_simulator')
+backend = os.environ.get('CK_IBM_BACKEND', 'local_qasm_simulator')
+
 try:
     # Create a Quantum Register called "qr" with 2 qubits.
     qr = Q_program.create_quantum_register("qr", 2)

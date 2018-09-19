@@ -116,7 +116,7 @@
     }
   }, 
   "run_vars": {
-    "CK_IBM_BACKEND": "ibmqx_qasm_simulator", 
+    "CK_IBM_BACKEND": "local_qasm_simulator",
     "CK_IBM_REPETITION": 1, 
     "CK_IBM_TIMEOUT": 1200, 
     "CK_IBM_VERBOSE": 1
