@@ -49,7 +49,11 @@
       "name": "IBM QuantumExperience PythonSDK",
       "skip_pruning_by_other_deps": "yes",
       "sort": 20,
-      "tags": "lib,python-package,qiskit"
+      "tags": "lib,python-package,qiskit",
+      "version_from": [
+            0,
+            5
+      ]
     },
     "optimizer-plugin": {
       "local": "yes",
