@@ -105,9 +105,14 @@
     }, 
     "python": {
       "local": "yes", 
-      "name": "python", 
+      "name": "Python 3",
       "sort": 8, 
-      "tags": "compiler,lang-python,python,v3"
+      "tags": "compiler,python",
+       "version_from": [
+            3,
+            2,
+            0
+      ]
     }
   }, 
   "run_vars": {
