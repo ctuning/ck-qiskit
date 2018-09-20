@@ -3,6 +3,7 @@
   "data_name": "qiskit-demo", 
   "no_compile": "yes", 
   "no_target_file": "yes", 
+  "pass_env_to_resolve": "yes",
   "print_files_after_run": [
     "tmp-stdout.tmp", 
     "tmp-stderr.tmp"
