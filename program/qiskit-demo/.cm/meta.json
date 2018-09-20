@@ -107,7 +107,7 @@
     },
     "lib-qiskit": {
       "local": "yes", 
-      "name": "IBM QuantumExperience Python SDK", 
+      "name": "IBM Quantum Information Science Kit (QISKit)",
       "skip_pruning_by_other_deps": "yes", 
       "sort": 10, 
       "tags": "lib,python-package,qiskit"
@@ -117,10 +117,10 @@
       "name": "Python 3",
       "sort": 8, 
       "tags": "compiler,python",
-       "version_from": [
-            3,
-            2,
-            0
+        "version_from": [
+          3,
+          2,
+          0
       ]
     }
   }, 
