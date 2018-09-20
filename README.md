@@ -43,14 +43,14 @@ $ python -m pip install ck                                              # let py
 $ ck pull repo:ck-qiskit
 ```
 
-## Install Quantum Information Software Kit (QISKit)
+## Install Quantum Information Science Kit (QISKit)
 
 ```
 $ ck list ck-qiskit:package:*
 $ ck install package:lib-qiskit
 ```
 
-## IBM Quantum Experience
+## IBM Quantum Experience (QX)
 
 ### Documentation
 - [Main Repo](https://github.com/QISKit)
