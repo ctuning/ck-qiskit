@@ -15,7 +15,7 @@ import os
 # http://stackoverflow.com/a/7506006
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
-from qiskit import QuantumProgram, QISKitError, available_backends
+from qiskit import QuantumProgram, QISKitError, available_backends, register
 
 try:
     import Qconfig
