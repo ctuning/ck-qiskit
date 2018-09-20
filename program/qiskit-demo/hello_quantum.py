@@ -1,15 +1,21 @@
+#!/usr/bin/env python3
+
 """
 Example used in the readme. In this example a Bell state is made
+
+## Running this script using the "lightweight" CK infrastructure to import Qiskit library:
+
+    ck virtual env --tags=lib,qiskit --shell_cmd=hello_quantum.py
 """
 import sys
 import os
-from pprint import pprint
+
 # so we need a relative position from this file path.
 # TODO: Relative imports for intra-package imports are highly discouraged.
 # http://stackoverflow.com/a/7506006
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from qiskit import QuantumProgram, QISKitError, available_backends
 
+from qiskit import QuantumProgram, QISKitError, available_backends
 
 try:
     import Qconfig
@@ -24,15 +30,12 @@ except:
             running the jobs in the local simulator
             """)
 
-# Create a QuantumProgram object instance.
-Q_program = QuantumProgram()
-
-print("The backends available for use are:")
-pprint(available_backends())
-print("\n")
-
+print("The backends available for use are: {}\n".format(available_backends()))
 #backend = os.environ.get('CK_IBM_BACKEND', 'ibmq_qasm_simulator')
 backend = os.environ.get('CK_IBM_BACKEND', 'local_qasm_simulator')
+
+# Create a QuantumProgram object instance.
+Q_program = QuantumProgram()
 
 try:
     # Create a Quantum Register called "qr" with 2 qubits.
