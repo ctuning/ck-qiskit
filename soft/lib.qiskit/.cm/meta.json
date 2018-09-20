@@ -10,7 +10,7 @@
     }, 
     "soft_file_universal": "qiskit-sdk-py$#sep#$build$#sep#$qiskit$#sep#$__init__.py"
   }, 
-  "soft_name": "Qiskit", 
+  "soft_name": "IBM Quantum Information Science Kit (QISKit)", 
   "tags": [
     "lib",
     "python-package",
