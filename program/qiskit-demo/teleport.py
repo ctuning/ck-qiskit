@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 # Copyright 2017 IBM RESEARCH. All Rights Reserved.
 #
@@ -17,27 +17,57 @@
 
 """
 Quantum teleportation example based on an OpenQASM example.
+
+## Running this script using the "lightweight" CK infrastructure to import Qiskit library...
+
+# 1) on local simulator:
+    ck virtual env --tags=lib,qiskit --shell_cmd=teleport.py
+
+# 2) on remote simulator (need the API Token from IBM QuantumExperience) :
+      CK_IBM_BACKEND=ibmq_qasm_simulator ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=ibmqx,login` --shell_cmd=teleport.py
 """
+
 import sys
 import os
+
 # We don't know from where the user is running the example,
 # so we need a relative position from this file path.
 # TODO: Relative imports for intra-package imports are highly discouraged.
 # http://stackoverflow.com/a/7506006
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from qiskit import QuantumProgram
-import Qconfig
 
+from qiskit import QuantumProgram, available_backends, register
+from qiskit.mapper._coupling import coupling_dict2list
+
+try:
+    import Qconfig
+    register(Qconfig.APItoken, Qconfig.config["url"], verify=False,
+                      hub=Qconfig.config["hub"],
+                      group=Qconfig.config["group"],
+                      project=Qconfig.config["project"])
+except:
+    print("""
+            WARNING: There's no connection with IBMQuantumExperience servers.
+            cannot test I/O intesive tasks, will only test CPU intensive tasks
+            running the jobs in the local simulator
+            """)
 
 ###############################################################
-# Set the backend name and coupling map.
+# Set the backend name
 ###############################################################
-backend = "ibmqx_qasm_simulator"
-coupling_map = {0: [1, 2],
-                1: [2],
-                2: [],
-                3: [2, 4],
-                4: [2]}
+print("The backends available for use are: {}\n".format(available_backends()))
+#backend = os.environ.get('CK_IBM_BACKEND', 'ibmq_qasm_simulator')
+backend = os.environ.get('CK_IBM_BACKEND', 'local_qasm_simulator')
+
+###############################################################
+# Set the coupling map
+###############################################################
+coupling_map = coupling_dict2list( {0: [1, 2],
+                                    1: [2],
+                                    2: [],
+                                    3: [2, 4],
+                                    4: [2],
+})
 
 ###############################################################
 # Make a quantum program for quantum teleportation.
@@ -88,9 +118,9 @@ qc.x(q[2]).c_if(c1, 1)
 qc.measure(q[2], c2[0])
 
 ###############################################################
-# Set up the API and execute the program.
+# Execute the program.
 ###############################################################
-qp.set_api(Qconfig.APItoken, Qconfig.config["url"])
+
 
 # Experiment does not support feedback, so we use the simulator
 
@@ -104,7 +134,9 @@ print(result.get_counts("teleport"))
 result = qp.execute(["teleport"], backend=backend,
                     coupling_map=coupling_map, shots=1024)
 print(result)
-print(result.get_ran_qasm("teleport"))
 print(result.get_counts("teleport"))
+
+if backend != 'local_qasm_simulator':
+    print(result.get_ran_qasm("teleport"))
 
 # Both versions should give the same distribution
