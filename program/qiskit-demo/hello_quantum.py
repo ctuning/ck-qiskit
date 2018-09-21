@@ -43,6 +43,9 @@ print("The backends available for use are: {}\n".format(available_backends()))
 #backend = os.environ.get('CK_IBM_BACKEND', 'ibmq_qasm_simulator')
 backend = os.environ.get('CK_IBM_BACKEND', 'local_qasm_simulator')
 
+timeout = int( os.environ.get('CK_IBM_TIMEOUT', 120) )
+shots   = int( os.environ.get('CK_IBM_REPETITION', 10) )
+
 # Create a QuantumProgram object instance.
 Q_program = QuantumProgram()
 
@@ -65,7 +68,7 @@ try:
     qc.measure(qr, cr)
 
     # Compile and execute the Quantum Program using the given backend.
-    result = Q_program.execute(["bell"], backend=backend, shots=1024, seed=1)
+    result = Q_program.execute(["bell"], backend=backend, shots=shots, seed=1, timeout=timeout)
 
     # Show the results.
     print(result)
