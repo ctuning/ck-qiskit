@@ -25,11 +25,11 @@
         ]
       }
     }, 
-    "dvdt_test_qasm": {
+    "run_qasm_file": {
       "ignore_return_code": "no", 
       "run_time": {
         "output_invariant_of_repeat": "yes", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../dvdt_test_qasm.py", 
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../run_qasm_file.py", 
         "run_cmd_out1": "tmp-stdout.tmp", 
         "run_cmd_out2": "tmp-stderr.tmp", 
         "run_output_files": [
