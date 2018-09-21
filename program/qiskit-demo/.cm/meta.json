@@ -43,7 +43,7 @@
       "ignore_return_code": "no", 
       "run_time": {
         "output_invariant_of_repeat": "yes", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../hello_quantum.py", 
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../quantum_coin_flip.py",
         "run_cmd_out1": "tmp-stdout.tmp", 
         "run_cmd_out2": "tmp-stderr.tmp", 
         "run_output_files": [

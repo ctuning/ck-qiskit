@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 
 """
-Example used in the readme. In this example a Bell state is made.
+Example used in the readme. In this example a Bell state is made and then measured.
 
 ## Running this script using the "lightweight" CK infrastructure to import QISKit library...
 
 # 1) on local simulator:
-    ck virtual env --tags=lib,qiskit --shell_cmd=hello_quantum.py
+    ck virtual env --tags=lib,qiskit --shell_cmd=quantum_coin_flip.py
 
 # 2) on remote simulator (need the API Token from IBM QuantumExperience) :
-    CK_IBM_BACKEND=ibmq_qasm_simulator ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=ibmqx,login` --shell_cmd=hello_quantum.py
+    CK_IBM_BACKEND=ibmq_qasm_simulator ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=ibmqx,login` --shell_cmd=quantum_coin_flip.py
 
 # 3) on remote quantum hardware (need the API Token from IBM QuantumExperience) :
-    CK_IBM_BACKEND=ibmqx4 ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=ibmqx,login` --shell_cmd=hello_quantum.py
+    CK_IBM_BACKEND=ibmqx4 ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=ibmqx,login` --shell_cmd=quantum_coin_flip.py
 
 """
 import sys
