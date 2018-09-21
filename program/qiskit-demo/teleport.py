@@ -18,7 +18,7 @@
 """
 Quantum teleportation example based on an OpenQASM example.
 
-## Running this script using the "lightweight" CK infrastructure to import Qiskit library...
+## Running this script using the "lightweight" CK infrastructure to import QISKit library...
 
 # 1) on local simulator:
     ck virtual env --tags=lib,qiskit --shell_cmd=teleport.py

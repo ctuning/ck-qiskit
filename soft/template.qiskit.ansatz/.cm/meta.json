@@ -10,7 +10,7 @@
     }, 
     "soft_file_universal": "custom_ansatz.py"
   }, 
-  "soft_name": "Ansatz function for Qiskit VQE",
+  "soft_name": "Ansatz function for QISKit VQE",
   "tags": [
     "quantum",
     "vqe",

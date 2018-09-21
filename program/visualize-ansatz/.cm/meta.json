@@ -18,7 +18,7 @@
   "run_deps": {
     "ansatz-plugin": {
       "local": "yes", 
-      "name": "Qiskit ansatz function", 
+      "name": "QISKit ansatz function", 
       "skip_pruning_by_other_deps": "yes", 
       "sort": 50, 
       "tags": "quantum,ansatz,deployed"
