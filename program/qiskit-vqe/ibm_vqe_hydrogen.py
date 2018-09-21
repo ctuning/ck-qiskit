@@ -80,9 +80,6 @@ def vqe_for_qiskit(sample_number, pauli_list):
     # Groups a list of (coeff,Pauli) tuples into tensor product basis (tpb) sets
     pauli_list_grouped = group_paulis(pauli_list)
 
-    # Load the ansatz function from the plug-in
-    ansatz_method   = get_first_callable( custom_ansatz )
-    ansatz_function = getattr(custom_ansatz, ansatz_method)     # ansatz_method is a string/name, ansatz_function is an imported callable
 
     report = { 'total_q_seconds': 0, 'total_q_shots':0, 'iterations' : [] }
 
@@ -151,6 +148,10 @@ if __name__ == '__main__':
     classical_energy = np.amin(la.eigh(H)[0])
     print('The exact ground state energy is: {:.4f}'.format(classical_energy))
 
+    # Load the ansatz function from the plug-in
+    ansatz_method   = get_first_callable( custom_ansatz )
+    ansatz_function = getattr(custom_ansatz, ansatz_method)     # ansatz_method is a string/name, ansatz_function is an imported callable
+
     # ---------------------------------------- run VQE: ----------------------------------------
 
     (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list)
@@ -158,13 +159,16 @@ if __name__ == '__main__':
     # ---------------------------------------- store the results: ----------------------------------------
 
     minimizer_src   = inspect.getsource( minimizer_function )
+    ansatz_src      = inspect.getsource( ansatz_function )
 
     vqe_input = {
         "q_device_name"     : q_device_name,
         "minimizer_method"  : minimizer_method,
-        "minimizer_options" : minimizer_options,
-        "sample_number"     : sample_number,
         "minimizer_src"     : minimizer_src,
+        "minimizer_options" : minimizer_options,
+        "ansatz_method"     : ansatz_method,
+        "ansatz_src"        : ansatz_src,
+        "sample_number"     : sample_number,
         "classical_energy"  : classical_energy
         }
 
