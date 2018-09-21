@@ -27,6 +27,9 @@
     }, 
     "run_qasm_file": {
       "ignore_return_code": "no", 
+      "run_vars": {
+        "CK_IBM_BACKEND": "ibmq_qasm_simulator"
+      },
       "run_time": {
         "output_invariant_of_repeat": "yes", 
         "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../run_qasm_file.py", 
@@ -82,7 +85,10 @@
       }
     }, 
     "unittests": {
-      "ignore_return_code": "no", 
+      "ignore_return_code": "no",
+      "run_vars": {
+        "CK_IBM_BACKEND": "ibmq_qasm_simulator"
+      },
       "run_time": {
         "output_invariant_of_repeat": "yes", 
         "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../unittests.py", 
