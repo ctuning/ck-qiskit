@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+
+"""
+This example runs a battery of unittests against the remote ibmq_qasm_simulator
+
+## Running this script using the "lightweight" CK infrastructure to import Qiskit library:
+    ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=ibmqx,login` --shell_cmd=unittests.py
+
+"""
+
 # pylint: disable=C0103
 '''
 Unit Test
@@ -90,7 +100,7 @@ measure q[2] -> f[0];
         Check run an experiment by user authenticated
         '''
         backend = self.api.available_backend_simulators()[0]['name']
-        backend = "ibmqx_qasm_simulator" 
+        backend = "ibmq_qasm_simulator" 
         shots = 1
         experiment = self.api.run_experiment(self.qasm, backend, shots)
         check_status = None
@@ -114,7 +124,7 @@ measure q[2] -> f[0];
         '''
         Check run an job by user authenticated
         '''
-        backend = 'simulator'
+        backend = 'ibmq_qasm_simulator'
         shots = 1
         job = self.api.run_job(self.qasms, backend, shots)
         check_status = None
