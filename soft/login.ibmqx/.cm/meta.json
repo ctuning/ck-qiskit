@@ -13,6 +13,10 @@
         {
             "variable"      : "CK_IBM_API_TOKEN",
             "display_name"  : "your IBM QuantumExperience API key"
+        },
+        {
+            "variable"      : "CK_IBM_API_EMAIL",
+            "display_name"  : "your email that you used to register in IBM QuantumExperience"
         }
     ]
   }, 
