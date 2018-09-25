@@ -3,35 +3,24 @@
 [![Travis Build Status](https://travis-ci.org/ctuning/ck-qiskit.svg?branch=master)](https://travis-ci.org/ctuning/ck-qiskit)
 
 
-## Installation (on Ubuntu or Debian)
+## Install global prerequisites (Python3, C++ compiler, libraries and CK)
 
-### Install global prerequisites, Python 3 and Pip 3 (Python 2 is **not** supported)
+### on Ubuntu/Debian:
 ```
-$ sudo apt install build-essential liblapack-dev libblas-dev libssl-dev libpng-dev libfreetype6-dev
-$ sudo apt install python3 python3-pip python3-wheel pkg-config
-$ sudo pip3 install setuptools
-```
-
-### Install Collective Knowledge
-```
-$ sudo pip3 install ck
+$ sudo apt-get install python3 python3-pip python3-tk
+$ sudo apt-get install libblas-dev liblapack-dev
+$ sudo python3 -m pip install ck
 ```
 
-
-## Installation (on MacOSX)
-
-### Install global prerequisites, GCC compiler v.6+, Python3 and its Pip3 (Python 2 is **not** supported)
+### on MacOS
 ```
-$ brew update
-$ brew reinstall python                                                 # brew now installs python3 and pip3 by default
-$ export PATH=/usr/local/opt/python/libexec/bin:$PATH
-$ brew install gcc\@6 || brew link --overwrite gcc\@6                   # to avoid symlink conflict with oclint
-$ python -m pip install --ignore-installed --verbose pip setuptools     # let python3 find its own pip and install its own setuptools
-```
-
-### Install Collective Knowledge
-```
-$ python -m pip install ck                                              # let python3 find its own pip and install CK
+$ brew update                                                           # this swaps python versions and makes 3 the default one
+$ brew install freetype                                                 # needed for matplotlib
+$ brew reinstall python                                                 # install and link python3 and pip3 to /usr/local/bin
+$ export PATH=/usr/local/opt/python/bin:$PATH
+$ brew install gcc\@7 || brew link --overwrite gcc\@7                   # to avoid symlink conflict with oclint
+$ python3 -m pip install --ignore-installed --verbose pip setuptools    # use own pip!
+$ python3 -m pip install ck                                             # install CK
 ```
 
 
@@ -43,16 +32,62 @@ $ python -m pip install ck                                              # let py
 $ ck pull repo:ck-qiskit
 ```
 
-## Install Quantum Information Science Kit (QISKit)
+## Run a couple of tests which will also install some dependencies
+
+### Run the following to install the software dependencies (accept most defaults by pressing `Enter`/`Return`) and run a simple QISKit test on a local simulator:
+```
+$ ck run program:qiskit-demo --cmd_key=hello
+...
+ (printing output files)
+
+    * tmp-stdout.tmp
+
+      -- Ignoring SSL errors.  This is not recommended --
+      The backends available for use are: ['ibmq_qasm_simulator', 'ibmqx2', 'ibmqx4', 'ibmqx5', 'local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
+
+      COMPLETED
+      {'counts': {'00': 529, '11': 495}}
+
+
+    * tmp-stderr.tmp
+
+
+
+Execution time: 2.077 sec.
+```
+
+### Please register at [IBM Quantum Experience](https://quantumexperience.ng.bluemix.net/qx/signup) and copy your API token from the ["Advanced"](https://quantumexperience.ng.bluemix.net/qx/account/advanced) tab (you may need to click on the "Regenerate" button first).
+
+### Now you can run the same test, but this time using IBM QX remote simulator. When prompted, please provide your API Token and the email address you used to register it.
+
+These credentials will be stored on your computer in the form of a "CK env entry" that can be automatically substituted in your further experiments.
 
 ```
-$ ck list ck-qiskit:package:*
-$ ck install package:lib-qiskit
+$ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_BACKEND=ibmq_qasm_simulator
+...
+ (printing output files)
+
+    * tmp-stdout.tmp
+
+      -- Ignoring SSL errors.  This is not recommended --
+      The backends available for use are: ['ibmq_qasm_simulator', 'ibmqx2', 'ibmqx4', 'ibmqx5', 'local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
+
+      COMPLETED
+      {'creg_labels': 'cr[2]', 'additionalData': {'seed': 1}, 'time': 0.00130243, 'counts': {'11': 495, '00': 529}, 'date': '2018-09-20T14:29:49.648Z'}
+
+
+    * tmp-stderr.tmp
+
+
+
+Execution time: 10.422 sec.
 ```
 
-## IBM Quantum Experience (QX)
+You should now be all set to use CK-QISKit, running your quantum code both on the local simulator and on IBM's remote sim and hardware.
 
-### Documentation
+
+## IBM Quantum Experience (QX) documentation
+
 - [Main Repo](https://github.com/QISKit)
 - [IBM Quantum Experience user guides](https://github.com/QISKit/ibmqx-user-guides)
 
@@ -65,83 +100,15 @@ At a lower level, you can use the native [QISKit Python API](https://github.com/
 
 ### Real Backends
 
-- [IBMQX2](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx2/README.md) 
+- [IBMQX2](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx2/README.md)
 - [IBMQX3](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx3/README.md)
 - [IBMQX4](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx4/README.md)
 - [IBMQX5](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx5/README.md)
 
 ### Local Simulators
 
-- `local_clifford_simulator`
 - `local_qasm_simulator`
+- `local_clifford_simulator`
 - `local_unitary_simulator`
 - `local_projectq_simulator`
 - `local_qiskit_simulator`
-
-
-## Run Programs
-
-Get a valid [IBM_API_TOKEN](https://quantumexperience.ng.bluemix.net/qx/login) `->` myaccount `->` advanced
-
-**NB:** An exception might be raised due to login failure (missing or invalid token).
-
-#### Run an example using a local simulator
-
-```
-$ ck run program:qiskit-demo --cmd_key=hello \
-  --env.CK_IBM_BACKEND=local_qasm_simulator
-```
-
-
-#### Run an example using a remote simulator
-
-```
-$ ck run program:qiskit-demo --cmd_key=hello \
-  --env.CK_IBM_BACKEND=ibmqx_qasm_simulator --env.CK_IBM_API_TOKEN=<YOUR_TOKEN>
-```
-
-#### Run an example using IBMQX5 
-
-```
-$ ck run program:qiskit-demo --cmd_key=hello \
-  --env.CK_IBM_BACKEND=ibmqx5 --env.CK_IBM_API_TOKEN=<YOUR_TOKEN>
-```
-
-
-## FAQ
-
-### How to register my libraries and tools with CK?
-
-CK will try to detect compilers and libraries automatically, but you can also
-register them as follows:
-
-```
-$ ck detect soft:compiler.gcc
-$ ck detect soft:compiler.python
-$ ck detect soft:lib.blas
-$ ck detect soft:lib.lapack
-```
-
-You can also register tools by providing a full path e.g.
-```
-$ ck detect soft:compiler.python --full_path=`which python3`
-```
-
-### Where does CK store my program and its output?
-
-A program can be located on disk by its name as follows:
-```
-$ ck find program:projectq-shor
-/home/flavio/CK-REPOS/ck-qiskit/program/qiskit-shor
-$ ls `ck find program:qiskit-shor`
-quantum_random_numbers.py  shor.py
-```
-
-Temporary files (including the executable, `stderr` and `stdout`) are in the `tmp` directory:
-```
-$ cd `ck find program:qiskit-shor`/tmp
-```
-
-## Troubleshooting
-
-**TODO**
