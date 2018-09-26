@@ -3,7 +3,7 @@
 [![Travis Build Status](https://travis-ci.org/ctuning/ck-qiskit.svg?branch=master)](https://travis-ci.org/ctuning/ck-qiskit)
 
 
-## Install global prerequisites (Python 3, C++ compiler, libraries and CK)
+## Install prerequisites (Python 3, C++ compiler, libraries and CK)
 
 ### Ubuntu/Debian Linux
 ```
@@ -23,16 +23,14 @@ $ python3 -m pip install --ignore-installed --verbose pip setuptools    # use ow
 $ python3 -m pip install ck                                             # install CK
 ```
 
-
-## Common part of the installation (Linux or macOS)
-
-Install this CK repository with all its dependencies (other CK repos to reuse artifacts)
-
+## Install QISKit
 ```
 $ ck pull repo:ck-qiskit
 ```
 
-## Run a couple of tests which will also install some dependencies
+## Test QISKit
+
+Run a couple of tests to install some dependencies and test basic workflows.
 
 ### Local execution
 
