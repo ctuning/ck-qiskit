@@ -39,9 +39,6 @@ def ck_postprocess(i):
         if line.startswith('COMPLETED'):
             save_next_line_to_json = True
 
-    #TODO: get email.
-    #d['CK_IBM_API_EMAIL']=env.get('CK_IBM_API_EMAIL','')
-
     rr={}
     rr['return']=0
     if d.get('post_processed','')=='yes':
