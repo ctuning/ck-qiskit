@@ -42,15 +42,11 @@
         ]
       }
     }, 
-    "hello": {
+    "quantum_coin_flip": {
       "ignore_return_code": "no", 
       "run_time": {
         "fine_grain_timer_file": "tmp-ck-timer.json",
         "output_invariant_of_repeat": "no",
-        "post_process_cmds": [
-          "python $#src_path_local#$postprocess_quantum_coin_flip.py"
-        ],
-        "post_process_via_ck": "yes",
         "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../quantum_coin_flip.py",
         "run_cmd_out1": "tmp-stdout.tmp", 
         "run_cmd_out2": "tmp-stderr.tmp", 

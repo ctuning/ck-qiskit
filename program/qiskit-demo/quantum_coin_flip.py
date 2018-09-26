@@ -39,9 +39,12 @@ except:
             running the jobs in the local simulator
             """)
 
-print("The backends available for use are: {}\n".format(available_backends()))
-#backend = os.environ.get('CK_IBM_BACKEND', 'ibmq_qasm_simulator')
+available_backends = available_backends()
+print("The backends available for use are: {}\n".format(available_backends))
 backend = os.environ.get('CK_IBM_BACKEND', 'local_qasm_simulator')
+
+email   = os.environ.get('CK_IBM_API_EMAIL', 'N/A')
+print("User email: {}\n".format(email))
 
 timeout = int( os.environ.get('CK_IBM_TIMEOUT', 120) )
 shots   = int( os.environ.get('CK_IBM_REPETITION', 10) )
@@ -76,3 +79,12 @@ try:
 
 except QISKitError as ex:
     print('Error in the circuit! {}'.format(ex))
+
+# Save output to CK format.
+import json
+with open('tmp-ck-timer.json', 'w') as f:
+    d = {}
+    d['email'] = email
+    d['result'] = result.get_data("bell")
+    d['backends'] = available_backends
+    json.dump(d, f)

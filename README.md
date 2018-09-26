@@ -3,16 +3,16 @@
 [![Travis Build Status](https://travis-ci.org/ctuning/ck-qiskit.svg?branch=master)](https://travis-ci.org/ctuning/ck-qiskit)
 
 
-## Install global prerequisites (Python3, C++ compiler, libraries and CK)
+## Install global prerequisites (Python 3, C++ compiler, libraries and CK)
 
-### on Ubuntu/Debian:
+### Ubuntu/Debian Linux
 ```
 $ sudo apt-get install python3 python3-pip python3-tk
 $ sudo apt-get install libblas-dev liblapack-dev
 $ sudo python3 -m pip install ck
 ```
 
-### on MacOS
+### macOS
 ```
 $ brew update                                                           # this swaps python versions and makes 3 the default one
 $ brew install freetype                                                 # needed for matplotlib
@@ -24,9 +24,9 @@ $ python3 -m pip install ck                                             # instal
 ```
 
 
-## Common part of the installation (Linux or MacOSX)
+## Common part of the installation (Linux or macOS)
 
-### Install this CK repository with all its dependencies (other CK repos to reuse artifacts)
+Install this CK repository with all its dependencies (other CK repos to reuse artifacts)
 
 ```
 $ ck pull repo:ck-qiskit
@@ -34,81 +34,85 @@ $ ck pull repo:ck-qiskit
 
 ## Run a couple of tests which will also install some dependencies
 
-### Run the following to install the software dependencies (accept most defaults by pressing `Enter`/`Return`) and run a simple QISKit test on a local simulator:
+### Local execution
+
+Run the following to install the software dependencies (accept most defaults by pressing `Enter`/`Return`) and run a simple QISKit test on a local simulator:
 ```
-$ ck run program:qiskit-demo --cmd_key=hello
+$ ck run program:qiskit-demo --cmd_key=quantum_coin_flip
 ...
  (printing output files)
 
     * tmp-stdout.tmp
 
       -- Ignoring SSL errors.  This is not recommended --
-      The backends available for use are: ['ibmq_qasm_simulator', 'ibmqx2', 'ibmqx4', 'ibmqx5', 'local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
+
+                  WARNING: There's no connection with IBMQuantumExperience servers.
+                  cannot test I/O intesive tasks, will only test CPU intensive tasks
+                  running the jobs in the local simulator
+
+      The backends available for use are: ['local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
+
+      User email: N/A
 
       COMPLETED
-      {'counts': {'00': 529, '11': 495}}
+      {'counts': {'00': 4, '11': 6}}
 
 
     * tmp-stderr.tmp
 
 
-
-Execution time: 2.077 sec.
+Execution time: 0.000 sec.
 ```
 
-### Please register at [IBM Quantum Experience](https://quantumexperience.ng.bluemix.net/qx/signup) and copy your API token from the ["Advanced"](https://quantumexperience.ng.bluemix.net/qx/account/advanced) tab (you may need to click on the "Regenerate" button first).
+### Remote execution
 
-### Now you can run the same test, but this time using IBM QX remote simulator. When prompted, please provide your API Token and the email address you used to register it.
+Please register at [IBM Quantum Experience](https://quantumexperience.ng.bluemix.net/qx/signup) ("IBM QX") and copy your API token from the ["Advanced"](https://quantumexperience.ng.bluemix.net/qx/account/advanced) tab (you may need to click on the "Regenerate" button first).
 
-These credentials will be stored on your computer in the form of a "CK env entry" that can be automatically substituted in your further experiments.
+Now you can run the same test, but this time using the IBM QX remote simulator. When prompted, please provide your API token and the email address you used to register it.
+
+These credentials will be stored on your computer in the form of a "CK environment entry" and automatically used for further experiments.
 
 ```
-$ ck run program:qiskit-demo --cmd_key=hello --env.CK_IBM_BACKEND=ibmq_qasm_simulator
+$ ck run program:qiskit-demo --cmd_key=quantum_coin_flip --env.CK_IBM_BACKEND=ibmq_qasm_simulator
 ...
  (printing output files)
 
     * tmp-stdout.tmp
 
       -- Ignoring SSL errors.  This is not recommended --
-      The backends available for use are: ['ibmq_qasm_simulator', 'ibmqx2', 'ibmqx4', 'ibmqx5', 'local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
+      The backends available for use are: ['ibmq_16_melbourne', 'ibmq_qasm_simulator', 'ibmqx2', 'ibmqx4', 'ibmqx5', 'local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
+
+      User email: anton@dividiti.com
 
       COMPLETED
-      {'creg_labels': 'cr[2]', 'additionalData': {'seed': 1}, 'time': 0.00130243, 'counts': {'11': 495, '00': 529}, 'date': '2018-09-20T14:29:49.648Z'}
+      {'creg_labels': 'cr[2]', 'additionalData': {'seed': 1}, 'time': 0.00023725, 'counts': {'11': 6, '00': 4}, 'date': '2018-09-26T11:40:38.802Z'}
 
 
-    * tmp-stderr.tmp
-
-
-
-Execution time: 10.422 sec.
+Execution time: 0.000 sec.
 ```
 
-You should now be all set to use CK-QISKit, running your quantum code both on the local simulator and on IBM's remote sim and hardware.
+You should now be all set to use CK-QISKit, running your quantum code both on the local simulator and on IBM's remote simulator and hardware!
 
 
-## IBM Quantum Experience (QX) documentation
+## IBM QX documentation
 
-- [Main Repo](https://github.com/QISKit)
-- [IBM Quantum Experience user guides](https://github.com/QISKit/ibmqx-user-guides)
-
+- [IBM QX user guides](https://github.com/QISKit/ibmqx-user-guides)
+- QISKit [main repo](https://github.com/QISKit)
 - QISKit [SDK](https://github.com/QISKit/qiskit-sdk-py/blob/master/README.md)
 - QISKit [Getting Started Guide](https://www.qiskit.org/documentation/quickstart.html)
 - QISKit [Tutorial](https://github.com/QISKit/qiskit-tutorial)
 
-
 At a lower level, you can use the native [QISKit Python API](https://github.com/QISKit/qiskit-api-py) to call [OpenQASM](https://github.com/QISKit/openqasm/blob/master/README.md).
 
-### Real Backends
+### Quantum devices
 
 - [IBMQX2](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx2/README.md)
 - [IBMQX3](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx3/README.md)
 - [IBMQX4](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx4/README.md)
 - [IBMQX5](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx5/README.md)
 
-### Local Simulators
+### Local simulators
 
 - `local_qasm_simulator`
-- `local_clifford_simulator`
+- `local_statevector_simulator`
 - `local_unitary_simulator`
-- `local_projectq_simulator`
-- `local_qiskit_simulator`
