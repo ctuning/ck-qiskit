@@ -104,12 +104,12 @@ You should now be all set to use CK-QISKit, running your quantum code both on th
 
 At a lower level, you can use the native [QISKit Python API](https://github.com/QISKit/qiskit-api-py) to call [OpenQASM](https://github.com/QISKit/openqasm/blob/master/README.md).
 
-### Quantum devices
+### Real devices
 
-- [IBMQX2](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx2/README.md)
-- [IBMQX3](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx3/README.md)
-- [IBMQX4](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx4/README.md)
-- [IBMQX5](https://github.com/QISKit/ibmqx-backend-information/blob/master/backends/ibmqx5/README.md)
+- [`ibmqx2`](https://github.com/Qiskit/qiskit-backend-information/blob/master/backends/yorktown/V1/README.md) ("IBM Q 5 Yorktown")
+- [`ibmqx4`](https://github.com/Qiskit/qiskit-backend-information/blob/master/backends/tenerife/V1/README.md) ("IBM Q 5 Tenerife")
+- [`ibmqx5`](https://github.com/Qiskit/qiskit-backend-information/blob/master/backends/rueschlikon/V1/README.md) ("IBM Q 16 Rueschlikon")
+- [`ibmq_16_melbourne`](https://github.com/Qiskit/qiskit-backend-information/blob/master/backends/melbourne/V1/README.md) ("IBM Q 16 Melbourne")
 
 ### Local simulators
 
