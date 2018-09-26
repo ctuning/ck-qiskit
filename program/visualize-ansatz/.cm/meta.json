@@ -47,7 +47,6 @@
     }
   }, 
   "run_vars": {
-    "VQE_VISUALIZE_ANSATZ": ""
   }, 
   "tags": [
     "ibm", 

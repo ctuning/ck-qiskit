@@ -16,7 +16,7 @@
       "run_time": {
         "fine_grain_timer_file":"ibm_vqe_report.json",
         "output_invariant_of_repeat": "no",
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../ibm_vqe_hydrogen.py --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$ $<<VQE_VISUALIZE_ANSATZ>>$",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../ibm_vqe_hydrogen.py --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$",
         "run_output_files": [
           "ibm_vqe_report.json"
         ]
@@ -80,8 +80,7 @@
   "run_vars": {
     "VQE_SAMPLE_SIZE"           : 100,
     "VQE_MAX_ITERATIONS"        : 80,
-    "VQE_QUANTUM_BACKEND"       : "local_qasm_simulator",
-    "VQE_VISUALIZE_ANSATZ"      : ""
+    "VQE_QUANTUM_BACKEND"       : "local_qasm_simulator"
   }, 
   "tags": [
     "ibm",
