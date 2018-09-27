@@ -16,6 +16,14 @@
 echo "**************************************************************"
 echo "Installing Quantum Software Development Kit ..."
 echo ""
+if [ "$CK_DLL_EXT" == ".dylib" ]
+then
+    echo "DYLD_LIBRARY_PATH = ${DYLD_LIBRARY_PATH}"
+else
+    echo "LD_LIBRARY_PATH = ${LD_LIBRARY_PATH}"
+fi
+echo "LIBRARY_PATH = ${LIBRARY_PATH}"
+echo ""
 
     # This is where pip will install the modules.
     # It has its own funny structure we don't control :
