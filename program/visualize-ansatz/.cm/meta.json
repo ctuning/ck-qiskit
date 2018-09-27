@@ -11,7 +11,7 @@
       "ignore_return_code": "no", 
       "run_time": {
         "output_invariant_of_repeat": "no", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ visualize_ansatz.py"
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ visualize_ansatz.py --filename=$<<IMAGE_FILENAME>>$"
       }
     }
   }, 
@@ -47,6 +47,7 @@
     }
   }, 
   "run_vars": {
+    "IMAGE_FILENAME" : "ansatz_circuit.png"
   }, 
   "tags": [
     "ibm", 
