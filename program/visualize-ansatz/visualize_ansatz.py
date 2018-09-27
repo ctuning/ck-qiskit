@@ -10,7 +10,7 @@ Example running it partially using CK infrastructure:
 from qiskit.tools.visualization._circuit_visualization import matplotlib_circuit_drawer
 
 import custom_ansatz    # the file will be different depending on the plugin choice
-
+import argparse
 
 def get_first_callable( namespace ):
     "return the first callable function in the given namespace"
@@ -29,5 +29,11 @@ ansatz_method   = get_first_callable( custom_ansatz )
 ansatz_function = getattr(custom_ansatz, ansatz_method)     # ansatz_method is a string/name, ansatz_function is an imported callable
 ansatz_circuit  = ansatz_function( [0.0]*100 )              # give it a huge vector of fake arguments
 
-matplotlib_circuit_drawer(ansatz_circuit, filename='ansatz_circuit.png')
+arg_parser = argparse.ArgumentParser()
+arg_parser.add_argument('--filename', default=ansatz_method+'.png', help='output image filename')
+args        = arg_parser.parse_args()
+filename    = args.filename
+
+
+matplotlib_circuit_drawer(ansatz_circuit, filename=filename)
 
