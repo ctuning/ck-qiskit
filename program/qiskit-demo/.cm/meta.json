@@ -109,7 +109,7 @@
       "name": "IBM QX credentials",
       "sort": 5,
       "disable_if_env": {
-        "CK_IBM_BACKEND": "local_qasm_simulator"
+        "CK_IBM_BACKEND": ["local_qasm_simulator", "local_statevector_simulator", "local_unitary_simulator"]
       },
       "tags": "ibmqx,login"
     },
