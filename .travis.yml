@@ -11,13 +11,13 @@ python:
 
 env:
     global:
-        - TRAVIS_CK_WHICH_TEST=hello
+        - TRAVIS_CK_WHICH_TEST=quantum_coin_flip
         - TRAVIS_CK_CXX_COMPILER=gcc
     matrix:
-        - TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_clifford_simulator
-        - TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_unitary_simulator
-        - TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_qiskit_simulator
-        - TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_qasm_simulator
+        - TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_clifford_simulator
+        - TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_unitary_simulator
+        - TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_qiskit_simulator
+        - TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_qasm_simulator
         - TRAVIS_CK_WHICH_TEST=vqe_hydrogen TRAVIS_CK_USE_BACKEND=local_qasm_simulator
 
 matrix:
@@ -26,22 +26,22 @@ matrix:
           osx_image: xcode9.2
           language: generic
           python:   3.7
-          env:      TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_clifford_simulator WANTED_PYTHON_VERSION=3.7
+          env:      TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_clifford_simulator WANTED_PYTHON_VERSION=3.7
         - os: osx
           osx_image: xcode9.2
           language: generic
           python:   3.7
-          env:      TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_unitary_simulator WANTED_PYTHON_VERSION=3.7
+          env:      TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_unitary_simulator WANTED_PYTHON_VERSION=3.7
         - os: osx
           osx_image: xcode9.2
           language: generic
           python:   3.7
-          env:      TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_qiskit_simulator WANTED_PYTHON_VERSION=3.7
+          env:      TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_qiskit_simulator WANTED_PYTHON_VERSION=3.7
         - os: osx
           osx_image: xcode9.2
           language: generic
           python:   3.7
-          env:      TRAVIS_CK_WHICH_TEST=hello TRAVIS_CK_USE_BACKEND=local_qasm_simulator WANTED_PYTHON_VERSION=3.7
+          env:      TRAVIS_CK_WHICH_TEST=quantum_coin_flip TRAVIS_CK_USE_BACKEND=local_qasm_simulator WANTED_PYTHON_VERSION=3.7
         - os: osx
           osx_image: xcode9.2
           language: generic
