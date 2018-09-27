@@ -26,6 +26,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
 from qiskit import QuantumProgram, QISKitError, available_backends, register
 
+
 try:
     import Qconfig
     register(Qconfig.APItoken, Qconfig.config["url"], verify=False,
@@ -80,11 +81,32 @@ try:
 except QISKitError as ex:
     print('Error in the circuit! {}'.format(ex))
 
-# Save output to CK format.
+
+########################### Save output to CK format. ##############################
+
 import json
-with open('tmp-ck-timer.json', 'w') as f:
-    d = {}
-    d['email'] = email
-    d['result'] = result.get_data("bell")
-    d['backends'] = available_backends
-    json.dump(d, f)
+import numpy as np
+
+# See https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable
+#
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, np.bool_):
+            return bool(obj)
+        elif isinstance(obj, np.complex):
+            return obj.real         # if you care about the imaginary part, try (obj.real, obj.imag)
+        return json.JSONEncoder.default(self, obj)
+
+output_dict = {
+    'backends': available_backends,
+    'email':    email,
+    'result':   result.get_data("bell"),
+}
+
+formatted_json  = json.dumps(output_dict, cls=NumpyEncoder, sort_keys = True, indent = 4)
+#print(formatted_json)
+
+with open('tmp-ck-timer.json', 'w') as json_file:
+    json_file.write( formatted_json )
