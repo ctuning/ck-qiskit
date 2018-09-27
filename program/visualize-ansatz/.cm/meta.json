@@ -4,14 +4,14 @@
   "no_compile": "yes", 
   "no_target_file": "yes", 
   "pass_env_to_resolve": "yes", 
-  "process_in_tmp": "yes",
+  "process_in_tmp": "no",
   "program": "yes", 
   "run_cmds": {
     "visualize-ansatz": {
       "ignore_return_code": "no", 
       "run_time": {
         "output_invariant_of_repeat": "no", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../visualize_ansatz.py"
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ visualize_ansatz.py"
       }
     }
   }, 
