@@ -8,7 +8,7 @@
       "win": 0
     }, 
     "detect_in_soft_dir": "yes",
-    "soft_file_universal": ".cm/meta.json",
+    "soft_file_universal": ".cm$#sep#$meta.json",
     "env_mapping": [
         {
             "variable"      : "CK_IBM_API_TOKEN",
