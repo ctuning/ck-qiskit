@@ -8,6 +8,9 @@
       "linux": 5, 
       "win": 5
     }, 
+    "extra_search_dirs": {
+        "win":      [ "C:\\ProgramData\\Anaconda3\\lib\\site-packages" ]
+    },
     "soft_file": {
         "linux":    "qiskit-sdk-py$#sep#$build$#sep#$qiskit$#sep#$__init__.py",
         "win":      "qiskit$#sep#$__init__.py"
