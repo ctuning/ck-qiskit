@@ -15,6 +15,7 @@
   }, 
   "soft_name": "IBM Quantum Information Science Kit (QISKit)",
   "tags": [
+    "quantum",
     "lib",
     "python-package",
     "qiskit"
