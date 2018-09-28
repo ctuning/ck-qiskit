@@ -9,7 +9,7 @@
       "win": 5
     }, 
     "soft_file": {
-        "linux":    "qiskit-sdk-py$#sep#$build$#sep#$qiskit$#sep#$__init__.py"
+        "linux":    "qiskit-sdk-py$#sep#$build$#sep#$qiskit$#sep#$__init__.py",
         "win":      "qiskit$#sep#$__init__.py"
     }
   }, 
