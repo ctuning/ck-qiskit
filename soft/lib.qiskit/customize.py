@@ -12,8 +12,20 @@
 
 import os
 
-##############################################################################
-# setup environment setup
+
+def version_cmd(i):
+    path_with_init_py       = i['full_path']                            # the full_path that ends with PACKAGE_NAME/__init__.py
+    path_without_init_py    = os.path.dirname( path_with_init_py )
+    version_file_path       = os.path.join( path_without_init_py, 'VERSION.txt' )
+
+    if os.path.isfile( version_file_path ):
+        with open(version_file_path, 'r') as version_file:
+            version_string = version_file.read().strip()
+    else:
+        version_string  = ''
+
+    return {'return':0, 'cmd':'', 'version':version_string}
+
 
 def setup(i):
     """
