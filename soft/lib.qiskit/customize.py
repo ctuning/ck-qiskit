@@ -57,30 +57,23 @@ def setup(i):
     # Get variables
     ck=i['ck_kernel']
 
-    iv=i.get('interactive','')
-
-    cus=i.get('customize',{})
-    fp=cus.get('full_path','')
-
-    hosd=i['host_os_dict']
-    tosd=i['target_os_dict']
-
+    hosd    = i['host_os_dict']
+    tosd    = i['target_os_dict']
     winh    = hosd.get('windows_base','')
     macos   = hosd.get('macos','')
 
-    ienv=cus.get('install_env',{})
+    cus             = i.get('customize',{})
+    ienv            = cus.get('install_env',{})
 
-    env=i['env']
-    ep=cus['env_prefix']
+    fp              = cus.get('full_path','')
+    p1              = os.path.dirname(fp)
+    path_lib        = os.path.dirname(p1)
+    path_install    = os.path.dirname(path_lib)
 
-    p1=os.path.dirname(fp)
-    pl=os.path.dirname(p1)
-    pi=os.path.dirname(pl)
-    env[ep]=pi
-    ppath=os.path.join(pi, ienv['PACKAGE_SUB_DIR1'])
-    env[ep+'_LIB']=ppath
-
-    pil_dlibs_path = os.path.join(ppath, 'PIL', '.dylibs')
+    env                     = i['env']
+    env_prefix              = cus['env_prefix']
+    env[env_prefix]         = path_install
+    env[env_prefix+'_LIB']  = path_lib
 
     # Using a generic script to prepend the library search path
     # with the value expected to be set in $CK_ENV_COMPILER_GCC_LIB .
@@ -99,7 +92,7 @@ def setup(i):
     }
 
     if not winh:
-        pil_extra_dynamic_path = os.path.join(ppath, 'PIL', '.dylibs' if macos else '.libs')
+        pil_extra_dynamic_path = os.path.join(path_lib, 'PIL', '.dylibs' if macos else '.libs')
         lib_path_adict['lib_path'].insert(0, pil_extra_dynamic_path)
 
     r = ck.access( lib_path_adict )
@@ -109,10 +102,10 @@ def setup(i):
     # FIXME: Fix for Windows.
     # FIXME: Should have no explicit exports.
     if winh=='yes':
-        shell_setup_script_contents += '\nset PYTHONPATH='+pl+';%PYTHONPATH%\n'
+        shell_setup_script_contents += '\nset PYTHONPATH='+path_lib+';%PYTHONPATH%\n'
     else:
-        shell_setup_script_contents += '\nexport PYTHONPATH='+ppath+':${PYTHONPATH}\n'
-        spath=os.path.join(ppath, 'out', 'qiskit_simulator')
+        shell_setup_script_contents += '\nexport PYTHONPATH='+path_lib+':${PYTHONPATH}\n'
+        spath=os.path.join(path_lib, 'out', 'qiskit_simulator')
         shell_setup_script_contents += '\nexport CK_ENV_LIB_QISKIT_SIM='+spath+'\n'
 
     for k in ienv:
