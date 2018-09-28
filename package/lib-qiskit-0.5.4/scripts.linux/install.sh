@@ -55,7 +55,8 @@ echo "Installing QISKit to '${EXTRA_PYTHON_SITE}' ..."
 
 cd ${INSTALL_DIR}/src
 
-${CK_ENV_COMPILER_PYTHON_FILE} -m pip install -r requirements.txt qiskit --prefix=${EXTRA_PYTHON_SITE} --ignore-installed
+ln -s setup.py.in setup.py
+${CK_ENV_COMPILER_PYTHON_FILE} -m pip install -r requirements.txt . --prefix=${EXTRA_PYTHON_SITE} --ignore-installed
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"
