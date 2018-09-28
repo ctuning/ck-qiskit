@@ -1,0 +1,27 @@
+build: false
+
+environment:
+  matrix:
+    - PYTHON: C:\Python36-x64
+      PYTHON_VERSION: 3.6
+
+    - PYTHON: C:\Python35-x64
+      PYTHON_VERSION: 3.5
+
+init:
+    - "ECHO %PYTHON% %PYTHON_VERSION%
+    - set PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+    - python --version
+    - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
+
+install:
+    - python -m pip install -U pip
+    - python -m easy_install -U setuptools
+    - python -m pip install ck
+    - ck version
+    - ck pull repo:ck-qiskit
+    - ck detect soft:compiler.python --full_path=%PYTHON%\\python.exe
+    - echo 0 | ck detect platform.os --update_platform_init
+
+test_script:
+    - ck run program:qiskit-demo --cmd_key=quantum_coin_flip
