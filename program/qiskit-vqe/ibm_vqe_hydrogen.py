@@ -16,8 +16,9 @@ import numpy as np
 from scipy import linalg as la
 
 from qiskit import QuantumProgram, register
-from qiskit.tools.apps.optimization import make_Hamiltonian, eval_hamiltonian, group_paulis
+from qiskit.tools.apps.optimization import make_Hamiltonian, group_paulis
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
+from eval_hamiltonian import eval_hamiltonian
 
 from vqe_utils import cmdline_parse_and_report, get_first_callable
 
