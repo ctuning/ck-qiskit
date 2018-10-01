@@ -26,6 +26,7 @@ $ python3 -m pip install ck                                             # instal
 ## Install QISKit
 ```
 $ ck pull repo:ck-qiskit
+$ ck install package:lib-python-qiskit
 ```
 
 ## Test QISKit
