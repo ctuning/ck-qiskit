@@ -97,7 +97,7 @@ def vqe_for_qiskit(sample_number, pauli_list):
     print('Validated value at solution is: {:.4f}'.format(fun_validated))
 
     # Exact calculation of the energy using matrix multiplication:
-    optimizer_output['fun_exact'] = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_function(optimizer_output['x']), 1, 'local_qasm_simulator').real
+    optimizer_output['fun_exact'] = eval_hamiltonian(Q_program, pauli_list, ansatz_function(optimizer_output['x']), 1, 'local_statevector_simulator').real
 
     optimizer_output['fun_validated'] = fun_validated
 
