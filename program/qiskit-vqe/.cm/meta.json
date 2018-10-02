@@ -80,6 +80,7 @@
   "run_vars": {
     "VQE_SAMPLE_SIZE"           : 100,
     "VQE_MAX_ITERATIONS"        : 80,
+    "VQE_QUANTUM_TIMEOUT"       : 180,
     "VQE_QUANTUM_BACKEND"       : "local_qasm_simulator"
   }, 
   "tags": [

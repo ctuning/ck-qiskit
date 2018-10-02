@@ -38,7 +38,7 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def vqe_for_qiskit(sample_number, pauli_list):
+def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds):
 
     def expectation_estimation(current_params, report):
 
@@ -50,7 +50,7 @@ def vqe_for_qiskit(sample_number, pauli_list):
 
         global fun_evaluation_counter
 
-        energy = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name).real
+        energy = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name, timeout=timeout_seconds).real
         q_run_seconds   = time.time() - timestamp_before_q_run
         q_run_shots     = sample_number
 
@@ -156,9 +156,11 @@ if __name__ == '__main__':
     ansatz_method   = get_first_callable( custom_ansatz )
     ansatz_function = getattr(custom_ansatz, ansatz_method)     # ansatz_method is a string/name, ansatz_function is an imported callable
 
+    timeout_seconds = int( os.environ.get('VQE_QUANTUM_TIMEOUT', '120') )
+
     # ---------------------------------------- run VQE: ----------------------------------------
 
-    (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list)
+    (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list, timeout_seconds)
 
     # ---------------------------------------- store the results: ----------------------------------------
 

@@ -19,7 +19,7 @@ from qiskit.extensions.standard import h, x, y, z
 from qiskit.tools.apps.optimization import make_Hamiltonian, group_paulis, measure_pauli_z
 
 
-def eval_hamiltonian(Q_program, hamiltonian, input_circuit, shots, device):
+def eval_hamiltonian(Q_program, hamiltonian, input_circuit, shots, device, timeout=60):
     """Calculates the average value of a Hamiltonian on a state created by the
      input circuit
 
@@ -43,7 +43,7 @@ def eval_hamiltonian(Q_program, hamiltonian, input_circuit, shots, device):
         if not isinstance(hamiltonian, list):
             circuit = ['c' + str(uuid.uuid4())]    # unique random circuit for no collision
             Q_program.add_circuit(circuit[0], input_circuit)
-            result = Q_program.execute(circuit, device, shots=shots,
+            result = Q_program.execute(circuit, device, shots=shots, timeout=timeout,
                                        config={"data": ["statevector"]})
             statevector = result.get_data(circuit[0]).get('statevector')
             if statevector is None:
@@ -85,7 +85,7 @@ def eval_hamiltonian(Q_program, hamiltonian, input_circuit, shots, device):
                 circuits_labels.append('circuit_label' + str(i) + str(uuid.uuid4()))
                 Q_program.add_circuit(circuits_labels[i], circuits[i])
                 i += 1
-            result = Q_program.execute(circuits_labels, device, shots=shots)
+            result = Q_program.execute(circuits_labels, device, shots=shots, timeout=timeout)
             # no Pauli final rotations
             statevector_0 = result.get_data(
                 circuits_labels[0])['statevector']
@@ -119,7 +119,7 @@ def eval_hamiltonian(Q_program, hamiltonian, input_circuit, shots, device):
                 circuits[i].measure(q[j], c[j])
             Q_program.add_circuit(circuits_labels[i], circuits[i])
             i += 1
-        result = Q_program.execute(circuits_labels, device, shots=shots)
+        result = Q_program.execute(circuits_labels, device, shots=shots, timeout=timeout)
         for j, _ in enumerate(hamiltonian):
             for k, _ in enumerate(hamiltonian[j]):
                 energy += hamiltonian[j][k][0] *\
