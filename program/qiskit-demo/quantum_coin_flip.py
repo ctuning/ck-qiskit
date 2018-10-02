@@ -75,7 +75,12 @@ try:
     result = Q_program.execute(["bell"], backend=backend, shots=shots, seed=1, timeout=timeout)
 
     # Show the results.
-    print(result)
+    print(result)       # 'COMPLETED'
+
+    q_execution_time = result.get_data().get('time')
+    if q_execution_time:
+        print("Quantum execution time: {} sec".format(q_execution_time) )
+
     print(result.get_data("bell"))
 
 except QISKitError as ex:
