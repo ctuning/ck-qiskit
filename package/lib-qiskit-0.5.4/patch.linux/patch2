@@ -19,7 +19,7 @@ index ae3cb85..c42381d 100644
              circuit = ['c' + str(uuid.uuid4())]    # unique random circuit for no collision
              Q_program.add_circuit(circuit[0], input_circuit)
 -            result = Q_program.execute(circuit, device, shots=shots,
-+            result = Q_program.execute(circuit, device, shots=shots, timeout=tout
++            result = Q_program.execute(circuit, device, shots=shots, timeout=tout, \
                                         config={"data": ["statevector"]})
              statevector = result.get_data(circuit[0]).get('statevector')
              if statevector is None:
