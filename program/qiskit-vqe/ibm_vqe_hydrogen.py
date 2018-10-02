@@ -50,17 +50,26 @@ def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds):
 
         global fun_evaluation_counter
 
-        energy = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name, timeout=timeout_seconds).real
-        q_run_seconds   = time.time() - timestamp_before_q_run
-        q_run_shots     = sample_number
+        complex_energy, q_run_seconds = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name, timeout=timeout_seconds)
+        energy = complex_energy.real
+
+        if len(q_run_seconds)>0:                            # got the real measured q time
+            total_q_run_seconds = sum( q_run_seconds )
+        else:                                               # have to assume
+            total_q_run_seconds = time.time() - timestamp_before_q_run
+            q_run_seconds       = [ total_q_run_seconds ]
+
+        q_runs              = len(q_run_seconds)
+        total_q_run_shots   = sample_number * q_runs
+        q_run_shots         = [sample_number] * q_runs
 
         report_this_iteration = {
-            'total_q_seconds_per_c_iteration' : q_run_seconds,
-            'seconds_per_individual_q_run' : [ q_run_seconds ],
-            'total_q_shots_per_c_iteration' : q_run_shots,
-            'shots_per_individual_q_run' : [ q_run_shots ],
-            'energy' : energy
-            }
+            'total_q_seconds_per_c_iteration' : total_q_run_seconds,
+            'seconds_per_individual_q_run' :    q_run_seconds,
+            'total_q_shots_per_c_iteration' :   total_q_run_shots,
+            'shots_per_individual_q_run' :      q_run_shots,
+            'energy' : energy,
+        }
 
         if report != 'TestMode':
             report['iterations'].append( report_this_iteration )
@@ -96,8 +105,9 @@ def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds):
     fun_validated = expectation_estimation(optimizer_output['x'], 'TestMode')
     print('Validated value at solution is: {:.4f}'.format(fun_validated))
 
-    # Exact calculation of the energy using matrix multiplication:
-    optimizer_output['fun_exact'] = eval_hamiltonian(Q_program, pauli_list, ansatz_function(optimizer_output['x']), 1, 'local_statevector_simulator').real
+    # Exact (noiseless) calculation of the energy at the given point:
+    complex_energy, _ = eval_hamiltonian(Q_program, pauli_list, ansatz_function(optimizer_output['x']), 1, 'local_statevector_simulator')
+    optimizer_output['fun_exact'] = complex_energy.real
 
     optimizer_output['fun_validated'] = fun_validated
 

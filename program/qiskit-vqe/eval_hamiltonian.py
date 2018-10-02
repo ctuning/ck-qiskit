@@ -38,6 +38,8 @@ def eval_hamiltonian(Q_program, hamiltonian, input_circuit, shots, device, timeo
     """
     energy = 0
 
+    q_execution_times = []
+
     if 'statevector' in device:
         # Hamiltonian is not a pauli_list grouped into tpb sets
         if not isinstance(hamiltonian, list):
@@ -119,12 +121,19 @@ def eval_hamiltonian(Q_program, hamiltonian, input_circuit, shots, device, timeo
                 circuits[i].measure(q[j], c[j])
             Q_program.add_circuit(circuits_labels[i], circuits[i])
             i += 1
+
         result = Q_program.execute(circuits_labels, device, shots=shots, timeout=timeout)
+
         for j, _ in enumerate(hamiltonian):
+#            print( "Q execution data [{}] = {}".format(j, result.get_data(circuits_labels[j])))
+
+            q_execution_time = result.get_data(circuits_labels[j]).get('time')
+            if q_execution_time:
+                q_execution_times.append( q_execution_time )
+
             for k, _ in enumerate(hamiltonian[j]):
                 energy += hamiltonian[j][k][0] *\
                     measure_pauli_z(result.get_counts(
                         circuits_labels[j]), hamiltonian[j][k][1])
 
-    return energy
-
+    return energy, q_execution_times
