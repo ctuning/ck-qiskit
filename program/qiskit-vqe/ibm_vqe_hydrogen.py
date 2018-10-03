@@ -170,7 +170,7 @@ if __name__ == '__main__':
 
     timeout_seconds = int( os.environ.get('VQE_QUANTUM_TIMEOUT', '120') )
 
-    json_stream_file = open('ibm_vqe_stream.json', 'a')
+    json_stream_file = open('vqe_stream.json', 'a')
 
     # ---------------------------------------- run VQE: --------------------------------------------------
 
