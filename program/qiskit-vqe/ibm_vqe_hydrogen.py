@@ -38,7 +38,7 @@ class NumpyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds):
+def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds, json_stream_file):
 
     def expectation_estimation(current_params, report):
 
@@ -81,6 +81,8 @@ def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds):
         report_this_iteration['total_seconds_per_c_iteration'] = time.time() - timestamp_before_ee
 
         print(report_this_iteration, "\n")
+        json_stream_file.write( json.dumps(report_this_iteration, cls=NumpyEncoder)+"\n" )
+        json_stream_file.flush()
 
         return energy
 
@@ -168,11 +170,16 @@ if __name__ == '__main__':
 
     timeout_seconds = int( os.environ.get('VQE_QUANTUM_TIMEOUT', '120') )
 
-    # ---------------------------------------- run VQE: ----------------------------------------
+    json_stream_file = open('ibm_vqe_stream.json', 'a')
 
-    (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list, timeout_seconds)
+    # ---------------------------------------- run VQE: --------------------------------------------------
+
+    (vqe_output, report) = vqe_for_qiskit(sample_number, pauli_list, timeout_seconds, json_stream_file)
 
     # ---------------------------------------- store the results: ----------------------------------------
+
+    json_stream_file.write( '# Experiment finished\n' )
+    json_stream_file.close()
 
     minimizer_src   = inspect.getsource( minimizer_function )
     ansatz_src      = inspect.getsource( ansatz_function )
