@@ -52,7 +52,13 @@
       "tags": "lib,python-package,qiskit",
       "version_from": [
             0,
-            5
+            5,
+            0
+      ],
+      "version_to": [
+            0,
+            5,
+            8
       ]
     },
     "optimizer-plugin": {
