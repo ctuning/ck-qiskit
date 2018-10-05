@@ -4,25 +4,44 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![compatibility](https://github.com/ctuning/ck-guide-images/blob/master/ck-compatible.svg)](https://github.com/ctuning/ck)
 
-## Install prerequisites (Python 3, C++ compiler, libraries and CK)
+## Install prerequisites (Python, CK, C++ compiler, libraries)
+
+- Python 3.5+ ([required by QISKit](https://github.com/Qiskit/qiskit-terra#dependencies); [CK supports 2.7 and 3.3+](https://github.com/ctuning/ck#minimal-installation)).
+- [Collective Knowledge](http://cknowledge.org).
+- [Tkinter](https://wiki.python.org/moin/TkInter) (required for `program:visualize-ansatz`).
+- (optional for hackathons) GCC-7+; BLAS, LAPACK libraries (required for `package:lib-qiskit*`, but not for `package:lib-python-qiskit*` used below).
 
 ### Ubuntu/Debian Linux
 ```
 $ sudo apt-get install python3 python3-pip python3-tk
-$ sudo apt-get install libblas-dev liblapack-dev
 $ sudo python3 -m pip install ck
+```
+#### Optional
+```
+$ sudo add-apt-repository ppa:ubuntu-toolchain-r/test                   # add newer gcc versions
+$ sudo apt-get update
+$ sudo apt-get install gcc-7 g++-7
+$ sudo apt-get install libblas-dev liblapack-dev                        # add blas and lapack
 ```
 
 ### macOS
 ```
-$ brew update                                                           # this swaps python versions and makes 3 the default one
+$ brew update                                                           # makes python3 the default python
 $ brew install freetype                                                 # needed for matplotlib
 $ brew reinstall python                                                 # install and link python3 and pip3 to /usr/local/bin
-$ export PATH=/usr/local/opt/python/bin:$PATH
-$ brew install gcc\@7 || brew link --overwrite gcc\@7                   # to avoid symlink conflict with oclint
-$ python3 -m pip install --ignore-installed --verbose pip setuptools    # use own pip!
+$ export PATH=/usr/local/opt/python/bin:$PATH                           # also append this to $HOME/.bash_profile
+$ python3 -m pip install --ignore-installed --verbose pip setuptools    # use its own pip!
 $ python3 -m pip install ck                                             # install CK
 ```
+#### Optional
+```
+$ brew install gcc\@7 || brew link --overwrite gcc\@7                   # to avoid symlink conflict with oclint
+```
+
+### Windows
+
+Please see [here](https://github.com/ctuning/ck#windows).
+
 
 ## Install QISKit
 ```
