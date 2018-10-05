@@ -4,6 +4,7 @@
     "install_env": {
       "PYTHON_PACKAGE_VERSION": "0.5.7",
       "PIP_INSTALL_OPTIONS": "--ignore-installed",
+      "PIP_USER": "0",
       "PYTHON_PACKAGE_NAME": "qiskit"
     },
     "no_ver_in_suggested_path": "no",
