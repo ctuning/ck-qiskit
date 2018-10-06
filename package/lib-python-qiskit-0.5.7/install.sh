@@ -20,7 +20,7 @@
 EXTRA_PYTHON_SITE=${INSTALL_DIR}/python_deps_site
 
 SHORT_PYTHON_VERSION=`${CK_ENV_COMPILER_PYTHON_FILE} -c 'import sys;print(sys.version[:3])'`
-export PACKAGE_LIB_DIR="${EXTRA_PYTHON_SITE}/lib/python${SHORT_PYTHON_VERSION}/site-packages"
+export PACKAGE_LIB_DIR="${EXTRA_PYTHON_SITE}/lib${PIP_LIB_SUFFIX:+${PIP_LIB_SUFFIX}}/python${SHORT_PYTHON_VERSION}/site-packages"
 export PYTHONPATH=$PACKAGE_LIB_DIR:$PYTHONPATH
 
 echo "**************************************************************"
