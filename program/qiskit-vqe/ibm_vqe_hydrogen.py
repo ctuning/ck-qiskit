@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 
 """
-This script runs Variational-Quantum-Eigensolver on H2 (Hydrogen molecule)
+This script runs Variational-Quantum-Eigensolver using Qiskit library
 
 Example running it partially using CK infrastructure:
-    time ck virtual `ck search env:* --tags=qiskit,lib`  `ck search env:* --tags=hackathon`  --shell_cmd="$HOME/CK/ck-qiskit/program/qiskit-vqe/ibm_vqe_hydrogen.py --minimizer_method=my_random_sampler --max_func_evaluations=10"
+    time ck virtual `ck search env:* --tags=qiskit,lib` \
+                    `ck search env:* --tags=vqe,lib` \
+                    `ck search env:* --tags=ansatz` \
+                    `ck search env:* --tags=optimizer` \
+                    `ck search env:* --tags=hamiltonian` \
+                    --shell_cmd="$HOME/CK/ck-qiskit/program/qiskit-vqe/ibm_vqe_hydrogen.py --max_func_evaluations=10"
 """
 
 import os
@@ -22,8 +27,8 @@ from eval_hamiltonian import eval_hamiltonian
 
 from vqe_utils import cmdline_parse_and_report, get_first_callable
 
-import custom_ansatz    # the file will be different depending on the plugin choice
-
+from vqe_hamiltonian import label_to_hamiltonian_coeff      # the file contents will be different depending on the plugin choice
+import custom_ansatz                                        # the file contents will be different depending on the plugin choice
 
 fun_evaluation_counter = 0    # global
 
@@ -148,16 +153,8 @@ if __name__ == '__main__':
     #import warnings
     #warnings.filterwarnings('ignore')
 
-    # Build hamiltonian for H2 from the list below:
-    #ham_name = '../H2Equilibrium.txt'
-    #pauli_list = Hamiltonian_from_file(ham_name)
-    pauli_list = [
-        [  0.011279956224107712,   label_to_pauli('ZZ') ],
-        [ -1.0523760606256514,     label_to_pauli('II') ],
-        [  0.39793570529466216,    label_to_pauli('ZI') ],
-        [  0.39793570529466227,    label_to_pauli('IZ') ],
-        [  0.18093133934472627,    label_to_pauli('XX') ]
-        ]
+    # Load the Hamiltonian into Qiskit-friendly format:
+    pauli_list = [ [label_to_hamiltonian_coeff[label], label_to_pauli(label)] for label in label_to_hamiltonian_coeff ]
 
     # Calculate Exact Energy classically, to compare with quantum solution
     H = make_Hamiltonian(pauli_list)

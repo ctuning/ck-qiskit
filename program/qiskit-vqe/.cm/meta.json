@@ -11,7 +11,7 @@
   "process_in_tmp": "yes", 
   "program": "yes", 
   "run_cmds": {
-    "ibm-vqe-hydrogen": {
+    "qiskit-vqe": {
       "ignore_return_code": "no",
       "run_time": {
         "fine_grain_timer_file":"ibm_vqe_report.json",
@@ -60,6 +60,13 @@
             5,
             8
       ]
+    },
+    "hamiltonian-plugin": {
+      "local": "yes",
+      "name": "Python code that defines the Hamiltonian",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 25,
+      "tags": "quantum,hamiltonian"
     },
     "optimizer-plugin": {
       "local": "yes",
