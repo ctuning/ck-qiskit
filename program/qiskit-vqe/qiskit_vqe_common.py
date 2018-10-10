@@ -9,7 +9,7 @@ Example running it partially using CK infrastructure:
                     `ck search env:* --tags=ansatz` \
                     `ck search env:* --tags=optimizer` \
                     `ck search env:* --tags=hamiltonian` \
-                    --shell_cmd="$HOME/CK/ck-qiskit/program/qiskit-vqe/ibm_vqe_hydrogen.py --max_func_evaluations=10"
+                    --shell_cmd="$HOME/CK/ck-qiskit/program/qiskit-vqe/qiskit_vqe_common.py --max_func_evaluations=10"
 """
 
 import os
