@@ -4,12 +4,8 @@
 This script runs Variational-Quantum-Eigensolver using Qiskit library
 
 Example running it partially using CK infrastructure:
-    time ck virtual `ck search env:* --tags=qiskit,lib` \
-                    `ck search env:* --tags=vqe,lib` \
-                    `ck search env:* --tags=ansatz` \
-                    `ck search env:* --tags=optimizer` \
-                    `ck search env:* --tags=hamiltonian` \
-                    --shell_cmd="$HOME/CK/ck-qiskit/program/qiskit-vqe/qiskit_vqe_common.py --max_func_evaluations=10"
+    ck virtual env  --tag_groups='compiler,python qiskit,lib vqe,utils vqe,hamiltonian deployed,ansatz deployed,optimizer' \
+                    --shell_cmd="$HOME/CK/ck-qiskit/program/qiskit-vqe/qiskit_vqe_common.py --start_param_value=0.5"
 """
 
 import os
