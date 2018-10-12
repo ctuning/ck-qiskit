@@ -163,10 +163,11 @@ if __name__ == '__main__':
     # Load the Hamiltonian into Qiskit-friendly format:
     pauli_list = [ [label_to_hamiltonian_coeff[label], label_to_pauli(label)] for label in label_to_hamiltonian_coeff ]
 
-    # Calculate Exact Energy classically, to compare with quantum solution
+    # Calculate Exact Energy classically, to compare with quantum solution:
+    #
     H = make_Hamiltonian(pauli_list)
     classical_energy = np.amin(la.eigh(H)[0])
-    print('The exact ground state energy is: {:.4f}'.format(classical_energy))
+    print('The exact ground state energy (the smallest eigenvalue of the Hamiltonian) is: {:.4f}'.format(classical_energy))
 
     # Load the ansatz function from the plug-in
     ansatz_method   = get_first_callable( custom_ansatz )
