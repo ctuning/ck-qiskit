@@ -25,22 +25,12 @@ from qiskit.tools.apps.optimization import make_Hamiltonian, group_paulis
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 from eval_hamiltonian import eval_hamiltonian
 
-from vqe_utils import cmdline_parse_and_report, get_first_callable
+from vqe_utils import cmdline_parse_and_report, get_first_callable, NumpyEncoder
 
 from vqe_hamiltonian import label_to_hamiltonian_coeff      # the file contents will be different depending on the plugin choice
 import custom_ansatz                                        # the file contents will be different depending on the plugin choice
 
 fun_evaluation_counter = 0    # global
-
-# See https://stackoverflow.com/questions/26646362/numpy-array-is-not-json-serializable
-#
-class NumpyEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, np.ndarray):
-            return obj.tolist()
-        elif isinstance(obj, np.bool_):
-            return bool(obj)
-        return json.JSONEncoder.default(self, obj)
 
 
 def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds, json_stream_file):
