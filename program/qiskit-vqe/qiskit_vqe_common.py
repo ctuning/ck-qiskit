@@ -20,7 +20,7 @@ import inspect
 import numpy as np
 from scipy import linalg as la
 
-from qiskit import QuantumProgram, register
+from qiskit import QuantumProgram, register, QISKitError
 from qiskit.tools.apps.optimization import make_Hamiltonian, group_paulis
 from qiskit.tools.qi.pauli import Pauli, label_to_pauli
 from eval_hamiltonian import eval_hamiltonian
@@ -55,8 +55,15 @@ def vqe_for_qiskit(sample_number, pauli_list, timeout_seconds, json_stream_file)
 
         global fun_evaluation_counter
 
-        complex_energy, q_run_seconds = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name, timeout=timeout_seconds)
-        energy = complex_energy.real
+        # Trying to recover from a timed-out run assuming it to be a temporary glitch:
+        #
+        for attempt in range(1,8):
+            try:
+                complex_energy, q_run_seconds = eval_hamiltonian(Q_program, pauli_list_grouped, ansatz_circuit, sample_number, q_device_name, timeout=timeout_seconds)
+                energy = complex_energy.real
+                break
+            except QISKitError as e:
+                print("{}, trying again -- attempt number {}, timeout: {} seconds".format(e, attempt, timeout_seconds))
 
         if len(q_run_seconds)>0:                            # got the real measured q time
             total_q_run_seconds = sum( q_run_seconds )
