@@ -61,26 +61,19 @@
             8
       ]
     },
-    "hamiltonian-plugin": {
-      "local": "yes",
-      "name": "Python code that defines the Hamiltonian",
-      "skip_pruning_by_other_deps": "yes",
-      "sort": 25,
-      "tags": "quantum,hamiltonian"
-    },
-    "optimizer-plugin": {
-      "local": "yes",
-      "name": "Deployed python optimizer function",
-      "skip_pruning_by_other_deps": "yes",
-      "sort": 30,
-      "tags": "quantum,optimizer,deployed"
-    },
     "vqe-utils-plugin": {
       "local": "yes",
       "name": "VQE Python utility functions",
       "skip_pruning_by_other_deps": "yes",
-      "sort": 40,
+      "sort": 30,
       "tags": "quantum,vqe,utils,lib"
+    },
+    "hamiltonian-plugin": {
+      "local": "yes",
+      "name": "Python code that defines the Hamiltonian",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 40,
+      "tags": "quantum,hamiltonian"
     },
     "ansatz-plugin": {
       "local": "yes",
@@ -88,6 +81,13 @@
       "skip_pruning_by_other_deps": "yes",
       "sort": 50,
       "tags": "quantum,ansatz,deployed"
+    },
+    "optimizer-plugin": {
+      "local": "yes",
+      "name": "Deployed python optimizer function",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 60,
+      "tags": "quantum,optimizer,deployed"
     }
   }, 
   "run_vars": {
