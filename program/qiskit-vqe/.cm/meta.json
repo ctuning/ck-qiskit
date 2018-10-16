@@ -98,16 +98,14 @@
     "VQE_QUANTUM_BACKEND"       : "local_qasm_simulator"
   }, 
   "tags": [
+    "vqe",
+    "vqe-implementation",
+    "quantum",
     "ibm",
     "ibmq",
     "ibmqx",
     "qiskit", 
     "qiskit-sdk-py",
-    "demo",
-    "examples",
-    "vqe",
-    "vqe-implementation",
-    "hydrogen",
     "hackathon"
   ]
 }
