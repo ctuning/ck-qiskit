@@ -16,6 +16,6 @@
     "quantum",
     "vqe",
     "ansatz",
-    "lib"
+    "qiskit"
   ]
 }
