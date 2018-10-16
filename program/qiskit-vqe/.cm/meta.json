@@ -80,7 +80,7 @@
       "name": "QISKit ansatz function",
       "skip_pruning_by_other_deps": "yes",
       "sort": 50,
-      "tags": "quantum,ansatz,deployed"
+      "tags": "quantum,qiskit,ansatz,deployed"
     },
     "optimizer-plugin": {
       "local": "yes",
