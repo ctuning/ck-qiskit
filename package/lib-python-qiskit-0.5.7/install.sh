@@ -8,9 +8,9 @@
 #
 
 # PACKAGE_DIR
+# PACKAGE_VERSION
 # INSTALL_DIR
 # PYTHON_PACKAGE_NAME
-# PYTHON_PACKAGE_VERSION
 # PIP_INSTALL_OPTIONS
 
 
@@ -31,7 +31,7 @@ rm -rf "${EXTRA_PYTHON_SITE}"
 ######################################################################################
 echo "Installing '${PYTHON_PACKAGE_NAME}' and its dependencies to '${PACKAGE_LIB_DIR}' ..."
 
-${CK_ENV_COMPILER_PYTHON_FILE} -m pip install ${PYTHON_PACKAGE_NAME}${PYTHON_PACKAGE_VERSION:+"==${PYTHON_PACKAGE_VERSION}"} --prefix=${EXTRA_PYTHON_SITE} ${PIP_INSTALL_OPTIONS}
+${CK_ENV_COMPILER_PYTHON_FILE} -m pip install ${PYTHON_PACKAGE_NAME}${PACKAGE_VERSION:+"==${PACKAGE_VERSION}"} --prefix=${EXTRA_PYTHON_SITE} ${PIP_INSTALL_OPTIONS}
 
 if [ "${?}" != "0" ] ; then
   echo "Error: installation failed!"

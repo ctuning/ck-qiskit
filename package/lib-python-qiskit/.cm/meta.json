@@ -3,8 +3,7 @@
   "customize": {
     "install_env": {
       "PIP_INSTALL_OPTIONS": "--ignore-installed", 
-      "PYTHON_PACKAGE_NAME": "qiskit",
-      "#PYTHON_PACKAGE_VERSION": "0.5.4"
+      "PYTHON_PACKAGE_NAME": "qiskit"
     }
   }, 
   "deps": {

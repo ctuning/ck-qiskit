@@ -8,9 +8,9 @@ rem See CK COPYRIGHT for copyright details.
 rem
 
 rem PACKAGE_DIR
+rem PACKAGE_VERSION
 rem INSTALL_DIR
 rem PYTHON_PACKAGE_NAME
-rem PYTHON_PACKAGE_VERSION
 rem PIP_INSTALL_OPTIONS
 
 rem This is where pip will install the modules.
@@ -30,13 +30,13 @@ rem ############################################################################
 echo.
 echo Installing %PYTHON_PACKAGE_NAME% and its dependencies to %PACKAGE_LIB_DIR% ...
 
-IF DEFINED PYTHON_PACKAGE_VERSION (
-    SET FULL_PACKAGE_NAME=%PYTHON_PACKAGE_NAME%==%PYTHON_PACKAGE_VERSION%
+IF DEFINED PACKAGE_VERSION (
+    SET FULL_PACKAGE_NAME=%PYTHON_PACKAGE_NAME%==%PACKAGE_VERSION%
 ) ELSE (
     SET FULL_PACKAGE_NAME=%PYTHON_PACKAGE_NAME%
 )
 
-%CK_ENV_COMPILER_PYTHON_FILE% -m pip install --ignore-installed %FULL_PACKAGE_NAME% -t %EXTRA_PYTHON_SITE% %PIP_INSTALL_OPTIONS%
+%CK_ENV_COMPILER_PYTHON_FILE% -m pip install %FULL_PACKAGE_NAME% -t %EXTRA_PYTHON_SITE% %PIP_INSTALL_OPTIONS%
 
 if %errorlevel% neq 0 (
  echo.

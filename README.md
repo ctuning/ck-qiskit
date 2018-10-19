@@ -46,7 +46,7 @@ Please see [here](https://github.com/ctuning/ck#windows).
 ## Install QISKit
 ```
 $ ck pull repo:ck-qiskit
-$ ck install package:lib-python-qiskit-0.5.7
+$ ck install package:lib-python-qiskit --force_version=0.5.7
 ```
 
 ## Test QISKit
