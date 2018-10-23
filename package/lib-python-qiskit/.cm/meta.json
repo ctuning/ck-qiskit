@@ -1,5 +1,6 @@
 {
   "check_exit_status": "yes", 
+  "comment": "Installing QISKit using pip",
   "customize": {
     "install_env": {
       "PIP_INSTALL_OPTIONS": "--ignore-installed", 
