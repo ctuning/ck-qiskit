@@ -103,5 +103,5 @@ script:
             echo qiskit_hydrogen | ck detect soft:vqe.hamiltonian
             ck run program:qiskit-0.6-vqe --env.VQE_MAX_ITERATIONS=10 --env.VQE_QUANTUM_BACKEND=${TRAVIS_CK_USE_BACKEND}
         else
-            ck run program:qiskit-demo --cmd_key=${TRAVIS_CK_WHICH_TEST} --env.CK_IBM_BACKEND=${TRAVIS_CK_USE_BACKEND}
+            ck run program:qiskit-0.6-demo --cmd_key=${TRAVIS_CK_WHICH_TEST} --env.CK_IBM_BACKEND=${TRAVIS_CK_USE_BACKEND}
         fi
