@@ -125,8 +125,8 @@ if __name__ == '__main__':
 
     start_params, sample_number, q_device_name, minimizer_method, minimizer_options, minimizer_function = cmdline_parse_and_report(
         num_params                  = custom_ansatz.num_params,
-        q_device_name_default       = 'local_qasm_simulator',
-        q_device_name_help          = "Real devices: 'ibmqx4' or 'ibmqx5'. Use 'ibmq_qasm_simulator' for remote simulator or 'local_qasm_simulator' for local",
+        q_device_name_default       = 'qasm_simulator',
+        q_device_name_help          = "Real devices: 'ibmqx4' or 'ibmqx5'. Use 'ibmq_qasm_simulator' for remote simulator or 'qasm_simulator' for local",
         minimizer_options_default   = '{"maxfev":200, "xatol": 0.001, "fatol": 0.001}',
         start_param_value_default   = 0.0
         )
