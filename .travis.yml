@@ -92,10 +92,7 @@ install:
     -       ck detect soft:compiler.python --full_path=`which ${PYTHON_EXE}`    # pick the one Travis has set for us in the PATH
     - SCIPY=`python -m pip show scipy | awk '$1=="Location:" {print $2}'`/scipy/__init__.py
     - ck detect soft:lib.python.scipy --full_path=$SCIPY                        # pick the one installed via requirements.txt
-    - echo "$TRAVIS_CK_COMPILER_CHOICE" | ck detect soft:compiler.${TRAVIS_CK_CXX_COMPILER}     # force detection of a specific C/C++ compiler
-    - echo   | ck detect soft:lib.blas
-    - echo   | ck detect soft:lib.lapack
-    -          ck install package:lib-qiskit-0.5.4                              # Fix the version
+    - ck install package:lib-python-qiskit --force_version=0.5.7
 
 
 script:

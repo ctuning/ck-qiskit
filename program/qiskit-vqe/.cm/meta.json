@@ -29,7 +29,7 @@
       "name": "IBM QX credentials",
       "sort": 5,
       "disable_if_env": {
-            "VQE_QUANTUM_BACKEND" : "local_qasm_simulator"
+            "VQE_QUANTUM_BACKEND" : "qasm_simulator"
       },
       "tags": "ibmqx,login"
     },
@@ -95,7 +95,7 @@
     "VQE_MAX_ITERATIONS"        : 80,
     "VQE_QUANTUM_TIMEOUT"       : 180,
     "VQE_START_PARAM_VALUE"     : 0.0,
-    "VQE_QUANTUM_BACKEND"       : "local_qasm_simulator"
+    "VQE_QUANTUM_BACKEND"       : "qasm_simulator"
   }, 
   "tags": [
     "vqe",
