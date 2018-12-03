@@ -30,6 +30,7 @@
     "quantum",
     "lib", 
     "python-package", 
+    "multiversion",
     "qiskit"
   ]
 }
