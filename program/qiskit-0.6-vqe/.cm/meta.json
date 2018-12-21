@@ -54,9 +54,14 @@
       "sort": 20, 
       "tags": "lib,python-package,qiskit", 
       "version_from": [
-        0, 
-        6, 
+        0,
+        6,
         0
+      ],
+      "version_to": [
+        0,
+        6,
+        9
       ]
     }, 
     "optimizer-plugin": {

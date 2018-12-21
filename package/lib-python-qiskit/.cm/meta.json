@@ -6,7 +6,7 @@
       "PIP_INSTALL_OPTIONS": "--ignore-installed", 
       "PYTHON_PACKAGE_NAME": "qiskit"
     },
-    "supported_versions": [ "0.5.5", "0.5.6", "0.5.7", "0.6.0", "0.6.1" ]
+    "supported_versions": [ "0.5.5", "0.5.6", "0.5.7", "0.6.0", "0.6.1", "0.7.0" ]
   }, 
   "deps": {
     "python": {
