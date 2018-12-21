@@ -52,28 +52,13 @@ Run the following to install the software dependencies (accept most defaults by 
 ```
 $ ck run program:qiskit-0.6-demo --cmd_key=quantum_coin_flip
 ...
- (printing output files)
+Trying to connect to the LOCAL backend "qasm_simulator"...
+Using "qasm_simulator" backend...
 
-    * tmp-stdout.tmp
+User email: N/A
 
-      -- Ignoring SSL errors.  This is not recommended --
-
-                  WARNING: There's no connection with IBMQuantumExperience servers.
-                  cannot test I/O intesive tasks, will only test CPU intensive tasks
-                  running the jobs in the local simulator
-
-      The backends available for use are: ['local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
-
-      User email: N/A
-
-      COMPLETED
-      {'counts': {'00': 4, '11': 6}}
-
-
-    * tmp-stderr.tmp
-
-
-Execution time: 0.000 sec.
+COMPLETED
+{'counts': {'00': 4, '11': 6}}
 ```
 
 ### Remote execution
@@ -87,20 +72,18 @@ These credentials will be stored on your computer in the form of a "CK environme
 ```
 $ ck run program:qiskit-0.6-demo --cmd_key=quantum_coin_flip --env.CK_IBM_BACKEND=ibmq_qasm_simulator
 ...
- (printing output files)
+Trying to connect to the LOCAL backend "ibmq_qasm_simulator"...
+Could not find the LOCAL backend "ibmq_qasm_simulator" - available LOCAL backends:
+        ['qasm_simulator', 'qasm_simulator_py', 'statevector_simulator', 'statevector_simulator_py', 'unitary_simulator', 'clifford_simulator']
 
-    * tmp-stdout.tmp
+CK_IBM_API_TOKEN found.
+Trying to connect to the REMOTE backend "ibmq_qasm_simulator"...
+Using "ibmq_qasm_simulator" backend...
 
-      -- Ignoring SSL errors.  This is not recommended --
-      The backends available for use are: ['ibmq_16_melbourne', 'ibmq_qasm_simulator', 'ibmqx2', 'ibmqx4', 'ibmqx5', 'local_qasm_simulator', 'local_statevector_simulator', 'local_unitary_simulator']
+User email: anton@dividiti.com
 
-      User email: anton@dividiti.com
-
-      COMPLETED
-      {'creg_labels': 'cr[2]', 'additionalData': {'seed': 1}, 'time': 0.00023725, 'counts': {'11': 6, '00': 4}, 'date': '2018-09-26T11:40:38.802Z'}
-
-
-Execution time: 0.000 sec.
+COMPLETED
+{'counts': {'0x3': 6, '0x0': 4}}
 ```
 
 You should now be all set to use CK-QISKit, running your quantum code both on the local simulator and on IBM's remote simulator and hardware!
@@ -123,8 +106,8 @@ At a lower level, you can use the native [QISKit Python API](https://github.com/
 - [`ibmqx5`](https://github.com/Qiskit/qiskit-backend-information/blob/master/backends/rueschlikon/V1/README.md) ("IBM Q 16 Rueschlikon")
 - [`ibmq_16_melbourne`](https://github.com/Qiskit/qiskit-backend-information/blob/master/backends/melbourne/V1/README.md) ("IBM Q 16 Melbourne")
 
-### Local simulators
+### Local simulators (supported by `program:qiskit-0.6-demo`)
 
-- `local_qasm_simulator`
-- `local_statevector_simulator`
-- `local_unitary_simulator`
+- `qasm_simulator`
+- `qasm_simulator_py`
+- `unitary_simulator`
