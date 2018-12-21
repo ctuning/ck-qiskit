@@ -13,33 +13,22 @@
 - Python 3.5+ ([required by QISKit](https://github.com/Qiskit/qiskit-terra#dependencies); [CK supports 2.7 and 3.3+](https://github.com/ctuning/ck#minimal-installation)).
 - [Collective Knowledge](http://cknowledge.org).
 - [Tkinter](https://wiki.python.org/moin/TkInter) (required for `program:visualize-ansatz`).
-- (optional for hackathons) GCC-7+; BLAS, LAPACK libraries (required for `package:lib-qiskit*`, but not for `package:lib-python-qiskit*` used below).
 
 ### Ubuntu/Debian Linux
 ```
 $ sudo apt-get install python3 python3-pip python3-tk
 $ sudo python3 -m pip install ck
 ```
-#### Optional
-```
-$ sudo add-apt-repository ppa:ubuntu-toolchain-r/test                   # add newer gcc versions
-$ sudo apt-get update
-$ sudo apt-get install gcc-7 g++-7
-$ sudo apt-get install libblas-dev liblapack-dev                        # add blas and lapack
-```
 
 ### macOS
 ```
 $ brew update                                                           # makes python3 the default python
-$ brew install freetype                                                 # needed for matplotlib
-$ brew reinstall python                                                 # install and link python3 and pip3 to /usr/local/bin
+$ brew unlink python                                                    # make sure we install Python 3.6, and not 3.7
+$ brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/f2a764ef944b1080be64bd88dca9a1d80130c558/Formula/python.rb
 $ export PATH=/usr/local/opt/python/bin:$PATH                           # also append this to $HOME/.bash_profile
+$ brew install freetype                                                 # needed for matplotlib
 $ python3 -m pip install --ignore-installed --verbose pip setuptools    # use its own pip!
 $ python3 -m pip install ck                                             # install CK
-```
-#### Optional
-```
-$ brew install gcc\@7 || brew link --overwrite gcc\@7                   # to avoid symlink conflict with oclint
 ```
 
 ### Windows
@@ -50,7 +39,7 @@ Please see [here](https://github.com/ctuning/ck#windows).
 ## Install QISKit
 ```
 $ ck pull repo:ck-qiskit
-$ ck install package:lib-python-qiskit --force_version=0.5.7
+$ ck install package:lib-python-qiskit --force_version=0.6.1
 ```
 
 ## Test QISKit
@@ -61,7 +50,7 @@ Run a couple of tests to install some dependencies and test basic workflows.
 
 Run the following to install the software dependencies (accept most defaults by pressing `Enter`/`Return`) and run a simple QISKit test on a local simulator:
 ```
-$ ck run program:qiskit-demo --cmd_key=quantum_coin_flip
+$ ck run program:qiskit-0.6-demo --cmd_key=quantum_coin_flip
 ...
  (printing output files)
 
@@ -96,7 +85,7 @@ Now you can run the same test, but this time using the IBM QX remote simulator. 
 These credentials will be stored on your computer in the form of a "CK environment entry" and automatically used for further experiments.
 
 ```
-$ ck run program:qiskit-demo --cmd_key=quantum_coin_flip --env.CK_IBM_BACKEND=ibmq_qasm_simulator
+$ ck run program:qiskit-0.6-demo --cmd_key=quantum_coin_flip --env.CK_IBM_BACKEND=ibmq_qasm_simulator
 ...
  (printing output files)
 
