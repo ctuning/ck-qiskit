@@ -1,21 +1,23 @@
 {
-  "auto_detect": "yes", 
+  "auto_detect": "yes",
   "customize": {
-    "check_that_exists": "yes", 
-    "ck_version": 10, 
-    "env_prefix": "CK_ENV_LIB_QISKIT", 
-    "limit_recursion_dir_search": {
-      "linux": 5, 
-      "win": 5
-    }, 
+    "check_that_exists": "yes",
+    "ck_version": 10,
+    "env_prefix": "CK_ENV_LIB_QISKIT",
     "extra_search_dirs": {
-        "win":      [ "C:\\ProgramData\\Anaconda3\\lib\\site-packages" ]
+      "win": [
+        "C:\\ProgramData\\Anaconda3\\lib\\site-packages"
+      ]
+    },
+    "limit_recursion_dir_search": {
+      "linux": 5,
+      "win": 5
     },
     "soft_file": {
-        "linux":    "qiskit-sdk-py$#sep#$build$#sep#$qiskit$#sep#$__init__.py",
-        "win":      "qiskit$#sep#$__init__.py"
+      "linux": "qiskit-sdk-py$#sep#$build$#sep#$qiskit$#sep#$__init__.py",
+      "win": "qiskit$#sep#$__init__.py"
     }
-  }, 
+  },
   "soft_name": "IBM Quantum Information Science Kit (QISKit)",
   "tags": [
     "quantum",

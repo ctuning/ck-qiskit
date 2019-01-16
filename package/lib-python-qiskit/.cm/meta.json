@@ -1,35 +1,42 @@
 {
-  "check_exit_status": "yes", 
+  "check_exit_status": "yes",
   "comment": "Installing QISKit using pip",
   "customize": {
     "install_env": {
-      "PIP_INSTALL_OPTIONS": "--ignore-installed", 
+      "PIP_INSTALL_OPTIONS": "--ignore-installed",
       "PYTHON_PACKAGE_NAME": "qiskit"
     },
-    "supported_versions": [ "0.5.5", "0.5.6", "0.5.7", "0.6.0", "0.6.1", "0.7.0" ]
-  }, 
+    "supported_versions": [
+      "0.5.5",
+      "0.5.6",
+      "0.5.7",
+      "0.6.0",
+      "0.6.1",
+      "0.7.0"
+    ]
+  },
   "deps": {
     "python": {
-      "add_to_path": "yes", 
-      "local": "yes", 
-      "name": "Python 3", 
-      "sort": 10, 
+      "add_to_path": "yes",
+      "local": "yes",
+      "name": "Python 3",
+      "sort": 10,
       "tags": "compiler,python",
       "version_from": [
-        3, 
-        5, 
+        3,
+        5,
         0
       ]
     }
-  }, 
+  },
   "end_full_path_universal": "build$#sep#$qiskit$#sep#$__init__.py",
-  "process_script": "install", 
-  "soft_uoa": "126e8e93a4041e7a", 
-  "suggested_path": "lib-python-qiskit", 
+  "process_script": "install",
+  "soft_uoa": "126e8e93a4041e7a",
+  "suggested_path": "lib-python-qiskit",
   "tags": [
     "quantum",
-    "lib", 
-    "python-package", 
+    "lib",
+    "python-package",
     "multiversion",
     "qiskit"
   ]

@@ -1,58 +1,58 @@
 {
-  "backup_data_uid": "efd1f493d14b4086", 
-  "data_name": "qiskit-0.6-vqe", 
-  "no_compile": "yes", 
-  "no_target_file": "yes", 
-  "pass_env_to_resolve": "yes", 
+  "backup_data_uid": "efd1f493d14b4086",
+  "data_name": "qiskit-0.6-vqe",
+  "no_compile": "yes",
+  "no_target_file": "yes",
+  "pass_env_to_resolve": "yes",
   "print_files_after_run": [
-    "tmp-stdout.tmp", 
+    "tmp-stdout.tmp",
     "tmp-stderr.tmp"
-  ], 
-  "process_in_tmp": "yes", 
-  "program": "yes", 
+  ],
+  "process_in_tmp": "yes",
+  "program": "yes",
   "run_cmds": {
     "qiskit-vqe": {
-      "ignore_return_code": "no", 
+      "ignore_return_code": "no",
       "run_time": {
-        "fine_grain_timer_file": "ibm_vqe_report.json", 
-        "output_invariant_of_repeat": "no", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../qiskit_vqe_common.py --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$ --start_param_value $<<VQE_START_PARAM_VALUE>>$", 
+        "fine_grain_timer_file": "ibm_vqe_report.json",
+        "output_invariant_of_repeat": "no",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../qiskit_vqe_common.py --sample_number $<<VQE_SAMPLE_SIZE>>$ --q-device-name $<<VQE_QUANTUM_BACKEND>>$ --max_func_evaluations $<<VQE_MAX_ITERATIONS>>$ --start_param_value $<<VQE_START_PARAM_VALUE>>$",
         "run_output_files": [
           "ibm_vqe_report.json"
         ]
       }
     }
-  }, 
+  },
   "run_deps": {
     "IBM QX login": {
       "disable_if_env": {
         "VQE_QUANTUM_BACKEND": "qasm_simulator"
-      }, 
-      "local": "yes", 
-      "name": "IBM QX credentials", 
-      "sort": 5, 
+      },
+      "local": "yes",
+      "name": "IBM QX credentials",
+      "sort": 5,
       "tags": "ibmqx,login"
-    }, 
+    },
     "ansatz-plugin": {
-      "local": "yes", 
-      "name": "QISKit ansatz function", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 50, 
+      "local": "yes",
+      "name": "QISKit ansatz function",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 50,
       "tags": "quantum,qiskit,ansatz,deployed"
-    }, 
+    },
     "hamiltonian-plugin": {
-      "local": "yes", 
-      "name": "Python code that defines the Hamiltonian", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 40, 
+      "local": "yes",
+      "name": "Python code that defines the Hamiltonian",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 40,
       "tags": "quantum,hamiltonian"
-    }, 
+    },
     "lib-qiskit": {
-      "local": "yes", 
-      "name": "IBM QuantumExperience PythonSDK", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 20, 
-      "tags": "lib,python-package,qiskit", 
+      "local": "yes",
+      "name": "IBM QuantumExperience PythonSDK",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 20,
+      "tags": "lib,python-package,qiskit",
       "version_from": [
         0,
         6,
@@ -63,49 +63,49 @@
         6,
         9
       ]
-    }, 
+    },
     "optimizer-plugin": {
-      "local": "yes", 
-      "name": "Deployed python optimizer function", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 60, 
+      "local": "yes",
+      "name": "Deployed python optimizer function",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 60,
       "tags": "quantum,optimizer,deployed"
-    }, 
+    },
     "python": {
-      "local": "yes", 
-      "name": "Python 3", 
-      "sort": 10, 
-      "tags": "compiler,python", 
+      "local": "yes",
+      "name": "Python 3",
+      "sort": 10,
+      "tags": "compiler,python",
       "version_from": [
-        3, 
-        5, 
+        3,
+        5,
         0
       ]
-    }, 
+    },
     "vqe-utils-plugin": {
-      "local": "yes", 
-      "name": "VQE Python utility functions", 
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 30, 
+      "local": "yes",
+      "name": "VQE Python utility functions",
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 30,
       "tags": "quantum,vqe,utils,lib"
     }
-  }, 
+  },
   "run_vars": {
-    "VQE_MAX_ITERATIONS": 80, 
-    "VQE_QUANTUM_BACKEND": "qasm_simulator", 
-    "VQE_QUANTUM_TIMEOUT": 180, 
-    "VQE_SAMPLE_SIZE": 100, 
+    "VQE_MAX_ITERATIONS": 80,
+    "VQE_QUANTUM_BACKEND": "qasm_simulator",
+    "VQE_QUANTUM_TIMEOUT": 180,
+    "VQE_SAMPLE_SIZE": 100,
     "VQE_START_PARAM_VALUE": 0.0
-  }, 
+  },
   "tags": [
-    "vqe", 
-    "vqe-implementation", 
-    "quantum", 
-    "ibm", 
-    "ibmq", 
-    "ibmqx", 
-    "qiskit", 
-    "qiskit-sdk-py", 
+    "vqe",
+    "vqe-implementation",
+    "quantum",
+    "ibm",
+    "ibmq",
+    "ibmqx",
+    "qiskit",
+    "qiskit-sdk-py",
     "hackathon"
   ]
 }

@@ -1,26 +1,26 @@
 {
-  "auto_detect": "yes", 
+  "auto_detect": "yes",
   "customize": {
-    "check_that_exists": "yes", 
+    "check_that_exists": "yes",
+    "detect_in_soft_dir": "yes",
+    "env_mapping": [
+      {
+        "display_name": "your IBM QuantumExperience API key",
+        "variable": "CK_IBM_API_TOKEN"
+      },
+      {
+        "display_name": "your email that you used to register in IBM QuantumExperience",
+        "variable": "CK_IBM_API_EMAIL"
+      }
+    ],
     "env_prefix": "CK_ENV_LOGIN_IBMQX",
     "limit_recursion_dir_search": {
       "linux": 0,
       "win": 0
-    }, 
-    "detect_in_soft_dir": "yes",
-    "soft_file_universal": ".cm$#sep#$meta.json",
-    "env_mapping": [
-        {
-            "variable"      : "CK_IBM_API_TOKEN",
-            "display_name"  : "your IBM QuantumExperience API key"
-        },
-        {
-            "variable"      : "CK_IBM_API_EMAIL",
-            "display_name"  : "your email that you used to register in IBM QuantumExperience"
-        }
-    ]
-  }, 
-  "soft_name": "IBM QuantumExperience Login", 
+    },
+    "soft_file_universal": ".cm$#sep#$meta.json"
+  },
+  "soft_name": "IBM QuantumExperience Login",
   "tags": [
     "dialogue",
     "ibm",

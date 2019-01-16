@@ -1,134 +1,140 @@
 {
-  "backup_data_uid": "3cf079d410d8f5aa", 
-  "data_name": "qiskit-demo", 
-  "no_compile": "yes", 
-  "no_target_file": "yes", 
+  "backup_data_uid": "3cf079d410d8f5aa",
+  "data_name": "qiskit-demo",
+  "no_compile": "yes",
+  "no_target_file": "yes",
   "pass_env_to_resolve": "yes",
   "print_files_after_run": [
-    "tmp-stdout.tmp", 
+    "tmp-stdout.tmp",
     "tmp-stderr.tmp"
-  ], 
-  "process_in_tmp": "yes", 
-  "program": "yes", 
+  ],
+  "process_in_tmp": "yes",
+  "program": "yes",
   "run_cmds": {
     "dvdt_monitor": {
-      "ignore_return_code": "no", 
+      "ignore_return_code": "no",
       "run_time": {
-        "output_invariant_of_repeat": "yes", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../monitor.py", 
-        "run_cmd_out1": "tmp-stdout.tmp", 
-        "run_cmd_out2": "tmp-stderr.tmp", 
+        "output_invariant_of_repeat": "yes",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../monitor.py",
+        "run_cmd_out1": "tmp-stdout.tmp",
+        "run_cmd_out2": "tmp-stderr.tmp",
         "run_output_files": [
-          "tmp-ck-timer.json", 
-          "tmp-ck-output.bin", 
+          "tmp-ck-timer.json",
+          "tmp-ck-output.bin",
           "tmp-ck-output.json"
         ]
       }
-    }, 
-    "run_qasm_file": {
-      "ignore_return_code": "no", 
-      "run_vars": {
-        "CK_IBM_BACKEND": "ibmq_qasm_simulator"
-      },
+    },
+    "initialize": {
+      "ignore_return_code": "no",
       "run_time": {
-        "output_invariant_of_repeat": "yes", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../run_qasm_file.py", 
-        "run_cmd_out1": "tmp-stdout.tmp", 
-        "run_cmd_out2": "tmp-stderr.tmp", 
+        "output_invariant_of_repeat": "yes",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../initialize.py",
+        "run_cmd_out1": "tmp-stdout.tmp",
+        "run_cmd_out2": "tmp-stderr.tmp",
         "run_output_files": [
-          "tmp-ck-timer.json", 
-          "tmp-ck-output.bin", 
+          "tmp-ck-timer.json",
+          "tmp-ck-output.bin",
           "tmp-ck-output.json"
         ]
       }
-    }, 
+    },
     "quantum_coin_flip": {
-      "ignore_return_code": "no", 
+      "ignore_return_code": "no",
       "run_time": {
         "fine_grain_timer_file": "tmp-ck-timer.json",
         "output_invariant_of_repeat": "no",
         "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../quantum_coin_flip.py",
-        "run_cmd_out1": "tmp-stdout.tmp", 
-        "run_cmd_out2": "tmp-stderr.tmp", 
+        "run_cmd_out1": "tmp-stdout.tmp",
+        "run_cmd_out2": "tmp-stderr.tmp",
         "run_output_files": [
-          "tmp-ck-timer.json", 
-          "tmp-ck-output.bin", 
+          "tmp-ck-timer.json",
+          "tmp-ck-output.bin",
           "tmp-ck-output.json"
         ]
       }
-    }, 
-    "initialize": {
-      "ignore_return_code": "no", 
-      "run_time": {
-        "output_invariant_of_repeat": "yes", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../initialize.py", 
-        "run_cmd_out1": "tmp-stdout.tmp", 
-        "run_cmd_out2": "tmp-stderr.tmp", 
-        "run_output_files": [
-          "tmp-ck-timer.json", 
-          "tmp-ck-output.bin", 
-          "tmp-ck-output.json"
-        ]
-      }
-    }, 
-    "teleport": {
-      "ignore_return_code": "no", 
-      "run_time": {
-        "output_invariant_of_repeat": "yes", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../teleport.py", 
-        "run_cmd_out1": "tmp-stdout.tmp", 
-        "run_cmd_out2": "tmp-stderr.tmp", 
-        "run_output_files": [
-          "tmp-ck-timer.json", 
-          "tmp-ck-output.bin", 
-          "tmp-ck-output.json"
-        ]
-      }
-    }, 
-    "unittests": {
+    },
+    "run_qasm_file": {
       "ignore_return_code": "no",
+      "run_time": {
+        "output_invariant_of_repeat": "yes",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../run_qasm_file.py",
+        "run_cmd_out1": "tmp-stdout.tmp",
+        "run_cmd_out2": "tmp-stderr.tmp",
+        "run_output_files": [
+          "tmp-ck-timer.json",
+          "tmp-ck-output.bin",
+          "tmp-ck-output.json"
+        ]
+      },
       "run_vars": {
         "CK_IBM_BACKEND": "ibmq_qasm_simulator"
-      },
+      }
+    },
+    "teleport": {
+      "ignore_return_code": "no",
       "run_time": {
-        "output_invariant_of_repeat": "yes", 
-        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../unittests.py", 
-        "run_cmd_out1": "tmp-stdout.tmp", 
-        "run_cmd_out2": "tmp-stderr.tmp", 
+        "output_invariant_of_repeat": "yes",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../teleport.py",
+        "run_cmd_out1": "tmp-stdout.tmp",
+        "run_cmd_out2": "tmp-stderr.tmp",
         "run_output_files": [
-          "tmp-ck-timer.json", 
-          "tmp-ck-output.bin", 
+          "tmp-ck-timer.json",
+          "tmp-ck-output.bin",
           "tmp-ck-output.json"
         ]
       }
+    },
+    "unittests": {
+      "ignore_return_code": "no",
+      "run_time": {
+        "output_invariant_of_repeat": "yes",
+        "run_cmd_main": "$<<CK_ENV_COMPILER_PYTHON_FILE>>$ ../unittests.py",
+        "run_cmd_out1": "tmp-stdout.tmp",
+        "run_cmd_out2": "tmp-stderr.tmp",
+        "run_output_files": [
+          "tmp-ck-timer.json",
+          "tmp-ck-output.bin",
+          "tmp-ck-output.json"
+        ]
+      },
+      "run_vars": {
+        "CK_IBM_BACKEND": "ibmq_qasm_simulator"
+      }
     }
-  }, 
+  },
   "run_deps": {
     "ibm-qx-login": {
+      "disable_if_env": {
+        "CK_IBM_BACKEND": [
+          "local_qasm_simulator",
+          "local_qasm_simulator_cpp",
+          "local_statevector_simulator",
+          "local_unitary_simulator",
+          "local_clifford_simulator"
+        ]
+      },
       "local": "yes",
       "name": "IBM QX credentials",
       "sort": 5,
-      "disable_if_env": {
-        "CK_IBM_BACKEND": ["local_qasm_simulator", "local_qasm_simulator_cpp", "local_statevector_simulator", "local_unitary_simulator", "local_clifford_simulator"]
-      },
       "tags": "ibmqx,login"
     },
     "lib-qiskit": {
-      "local": "yes", 
+      "local": "yes",
       "name": "IBM Quantum Information Science Kit (QISKit)",
-      "skip_pruning_by_other_deps": "yes", 
-      "sort": 10, 
+      "skip_pruning_by_other_deps": "yes",
+      "sort": 10,
       "tags": "lib,python-package,qiskit",
       "version_to": [
         0,
         5,
         8
       ]
-    }, 
+    },
     "python": {
-      "local": "yes", 
+      "local": "yes",
       "name": "Python 3",
-      "sort": 8, 
+      "sort": 8,
       "tags": "compiler,python",
       "version_from": [
         3,
@@ -136,20 +142,20 @@
         0
       ]
     }
-  }, 
+  },
   "run_vars": {
     "CK_IBM_BACKEND": "local_qasm_simulator",
     "CK_IBM_REPETITION": 10,
     "CK_IBM_TIMEOUT": 60,
     "CK_IBM_VERBOSE": 1
-  }, 
+  },
   "tags": [
-    "qiskit", 
-    "qiskit,qiskit-sdk-py", 
-    "demo", 
-    "examples", 
-    "ibm", 
-    "quantum_random_numbers", 
+    "qiskit",
+    "qiskit,qiskit-sdk-py",
+    "demo",
+    "examples",
+    "ibm",
+    "quantum_random_numbers",
     "teleport"
   ]
 }
