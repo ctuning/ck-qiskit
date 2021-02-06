@@ -1,20 +1,17 @@
 {
-  "data_uid": "4f49a0bdde6167b4", 
-  "data_name": "ck-qiskit", 
+  "data_alias": "ck-qiskit",
+  "data_name": "ck-qiskit",
+  "data_uid": "4f49a0bdde6167b4",
+  "data_uoa": "ck-qiskit",
   "dict": {
+    "desc": "CK workflows and portable packages for Quantum Information Software Kit (QISKit).",
     "repo_deps": [
-      {
-        "repo_uoa": "ck-quantum",
-        "repo_url": "https://github.com/ctuning/ck-quantum"
-      },
       {
         "repo_uoa": "ck-autotuning",
         "repo_url": "https://github.com/ctuning/ck-autotuning"
       }
     ],
-    "url": "https://github.com/ctuning/ck-qiskit", 
-    "shared": "git"
-  }, 
-  "data_alias": "ck-qiskit", 
-  "data_uoa": "ck-qiskit"
+    "shared": "git",
+    "url": "https://github.com/ctuning/ck-qiskit"
+  }
 }
